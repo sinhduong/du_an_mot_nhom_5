@@ -14,5 +14,8 @@ match ($act) {
     'danh-muc' => (new AdminDanhMucController())->danhSachDanhMuc(),
     'form-them-danh-muc' => (new AdminDanhMucController())->formAddDanhMuc(),
     'them-danh-muc' => (new AdminDanhMucController())->postAddDanhMuc(),
+    'form-sua-danh-muc' => (new AdminDanhMucController())->formEditDanhMuc(),
+    'update-danh-muc' => (new AdminDanhMucController())->postEditDanhMuc($_GET['id']),
+    'delete-danh-muc' => (new AdminDanhMucController())->deleteDanhMuc($_GET['id']),
 
 };
