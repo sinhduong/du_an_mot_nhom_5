@@ -71,4 +71,19 @@ class AdminTaiKhoan
             echo 'error' . $e->getMessage();
         }
     }
+    public function resetPassword($id, $mat_khau)
+    {
+        try {
+            $sql = 'UPDATE tai_khoans SET mat_khau=:mat_khau WHERE id=:id';
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':mat_khau' => $mat_khau,
+                ':id' => $id,
+            ]);
+            return true;
+        } catch (Exception $e) {
+            echo 'error' . $e->getMessage();
+        }
+    }
 }

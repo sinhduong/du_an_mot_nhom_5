@@ -68,41 +68,63 @@ class AdminTaikhoanController
     }
     public function postEditQuanTri()
     {
-        // xử lý dữ liệu 
-        // var_dump($_POST);
-        // KIỂM  tra xem dữ liệu có được submit hay không
+        // Kiểm tra xem dữ liệu có được submit bằng phương thức POST không
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // lấy ra dữ liệu
+            // Lấy dữ liệu từ form
             $quan_tri_id = $_POST['quan_tri_id'] ?? '';
             $ho_ten = $_POST['ho_ten'] ?? '';
             $email = $_POST['email'] ?? '';
             $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
             $trang_thai = $_POST['trang_thai'] ?? '';
 
-            // Tạo một mảng chống để chứa dữ liệu
+            // Tạo một mảng trống để chứa các lỗi
             $error = [];
+
+            // Kiểm tra và thêm lỗi nếu có
             if (empty($ho_ten)) {
-                $errors['ho_ten'] = 'Tên người dùng không được bỏ trống';
+                $error['ho_ten'] = 'Tên người dùng không được bỏ trống';
             }
             if (empty($email)) {
-                $errors['email'] = 'Email người dùng không được bỏ trống';
+                $error['email'] = 'Email người dùng không được bỏ trống';
+            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $error['email'] = 'Email không hợp lệ';
             }
             if (empty($trang_thai)) {
-                $errors['trang_thai'] = 'Vui lòng chọn trạng thái';
+                $error['trang_thai'] = 'Vui lòng chọn trạng thái';
             }
-            $_SESSION['error'] = $errors;
 
-            // nếu không có lỗi thì tiến hành thêm tài khoản
+            // Lưu mảng lỗi vào session để hiển thị trong form
+            $_SESSION['error'] = $error;
+
+            // Nếu không có lỗi, tiến hành cập nhật tài khoản
             if (empty($error)) {
-                // nều không có lỗi thì tiến hành thêm tài khoản
+                // Cập nhật tài khoản
                 $this->modelTaiKhoan->updateTaiKhoan($quan_tri_id, $ho_ten, $email, $so_dien_thoai, $trang_thai);
+
+                // Điều hướng về trang danh sách tài khoản quản trị sau khi cập nhật thành công
                 header("location: " . BASE_URL_ADMIN . '?act=list-tai-khoan-quan-tri');
                 exit();
             } else {
+                // Nếu có lỗi, điều hướng về lại form với id người quản trị viên
                 $_SESSION['flash'] = true;
-                header("location: " . BASE_URL_ADMIN . '?act=form-them-quan-tri&id_quan_tri=' . $quan_tri_id);
+                header("location: " . BASE_URL_ADMIN . '?act=form-sua-quan-tri&id_quan_tri=' . $quan_tri_id);
                 exit();
             }
+        }
+    }
+
+    public function resetPassword()
+    {
+        $tai_khoan_id = $_GET['id_quan_tri'];
+        $password = password_hash('123@123ab', PASSWORD_BCRYPT);
+        $status = $this->modelTaiKhoan->resetPassword($tai_khoan_id, $password);
+
+        if ($status) {
+            header("location: " . BASE_URL_ADMIN . '?act=list-tai-khoan-quan-tri');
+            exit();
+        } else {
+            var_dump('lỗi khi reset tài khoản');
+            die;
         }
     }
 }

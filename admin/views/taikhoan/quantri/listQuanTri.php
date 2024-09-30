@@ -67,7 +67,10 @@
                                                 <a href="<?= BASE_URL_ADMIN . '?act=form-sua-quan-tri&id_quan_tri=' . $quantri['id'] ?>">
                                                     <button class="btn btn-warning">Sửa</button>
                                                 </a>
-                                               
+                                                <a href="<?= BASE_URL_ADMIN . '?act=reset-password&id_quan_tri=' . $quantri['id'] ?>"
+                                                    onclick="return confirm('Bạn có muốn reset password của tài khoản này không?')">
+                                                    <button class="btn btn-danger">Reset</button>
+                                                </a>
                                             </td>
                                         </tr>
                                 </tbody>

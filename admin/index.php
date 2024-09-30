@@ -40,4 +40,7 @@ match ($act) {
     'them-quan-tri'=> (new AdminTaikhoanController())->postAddQuanTri(),
     'form-sua-quan-tri'=> (new AdminTaikhoanController())->formEditQuanTri(),
     'update-quan-tri'=> (new AdminTaikhoanController())->postEditQuanTri(),
+
+
+    'reset-password'=> (new AdminTaikhoanController())->resetPassword(),
 };
