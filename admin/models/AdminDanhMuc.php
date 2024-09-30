@@ -48,29 +48,31 @@ class AdminDanhMuc
             echo 'error' . $e->getMessage();
         }
     }
-    public function updateDanhMuc($id,$ten_danh_muc,$mo_ta){
+    public function updateDanhMuc($id, $ten_danh_muc, $mo_ta)
+    {
         try {
-            $sql="UPDATE danh_mucs SET ten_danh_muc =:ten_danh_muc,mo_ta=:mo_ta WHERE id=:id";
-            $stmt=$this->conn->prepare($sql);
+            $sql = "UPDATE danh_mucs SET ten_danh_muc =:ten_danh_muc,mo_ta=:mo_ta WHERE id=:id";
+            $stmt = $this->conn->prepare($sql);
             $stmt->execute([
-                ':ten_danh_muc'=>$ten_danh_muc,
-                ':mo_ta'=>$mo_ta,
-                ':id'=>$id
+                ':ten_danh_muc' => $ten_danh_muc,
+                ':mo_ta' => $mo_ta,
+                ':id' => $id
             ]);
 
             return true;
         } catch (Exception $e) {
             echo "Lỗi" . $e->getMessage();
         }
-     }
-    public function deleteDanhMuc($id){
-        try{
-            $sql="DELETE from danh_mucs where id=:id";
-            $stmt=$this->conn->prepare($sql);
+    }
+    public function deleteDanhMuc($id)
+    {
+        try {
+            $sql = "DELETE from danh_mucs where id=:id";
+            $stmt = $this->conn->prepare($sql);
             $stmt->execute([
-                ':id'=>$id
+                ':id' => $id
             ]);
-        }catch(Exception $e){
+        } catch (Exception $e) {
             echo "lỗi" . $e->getMessage();
         }
     }
