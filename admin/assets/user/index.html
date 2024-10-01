@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/styler.css">
+</head>
+<style>
+
+*{
+    box-sizing: border-box; /* Tính tổng chiều rộng và chiều cao của phần tử bao gồm cả padding và border */
+    margin: 0; /* Xóa khoảng cách mặc định của tất cả các phần tử */
+    padding: 0; /* Xóa đệm mặc định của tất cả các phần tử */
+}
+body {
+    font-family: "Poppins", sans-serif; /* Thiết lập font chữ mặc định là Poppins, sử dụng sans-serif nếu Poppins không tải được */
+    background: linear-gradient(rgba(31,0,116,0.1), rgba(11,0,33,0.6)), url('../img/digital-art-city-vehicle-street-1507861.jpg'); /* Nền kết hợp giữa gradient và hình ảnh */
+    height: 100vh; /* Chiều cao của body chiếm 100% chiều cao viewport */
+    background-position: center; /* Hình ảnh nền được căn giữa */
+    background-repeat: no-repeat; /* Hình nền không lặp lại */
+    background-size: cover; /* Hình nền sẽ phủ kín toàn bộ viewport */
+    display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử con */
+    align-items: center; /* Căn giữa phần tử con theo chiều dọc */
+    justify-content: center; /* Căn giữa phần tử con theo chiều ngang */
+    accent-color: #602bff; /* Thiết lập màu sắc chủ đạo cho các thành phần như checkbox, radio button,... */
+}
+.icon{
+    color: #fff; /* Màu trắng cho các biểu tượng icon */
+}
+.form{
+    width: 350px; /* Chiều rộng của form */
+    height: 400px; /* Chiều cao của form */
+    border-radius: 10px; /* Bo góc form */
+    box-shadow: 5px 5px 20px 5px rgba(10,2,34,0.78); /* Đổ bóng cho form với màu đen nhạt và độ mờ */
+    backdrop-filter: blur(3px); /* Làm mờ nền phía sau form */
+    border-radius: 20px; /* Bo góc cho form, ghi đè lên giá trị trước */
+}
+h3{
+    text-align: center; /* Căn giữa chữ tiêu đề */
+    padding: 2rem 1rem; /* Khoảng cách trên/dưới và trái/phải cho tiêu đề */
+    color: #eee; /* Màu chữ cho tiêu đề */
+    letter-spacing: 2px; /* Khoảng cách giữa các chữ cái */
+}
+.username,
+.password{
+    display: flex; /* Sử dụng flexbox cho căn chỉnh */
+    justify-content: space-around; /* Căn đều khoảng cách giữa các phần tử */
+    border-radius: 50px; /* Bo góc cho input */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    margin: 0 2.5rem 1rem 2.5rem; /* Khoảng cách ngoài cho input */
+    outline: none; /* Loại bỏ viền mặc định khi focus */
+    border-style: none; /* Loại bỏ kiểu viền mặc định */
+    border: 1px solid #5f3dc4; /* Viền cho input */
+}
+input::placeholder{
+    color: #ddd; /* Màu cho placeholder */
+}
+p{
+    color: #ddd; /* Màu cho đoạn văn bản */
+}
+.icon{
+    padding-right: 0.5rem; /* Khoảng cách phải cho icon */
+    color: #ddd; /* Màu cho icon */
+}
+input{
+    padding: 0.75rem 1.5rem; /* Khoảng cách trong cho input */
+    outline: none; /* Loại bỏ viền mặc định khi focus */
+    border-style: none; /* Loại bỏ kiểu viền mặc định */
+    background-color: transparent; /* Nền trong suốt cho input */
+    color: #ddd; /* Màu chữ cho input */
+}
+.button{
+    display: flex; /* Sử dụng flexbox cho căn chỉnh */
+    justify-content: space-between; /* Căn đều khoảng cách giữa các phần tử */
+    padding: 0 3rem; /* Khoảng cách trong cho button */
+    font-size: 0.75rem; /* Kích thước chữ cho button */
+    margin-bottom: 1rem; /* Khoảng cách dưới cho button */
+}
+.remember{
+    display: flex; /* Sử dụng flexbox cho căn chỉnh */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+.checkbox{
+    outline: none; /* Loại bỏ viền mặc định khi focus */
+    border-style: none; /* Loại bỏ kiểu viền mặc định */
+    margin-right: 0.25rem; /* Khoảng cách phải cho checkbox */
+    padding: 1rem; /* Khoảng cách trong cho checkbox */
+}
+a{
+    text-decoration: none; /* Loại bỏ gạch chân cho liên kết */
+    color: #5f3dc4; /* Màu cho liên kết */
+    transform: all 0.3s; /* Hiệu ứng chuyển đổi cho liên kết */
+}
+a:hover{
+    opacity: 0.8; /* Độ mờ khi hover vào liên kết */
+}
+.btn-box{
+    display: flex; /* Sử dụng flexbox cho căn chỉnh */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+}
+.btn-box button {
+    padding: 0.75rem 1.5rem; /* Tăng padding trên/dưới để cân bằng */
+    border-radius: 50px; /* Bo góc cho button */
+    outline: none; /* Loại bỏ viền mặc định khi focus */
+    border-style: none; /* Loại bỏ kiểu viền mặc định */
+    width: calc(100% - 5rem); /* Chiều rộng của button bằng với ô input */
+    cursor: pointer; /* Thay đổi con trỏ khi hover vào button */
+    transition: all 0.5s; /* Hiệu ứng chuyển đổi cho button */
+    background-color: #fff; /* Màu nền cho button */
+    color: #5f3dc4; /* Màu chữ cho button */
+    text-align: center; /* Căn giữa chữ trong button */
+    display: flex; /* Sử dụng flexbox để căn giữa */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+
+.btn-box button:hover{
+    opacity: 0.8; /* Độ mờ khi hover vào button */
+}
+.register{
+    display: flex; /* Sử dụng flexbox cho căn chỉnh */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    font-style: 0.75rem; /* Kiểu chữ cho phần đăng ký */
+    margin-top: 4rem; /* Khoảng cách trên cho phần đăng ký */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(rgba(31,0,116,0.1), rgba(11,0,33,0.6)), url('img/digital-art-city-vehicle-street-1507861.jpg');
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    accent-color: #602bff;
+}
+.icon{
+    color: #fff;
+}
+.form{
+    width: 350px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px 5px rgba(10,2,34,0.78);
+    backdrop-filter: blur(3px);
+    border-radius: 20px;
+    padding: 2rem 1rem;
+}
+h3{
+    text-align: center;
+    padding-bottom: 1rem;
+    color: #eee;
+    letter-spacing: 2px;
+}
+.input-group {
+    display: flex;
+    justify-content: space-around;
+    border-radius: 50px;
+    align-items: center;
+    margin: 0 2.5rem 1rem 2.5rem;
+    outline: none;
+    border-style: none;
+    border: 1px solid #5f3dc4;
+}
+input::placeholder{
+    color: #ddd;
+}
+p{
+    color: #ddd;
+}
+.icon{
+    padding-right: 0.5rem;
+    color: #ddd;
+}
+input{
+    padding: 0.75rem 1.5rem;
+    outline: none;
+    border-style: none;
+    background-color: transparent;
+    color: #ddd;
+    width: 100%;
+}
+.button{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 3rem;
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
+}
+.remember{
+    display: flex;
+    align-items: center;
+}
+.checkbox{
+    outline: none;
+    border-style: none;
+    margin-right: 0.25rem;
+    padding: 1rem;
+}
+a{
+    text-decoration: none;
+    color: #5f3dc4;
+    transform: all 0.3s;
+}
+a:hover{
+    opacity: 0.8;
+}
+.btn-box{
+    display: flex;
+    justify-content: center;
+}
+.btn-box button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    outline: none;
+    border-style: none;
+    width: calc(100% - 5rem);
+    cursor: pointer;
+    transition: all 0.5s;
+    background-color: #fff;
+    color: #5f3dc4;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-box button:hover{
+    opacity: 0.8;
+}
+.register{
+    display: flex;
+    justify-content: center;
+    font-style: 0.75rem;
+    margin-top: 2rem;
+}
+
+/* Add these styles for form switching */
+.hidden {
+    display: none;
+}
+.switch-button {
+    margin: 1rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.75rem;
+    margin-left: 2.5rem;
+    margin-top: -0.5rem;
+    display: none; /* Ẩn thông báo lỗi ban đầu */
+}
+
+</style>
+<body>
+    <main class="box">
+        <!-- Login Form -->
+        <form action="" class="form" id="loginForm">
+            <h3>Login</h3>
+            <div class="input-group">
+                <input type="text" name="username" placeholder="Username">
+                <ion-icon class="icon" name="person"></ion-icon>
+            </div>
+            <div class="input-group">
+                <input type="password" id="passwordField" name="password" placeholder="Password">
+                <ion-icon class="icon" id="togglePassword" name="lock-closed"></ion-icon>
+            </div>
+            <div class="button">
+                <div class="remember">
+                    <input type="checkbox" name="" id="" class="checkbox">
+                    <p>Remember me</p>
+                </div>
+                <a href="#">
+                    <p>Forgot password?</p>
+                </a>
+            </div>
+            <div class="btn-box">
+                <button class="button">Login</button>
+            </div>
+            <div class="switch-button">
+                <p>Don't have an account?</p>
+                <a href="#" id="showRegisterForm">Register</a>
+            </div>
+        </form>
+
+        <!-- Register Form -->
+        <form action="" class="form hidden" id="registerForm">
+            <h3>Register</h3>
+            <div class="input-group">
+                <input type="text" name="username" placeholder="Username">
+                <ion-icon class="icon" name="person"></ion-icon>
+            </div>
+            <div class="input-group">
+                <input type="email" name="email" placeholder="Email">
+                <ion-icon class="icon" name="mail"></ion-icon>
+            </div>
+            <div class="input-group">
+                <input type="password" id="registerPassword" name="password" placeholder="Password">
+                <ion-icon class="icon" id="toggleRegisterPassword" name="lock-closed"></ion-icon>
+            </div>
+            <span id="passwordError" class="error-message"></span>
+            <div class="input-group">
+                <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm Password">
+                <ion-icon class="icon" id="toggleConfirmPassword" name="lock-closed"></ion-icon>
+            </div>
+            <span id="confirmPasswordError" class="error-message"></span>
+            <div class="btn-box">
+                <button class="button">Register</button>
+            </div>
+            <div class="switch-button">
+                <p>Already have an account?</p>
+                <a href="#" id="showLoginForm">Login</a>
+            </div>
+        </form>
+        <!-- Forgot Password Form -->
+        <form action="" class="form hidden" id="forgotPasswordForm">
+            <h3>Forgot Password</h3>
+            <div class="input-group">
+                <input type="email" name="email" placeholder="Enter your email address">
+                <ion-icon class="icon" name="mail"></ion-icon>
+            </div>
+            <div class="btn-box">
+                <button class="button">Send Reset Link</button>
+            </div>
+            <div class="switch-button">
+                <p>Remember your password?</p>
+                <a href="#" id="showLoginFormFromForgot">Login</a>
+            </div>
+        </form>
+    </main>
+</body>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<script>
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordField = document.getElementById('passwordField');
+    const toggleRegisterPassword = document.getElementById('toggleRegisterPassword');
+    const registerPasswordField = document.getElementById('registerPassword');
+    const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+    const confirmPasswordField = document.getElementById('confirmPassword');
+
+    togglePassword.addEventListener('click', function () {
+        const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordField.setAttribute('type', type);
+        this.setAttribute('name', type === 'password' ? 'lock-closed' : 'lock-open');
+    });
+
+    toggleRegisterPassword.addEventListener('click', function () {
+        const type = registerPasswordField.getAttribute('type') === 'password' ? 'text' : 'password';
+        registerPasswordField.setAttribute('type', type);
+        this.setAttribute('name', type === 'password' ? 'lock-closed' : 'lock-open');
+    });
+
+    toggleConfirmPassword.addEventListener('click', function () {
+        const type = confirmPasswordField.getAttribute('type') === 'password' ? 'text' : 'password';
+        confirmPasswordField.setAttribute('type', type);
+        this.setAttribute('name', type === 'password' ? 'lock-closed' : 'lock-open');
+    });
+
+const loginForm = document.getElementById('loginForm');
+const registerForm = document.getElementById('registerForm');
+const showRegisterForm = document.getElementById('showRegisterForm');
+const showLoginForm = document.getElementById('showLoginForm');
+
+showRegisterForm.addEventListener('click', function (e) {
+    e.preventDefault();
+    loginForm.classList.add('hidden');
+    registerForm.classList.remove('hidden');
+});
+
+showLoginForm.addEventListener('click', function (e) {
+    e.preventDefault();
+    registerForm.classList.add('hidden');
+    loginForm.classList.remove('hidden');
+});
+
+
+document.getElementById("registerForm").addEventListener("submit", function (event) {
+    let password = document.getElementById("registerPassword").value;
+    let confirmPassword = document.getElementById("confirmPassword").value;
+
+    let passwordError = document.getElementById("passwordError");
+    let confirmPasswordError = document.getElementById("confirmPasswordError");
+
+    // Reset thông báo lỗi
+    passwordError.style.display = "none";
+    confirmPasswordError.style.display = "none";
+
+    let isValid = true;
+
+    // Kiểm tra độ dài mật khẩu
+    if (password.length < 8) {
+        passwordError.textContent = "Mật khẩu phải trên 8 ký tự";
+        passwordError.style.display = "block";
+        isValid = false;
+    } else if (password.length > 20) {
+        passwordError.textContent = "Mật khẩu chỉ được dưới 20 ký tự";
+        passwordError.style.display = "block";
+        isValid = false;
+    }
+
+    // Kiểm tra khớp mật khẩu
+    if (password !== confirmPassword) {
+        confirmPasswordError.textContent = "Mật khẩu không khớp";
+        confirmPasswordError.style.display = "block";
+        isValid = false;
+    }
+
+    // Ngăn chặn gửi form nếu có lỗi
+    if (!isValid) {
+        event.preventDefault();
+    }
+});
+
+
+
+const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+const forgotPasswordLink = document.querySelector('a[href="#"]'); // Cập nhật selector nếu cần
+
+forgotPasswordLink.addEventListener('click', function (e) {
+    e.preventDefault();
+    loginForm.classList.add('hidden');
+    registerForm.classList.add('hidden');
+    forgotPasswordForm.classList.remove('hidden');
+});
+
+const showLoginFormFromForgot = document.getElementById('showLoginFormFromForgot');
+
+showLoginFormFromForgot.addEventListener('click', function (e) {
+    e.preventDefault();
+    forgotPasswordForm.classList.add('hidden');
+    loginForm.classList.remove('hidden');
+});
+
+</script>
+
+</html>

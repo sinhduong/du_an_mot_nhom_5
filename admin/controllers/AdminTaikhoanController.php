@@ -2,9 +2,13 @@
 class AdminTaikhoanController
 {
     public $modelTaiKhoan;
+    public $modelDonHang;
+    public $modelSanPham;
     public function __construct()
     {
         $this->modelTaiKhoan = new AdminTaiKhoan();
+        $this->modelDonHang = new AdminDonHang();
+        $this->modelSanPham = new AdminSanPham();
     }
     public function danhSachQuanTri()
     {
@@ -116,15 +120,105 @@ class AdminTaikhoanController
     public function resetPassword()
     {
         $tai_khoan_id = $_GET['id_quan_tri'];
+        $tai_khoan=$this->modelTaiKhoan->getDetailTaiKhoan($tai_khoan_id);
         $password = password_hash('123@123ab', PASSWORD_BCRYPT);
         $status = $this->modelTaiKhoan->resetPassword($tai_khoan_id, $password);
 
-        if ($status) {
+        if ($status && $tai_khoan['chuc_vu_id']==1) {
             header("location: " . BASE_URL_ADMIN . '?act=list-tai-khoan-quan-tri');
             exit();
-        } else {
+        }elseif($status && $tai_khoan['chuc_vu_id']==2){
+            header("location: " . BASE_URL_ADMIN . '?act=list-tai-khoan-khach-hang');
+            exit();
+        }
+         else {
             var_dump('lỗi khi reset tài khoản');
             die;
         }
     }
+    public function danhSachKhachHang()
+    {
+        $listKhachHang = $this->modelTaiKhoan->getAllTaikhoan(2);
+        // var_dump($listKhachHang);
+        // die;
+        require_once './views/taikhoan/khachhang/listKhachHang.php';
+    }
+    public function formEditKhachHang()
+    {
+        $id_khach_hang = $_GET['id_khach_hang'];
+        $khachHang = $this->modelTaiKhoan->getDetailTaiKhoan($id_khach_hang);
+
+        require_once './views/taikhoan/khachhang/editKhachHang.php';
+        deleteSessionError();
+    }
+    public function postEditKhachHang()
+    {
+        // Kiểm tra xem dữ liệu có được submit bằng phương thức POST không
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Lấy dữ liệu từ form
+            $khach_hang_id = $_POST['khach_hang_id'] ?? '';
+            $ho_ten = $_POST['ho_ten'] ?? '';
+            $email = $_POST['email'] ?? '';
+            $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
+            $ngay_sinh = $_POST['ngay_sinh'] ?? '';
+            $gioi_tinh = $_POST['gioi_tinh'] ?? '';
+            $dia_chi = $_POST['dia_chi'] ?? '';
+            $trang_thai = $_POST['trang_thai'] ?? '';
+
+            // Tạo một mảng trống để chứa các lỗi
+            $error = [];
+
+            // Kiểm tra và thêm lỗi nếu có
+            if (empty($ho_ten)) {
+                $error['ho_ten'] = 'Tên người dùng không được bỏ trống';
+            }
+            if (empty($email)) {
+                $error['email'] = 'Email người dùng không được bỏ trống';
+            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $error['email'] = 'Email không hợp lệ';
+            }
+            if (empty($trang_thai)) {
+                $error['trang_thai'] = 'Vui lòng chọn trạng thái';
+            }
+            if (empty($ngay_sinh)) {
+                $error['ngay_sinh'] = 'Vui lòng chọn ngày sinh';
+            }
+            if (empty($gioi_tinh)) {
+                $error['gioi_tinh'] = 'Vui lòng chọn giới tính';
+            }
+
+            // Lưu mảng lỗi vào session để hiển thị trong form
+            $_SESSION['error'] = $error;
+
+            // Nếu không có lỗi, tiến hành cập nhật tài khoản
+            if (empty($error)) {
+                // Cập nhật tài khoản
+                $this->modelTaiKhoan->updateKhachHang($khach_hang_id, $ho_ten, $email, $so_dien_thoai,$ngay_sinh,$gioi_tinh,$dia_chi, $trang_thai);
+
+                // Điều hướng về trang danh sách tài khoản quản trị sau khi cập nhật thành công
+                header("location: " . BASE_URL_ADMIN . '?act=list-tai-khoan-khach-hang');
+                exit();
+            } else {
+                // Nếu có lỗi, điều hướng về lại form với id người quản trị viên
+                $_SESSION['flash'] = true;
+                header("location: " . BASE_URL_ADMIN . '?act=form-sua-khach-hang&id_khach_hang=' . $khach_hang_id);
+                exit();
+            }
+        }
+    }
+    public function detailKhachHang(){
+        $id_khach_hang=$_GET['id_khach_hang'];
+        // var_dump($id_khach_hang);
+
+        $khachHang=$this->modelTaiKhoan->getDetailTaiKhoan($id_khach_hang);
+
+        $listDonHang=$this->modelDonHang->getDonHangFromKhachHang($id_khach_hang);
+
+        $listBinhLuan=$this->modelSanPham->getBinhLuanFromKhachHang($id_khach_hang);
+        // var_dump($listDonHang);die;
+
+        require_once './views/taikhoan/khachhang/detailKhachHang.php';
+    }
+
+
 }

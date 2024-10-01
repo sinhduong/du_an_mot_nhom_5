@@ -1,0 +1,145 @@
+* {
+    box-sizing: border-box; /* Tính tổng chiều rộng và chiều cao của phần tử bao gồm cả padding và border */
+    margin: 0; /* Xóa khoảng cách mặc định của tất cả các phần tử */
+    padding: 0; /* Xóa đệm mặc định của tất cả các phần tử */
+}
+body {
+    font-family: "Poppins", sans-serif; /* Thiết lập font chữ mặc định là Poppins, sử dụng sans-serif nếu Poppins không tải được */
+    background: linear-gradient(rgba(31,0,116,0.1), rgba(11,0,33,0.6)), url('../img/digital-art-city-vehicle-street-1507861.jpg'); /* Nền kết hợp giữa gradient và hình ảnh */
+    height: 100vh; /* Chiều cao của body chiếm 100% chiều cao viewport */
+    background-position: center; /* Hình ảnh nền được căn giữa */
+    background-repeat: no-repeat; /* Hình nền không lặp lại */
+    background-size: cover; /* Hình nền sẽ phủ kín toàn bộ viewport */
+    display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử con */
+    align-items: center; /* Căn giữa phần tử con theo chiều dọc */
+    justify-content: center; /* Căn giữa phần tử con theo chiều ngang */
+    accent-color: #602bff; /* Thiết lập màu sắc chủ đạo cho các thành phần như checkbox, radio button,... */
+}
+.icon {
+    color: #fff; /* Màu trắng cho các biểu tượng icon */
+    padding-right: 0.5rem; /* Khoảng cách phải cho icon */
+}
+.form {
+    width: 350px; /* Chiều rộng của form */
+    border-radius: 20px; /* Bo góc form */
+    box-shadow: 5px 5px 20px 5px rgba(10,2,34,0.78); /* Đổ bóng cho form với màu đen nhạt và độ mờ */
+    backdrop-filter: blur(3px); /* Làm mờ nền phía sau form */
+    padding: 2rem 1rem; /* Khoảng cách trong cho form */
+}
+h3 {
+    text-align: center; /* Căn giữa chữ tiêu đề */
+    padding-bottom: 1rem; /* Khoảng cách dưới cho tiêu đề */
+    color: #eee; /* Màu chữ cho tiêu đề */
+    letter-spacing: 2px; /* Khoảng cách giữa các chữ cái */
+}
+.input-group {
+    display: flex; /* Sử dụng flexbox cho căn chỉnh */
+    justify-content: space-around; /* Căn đều khoảng cách giữa các phần tử */
+    border-radius: 50px; /* Bo góc cho input */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    margin: 0 2.5rem 1rem 2.5rem; /* Khoảng cách ngoài cho input */
+    outline: none; /* Loại bỏ viền mặc định khi focus */
+    border-style: none; /* Loại bỏ kiểu viền mặc định */
+    border: 1px solid #5f3dc4; /* Viền cho input */
+}
+input::placeholder {
+    color: #ddd; /* Màu cho placeholder */
+}
+p {
+    color: #ddd; /* Màu cho đoạn văn bản */
+}
+input {
+    padding: 0.75rem 1.5rem; /* Khoảng cách trong cho input */
+    outline: none; /* Loại bỏ viền mặc định khi focus */
+    border-style: none; /* Loại bỏ kiểu viền mặc định */
+    background-color: transparent; /* Nền trong suốt cho input */
+    color: #ddd; /* Màu chữ cho input */
+    width: 100%; /* Chiều rộng của input là 100% */
+}
+.button {
+    display: flex; /* Sử dụng flexbox cho căn chỉnh */
+    justify-content: space-between; /* Căn đều khoảng cách giữa các phần tử */
+    padding: 0 3rem; /* Khoảng cách trong cho button */
+    font-size: 0.75rem; /* Kích thước chữ cho button */
+    margin-bottom: 1rem; /* Khoảng cách dưới cho button */
+}
+.remember {
+    display: flex; /* Sử dụng flexbox cho căn chỉnh */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+.checkbox {
+    outline: none; /* Loại bỏ viền mặc định khi focus */
+    border-style: none; /* Loại bỏ kiểu viền mặc định */
+    margin-right: 0.25rem; /* Khoảng cách phải cho checkbox */
+    padding: 1rem; /* Khoảng cách trong cho checkbox */
+}
+a {
+    text-decoration: none; /* Loại bỏ gạch chân cho liên kết */
+    color: #5f3dc4; /* Màu cho liên kết */
+    transition: all 0.3s; /* Hiệu ứng chuyển đổi cho liên kết */
+}
+a:hover {
+    opacity: 0.8; /* Độ mờ khi hover vào liên kết */
+}
+.btn-box {
+    display: flex; /* Sử dụng flexbox cho căn chỉnh */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+}
+.btn-box button {
+    padding: 0.75rem 1.5rem; /* Khoảng cách trong cho button */
+    border-radius: 50px; /* Bo góc cho button */
+    outline: none; /* Loại bỏ viền mặc định khi focus */
+    border-style: none; /* Loại bỏ kiểu viền mặc định */
+    width: calc(100% - 5rem); /* Chiều rộng của button bằng với ô input */
+    cursor: pointer; /* Thay đổi con trỏ khi hover vào button */
+    transition: all 0.5s; /* Hiệu ứng chuyển đổi cho button */
+    background-color: #fff; /* Màu nền cho button */
+    color: #5f3dc4; /* Màu chữ cho button */
+    text-align: center; /* Căn giữa chữ trong button */
+    display: flex; /* Sử dụng flexbox để căn giữa */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+.btn-box button:hover {
+    opacity: 0.8; /* Độ mờ khi hover vào button */
+}
+.register {
+    display: flex; /* Sử dụng flexbox cho căn chỉnh */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    font-style: 0.75rem; /* Kiểu chữ cho phần đăng ký */
+    margin-top: 2rem; /* Khoảng cách trên cho phần đăng ký */
+}
+
+/* Add these styles for form switching */
+.hidden {
+    display: none; /* Ẩn phần tử */
+}
+.switch-button {
+    margin: 1rem 2.5rem; /* Khoảng cách ngoài cho nút chuyển đổi */
+    display: flex; /* Sử dụng flexbox cho căn chỉnh */
+    justify-content: space-between; /* Căn đều khoảng cách giữa các phần tử */
+}
+
+/* Định dạng cho thông báo lỗi */
+.error-message {
+    text-align: center;
+    margin: 0 2.5rem 1rem 2.5rem;
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    display: block; /* Đảm bảo nó hiển thị trên một dòng riêng */
+}
+.error-message-register {
+    text-align: center;
+    padding-bottom: 5px;
+    /* margin-bottom: 10px ; */
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    display: block; /* Đảm bảo nó hiển thị trên một dòng riêng */
+}
+
+/* Tùy chọn: Định dạng cho trường có lỗi */
+.is-invalid {
+    border-color: red;
+}
