@@ -17,3 +17,4 @@ define('DB_NAME', 'duan1_nhom5');
 
 // Define the path to the parent directory
 define('PATH_PORT', __DIR__ . '/../');
+define('PATH_ROOT', __DIR__ . '/../');

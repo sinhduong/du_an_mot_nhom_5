@@ -46,12 +46,17 @@ match ($act) {
 
     // Route quản lý tài khoản khách hàng
     'list-tai-khoan-khach-hang' => (new AdminTaikhoanController())->danhSachKhachHang(),
-    'form-sua-khach-hang'=> (new AdminTaikhoanController())->formEditKhachHang(),
-    'update-khach-hang'=> (new AdminTaikhoanController())->postEditKhachHang(),
-    'chi-tiet-khach-hang'=> (new AdminTaikhoanController())->detailKhachHang(),
+    'form-sua-khach-hang' => (new AdminTaikhoanController())->formEditKhachHang(),
+    'update-khach-hang' => (new AdminTaikhoanController())->postEditKhachHang(),
+    'chi-tiet-khach-hang' => (new AdminTaikhoanController())->detailKhachHang(),
 
 
     // route bình luận
-    'update-trang-thai-binh-luan'=> (new AdminSanPhamController())->updateTrangThaiBinhLuan(),
+    'update-trang-thai-binh-luan' => (new AdminSanPhamController())->updateTrangThaiBinhLuan(),
 
+
+
+    // route auth
+    'login-admin' => (new AdminTaiKhoanController())->formLogin(),
+    'check-login-admin' => (new AdminTaiKhoanController())->login(),
 };

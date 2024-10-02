@@ -58,17 +58,19 @@
                                         <?php foreach ($listSanPham as $key => $sanPham): ?>
                                             <tr>
                                                 <td><?= $key + 1 ?></td>
-                                                <td><?= htmlspecialchars($sanPham['ten_danh_muc']) ?></td>
-                                                <td><img src="<?= BASE_URL . htmlspecialchars($sanPham['hinh_anh']) ?>" style="width: 100px" alt="" onerror="this.onerror=null; this.src='default_image_url.jpg'"></td>
+                                                <td><?= htmlspecialchars($sanPham['ten_san_pham']) ?></td>
+                                                <td>
+                                                    <img src="<?= BASE_URL . htmlspecialchars($sanPham['hinh_anh']) ?>" style="width: 100px" alt="Hình sản phẩm" onerror="this.onerror=null; this.src='default_image_url.jpg'">
+                                                </td>
                                                 <td><?= number_format($sanPham['gia_san_pham'], 0, ',', '.') ?> VNĐ</td>
-                                                <td><?= $sanPham['so_luong'] ?></td>
+                                                <td><?= htmlspecialchars($sanPham['so_luong']) ?></td>
                                                 <td><?= htmlspecialchars($sanPham['ten_danh_muc']) ?></td>
                                                 <td><?= $sanPham['trang_thai'] == 1 ? 'Còn bán' : 'Dừng bán' ?></td>
                                                 <td>
-                                                    <a href="<?= BASE_URL_ADMIN . '?act=form-sua-danh-muc&id_san_pham=' . $sanPham['id'] ?>">
+                                                    <a href="<?= BASE_URL_ADMIN . '?act=form-sua-san-pham&id_san_pham=' . htmlspecialchars($sanPham['id']) ?>">
                                                         <button class="btn btn-warning">Sửa</button>
                                                     </a>
-                                                    <a href="<?= BASE_URL_ADMIN . '?act=delete-danh-muc&id_san_pham=' . $sanPham['id'] ?>" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?')">
+                                                    <a href="<?= BASE_URL_ADMIN . '?act=delete-danh-muc&id_san_pham=' . htmlspecialchars($sanPham['id']) ?>" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?')">
                                                         <button class="btn btn-danger">Xóa</button>
                                                     </a>
                                                 </td>

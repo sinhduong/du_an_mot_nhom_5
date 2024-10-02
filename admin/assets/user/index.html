@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/styler.css">
+    <link rel="stylesheet" href="./css/styler.css">
 </head>
-<style>
+<!-- <style>
 
 *{
     box-sizing: border-box; /* Tính tổng chiều rộng và chiều cao của phần tử bao gồm cả padding và border */
@@ -262,8 +262,9 @@ a:hover{
     display: none; /* Ẩn thông báo lỗi ban đầu */
 }
 
-</style>
-<body>
+</style> -->
+
+<body class="body">
     <main class="box">
         <!-- Login Form -->
         <form action="" class="form" id="loginForm">
@@ -369,80 +370,80 @@ a:hover{
         this.setAttribute('name', type === 'password' ? 'lock-closed' : 'lock-open');
     });
 
-const loginForm = document.getElementById('loginForm');
-const registerForm = document.getElementById('registerForm');
-const showRegisterForm = document.getElementById('showRegisterForm');
-const showLoginForm = document.getElementById('showLoginForm');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const showRegisterForm = document.getElementById('showRegisterForm');
+    const showLoginForm = document.getElementById('showLoginForm');
 
-showRegisterForm.addEventListener('click', function (e) {
-    e.preventDefault();
-    loginForm.classList.add('hidden');
-    registerForm.classList.remove('hidden');
-});
+    showRegisterForm.addEventListener('click', function (e) {
+        e.preventDefault();
+        loginForm.classList.add('hidden');
+        registerForm.classList.remove('hidden');
+    });
 
-showLoginForm.addEventListener('click', function (e) {
-    e.preventDefault();
-    registerForm.classList.add('hidden');
-    loginForm.classList.remove('hidden');
-});
-
-
-document.getElementById("registerForm").addEventListener("submit", function (event) {
-    let password = document.getElementById("registerPassword").value;
-    let confirmPassword = document.getElementById("confirmPassword").value;
-
-    let passwordError = document.getElementById("passwordError");
-    let confirmPasswordError = document.getElementById("confirmPasswordError");
-
-    // Reset thông báo lỗi
-    passwordError.style.display = "none";
-    confirmPasswordError.style.display = "none";
-
-    let isValid = true;
-
-    // Kiểm tra độ dài mật khẩu
-    if (password.length < 8) {
-        passwordError.textContent = "Mật khẩu phải trên 8 ký tự";
-        passwordError.style.display = "block";
-        isValid = false;
-    } else if (password.length > 20) {
-        passwordError.textContent = "Mật khẩu chỉ được dưới 20 ký tự";
-        passwordError.style.display = "block";
-        isValid = false;
-    }
-
-    // Kiểm tra khớp mật khẩu
-    if (password !== confirmPassword) {
-        confirmPasswordError.textContent = "Mật khẩu không khớp";
-        confirmPasswordError.style.display = "block";
-        isValid = false;
-    }
-
-    // Ngăn chặn gửi form nếu có lỗi
-    if (!isValid) {
-        event.preventDefault();
-    }
-});
+    showLoginForm.addEventListener('click', function (e) {
+        e.preventDefault();
+        registerForm.classList.add('hidden');
+        loginForm.classList.remove('hidden');
+    });
 
 
+    document.getElementById("registerForm").addEventListener("submit", function (event) {
+        let password = document.getElementById("registerPassword").value;
+        let confirmPassword = document.getElementById("confirmPassword").value;
 
-const forgotPasswordForm = document.getElementById('forgotPasswordForm');
-const forgotPasswordLink = document.querySelector('a[href="#"]'); // Cập nhật selector nếu cần
+        let passwordError = document.getElementById("passwordError");
+        let confirmPasswordError = document.getElementById("confirmPasswordError");
 
-forgotPasswordLink.addEventListener('click', function (e) {
-    e.preventDefault();
-    loginForm.classList.add('hidden');
-    registerForm.classList.add('hidden');
-    forgotPasswordForm.classList.remove('hidden');
-});
+        // Reset thông báo lỗi
+        passwordError.style.display = "none";
+        confirmPasswordError.style.display = "none";
 
-const showLoginFormFromForgot = document.getElementById('showLoginFormFromForgot');
+        let isValid = true;
 
-showLoginFormFromForgot.addEventListener('click', function (e) {
-    e.preventDefault();
-    forgotPasswordForm.classList.add('hidden');
-    loginForm.classList.remove('hidden');
-});
+        // Kiểm tra độ dài mật khẩu
+        if (password.length < 8) {
+            passwordError.textContent = "Mật khẩu phải trên 8 ký tự";
+            passwordError.style.display = "block";
+            isValid = false;
+        } else if (password.length > 20) {
+            passwordError.textContent = "Mật khẩu chỉ được dưới 20 ký tự";
+            passwordError.style.display = "block";
+            isValid = false;
+        }
+
+        // Kiểm tra khớp mật khẩu
+        if (password !== confirmPassword) {
+            confirmPasswordError.textContent = "Mật khẩu không khớp";
+            confirmPasswordError.style.display = "block";
+            isValid = false;
+        }
+
+        // Ngăn chặn gửi form nếu có lỗi
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+
+
+
+    const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+    const forgotPasswordLink = document.querySelector('a[href="#"]'); // Cập nhật selector nếu cần
+
+    forgotPasswordLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        loginForm.classList.add('hidden');
+        registerForm.classList.add('hidden');
+        forgotPasswordForm.classList.remove('hidden');
+    });
+
+    const showLoginFormFromForgot = document.getElementById('showLoginFormFromForgot');
+
+    showLoginFormFromForgot.addEventListener('click', function (e) {
+        e.preventDefault();
+        forgotPasswordForm.classList.add('hidden');
+        loginForm.classList.remove('hidden');
+    });
 
 </script>
 

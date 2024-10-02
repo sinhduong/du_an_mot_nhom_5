@@ -86,7 +86,7 @@ class AdminTaiKhoan
             echo 'error' . $e->getMessage();
         }
     }
-    public function updateKhachHang($id, $ho_ten, $email, $so_dien_thoai,$ngay_sinh,$gioi_tinh,$dia_chi, $trang_thai)
+    public function updateKhachHang($id, $ho_ten, $email, $so_dien_thoai, $ngay_sinh, $gioi_tinh, $dia_chi, $trang_thai)
     {
         try {
             $sql = 'UPDATE tai_khoans 
@@ -112,6 +112,35 @@ class AdminTaiKhoan
             return true;
         } catch (Exception $e) {
             echo 'error' . $e->getMessage();
+        }
+    }
+
+
+    // tài khoản
+    public function checkLogin($email, $mat_khau)
+    {
+        try {
+            $sql = "SELECT * from tai_khoans where email=:email";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(['email' => $email]);
+            $user = $stmt->fetch();
+
+            if ($user && password_verify($mat_khau, $user['mat_khau'])) {
+                if ($user['chuc_vu_id'] == 1) {
+                    if ($user['trang_thai'] == 1) {
+                        return $user; //đăng nhập thành công
+                    } else {
+                        return "tài khoản bị cấm";
+                    }
+                } else {
+                    return "Tài khoản không có quyền đăng nhập";
+                }
+            } else {
+                return "Bạn nhập sai thông tin mật khẩu tài khoản";
+            }
+        } catch (\Exception $e) {
+            echo "Lỗi" . $e->getMessage();
+            return false;
         }
     }
 }
