@@ -32,6 +32,7 @@ match ($act) {
     'them-san-pham' => (new AdminSanPhamController())->postAddSanPham(),
     'form-sua-san-pham' => (new AdminSanPhamController())->formEditSanPham(),
     'update-san-pham' => (new AdminSanPhamController())->postEditSanPham($_GET['id']),
+    'sua-album-san-pham' => (new AdminSanPhamController())->postEditAlbumSanPham($_GET['id']),
     'delete-san-pham' => (new AdminSanPhamController())->deleteSanPham($_GET['id']),
 
     // Route quản lý tài khoản quản trị

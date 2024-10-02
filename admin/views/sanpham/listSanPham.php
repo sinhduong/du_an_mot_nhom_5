@@ -70,7 +70,7 @@
                                                     <a href="<?= BASE_URL_ADMIN . '?act=form-sua-san-pham&id_san_pham=' . htmlspecialchars($sanPham['id']) ?>">
                                                         <button class="btn btn-warning">Sửa</button>
                                                     </a>
-                                                    <a href="<?= BASE_URL_ADMIN . '?act=delete-danh-muc&id_san_pham=' . htmlspecialchars($sanPham['id']) ?>" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?')">
+                                                    <a href="<?= BASE_URL_ADMIN . '?act=delete-san-pham&id_san_pham=' . htmlspecialchars($sanPham['id']) ?>" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?')">
                                                         <button class="btn btn-danger">Xóa</button>
                                                     </a>
                                                 </td>

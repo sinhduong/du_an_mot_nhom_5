@@ -63,14 +63,139 @@ class AdminSanPham
             echo "Lỗi" . $e->getMessage();
         }
     }
+    public function getDetailSanPham($id)
+    {
+        try {
+            $sql = "SELECT * FROM san_phams WHERE id =:id";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id' => $id]);
+
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+            return false; // Trả về false để xử lý lỗi ở controller
+        }
+    }
+
+    public function getListAnhSanPham($id)
+    {
+        try {
+            $sql = "SELECT *FROM hinh_anh_san_phams WHERE san_pham_id =:id";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id' => $id]);
+
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+            return false; // Trả về false để xử lý lỗi ở controller
+        }
+    }
+    public function updateSanPham($san_pham_id, $ten_san_pham, $gia_san_pham, $gia_khuyen_mai, $so_luong, $ngay_nhap, $danh_muc_id, $trang_thai, $mo_ta, $hinh_anh)
+    {
+        try {
+            $sql = "UPDATE san_phams SET 
+                ten_san_pham = :ten_san_pham,
+                gia_san_pham = :gia_san_pham,
+                gia_khuyen_mai = :gia_khuyen_mai,
+                so_luong = :so_luong,
+                ngay_nhap = :ngay_nhap,
+                danh_muc_id = :danh_muc_id,
+                trang_thai = :trang_thai,
+                mo_ta = :mo_ta,
+                hinh_anh = :hinh_anh
+                WHERE id = :id"; 
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':ten_san_pham' => $ten_san_pham,
+                ':gia_san_pham' => $gia_san_pham,
+                ':gia_khuyen_mai' => $gia_khuyen_mai,
+                ':so_luong' => $so_luong,
+                ':ngay_nhap' => $ngay_nhap,
+                ':danh_muc_id' => $danh_muc_id,
+                ':trang_thai' => $trang_thai,
+                ':mo_ta' => $mo_ta,
+                ':hinh_anh' => $hinh_anh,
+                ':id' => $san_pham_id
+            ]);
+
+            return true;
+        } catch (Exception $e) {
+            error_log("Lỗi: " . $e->getMessage());
+            return false; 
+        }
+    }
+
+    public function destroySanPham($id)
+    {
+        try {
+            $sql = "DELETE FROM san_phams WHERE id=:id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':id' => $id
+            ]);
+
+            return true;
+        } catch (Exception $e) {
+            echo "Lỗi" . $e->getMessage();
+        }
+    }
+
+    public function getDetailAlbumSanPham($id)
+    {
+        try {
+            $sql = "SELECT * FROM hinh_anh_san_phams WHERE id =:id";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id' => $id]);
+
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+            return false; // Trả về false để xử lý lỗi ở controller
+        }
+    }
+
+    public function updateAlbunSanPham($id,$new_file)
+    {
+        try {
+            $sql = "UPDATE hinh_anh_san_phams SET 
+                link_hinh_anh = :new_file,
+                WHERE id = :id"; 
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':new_file' => $new_file,
+                ':id' => $id,
+               
+            ]);
+
+            return true;
+        } catch (Exception $e) {
+            error_log("Lỗi: " . $e->getMessage());
+            return false; 
+        }
+    }
 
 
+    public function destroyAnhSanPham($id)
+    {
+        try {
+            $sql = "DELETE FROM hinh_anh_san_phams WHERE id=:id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':id' => $id
+            ]);
 
-
-
-
-
-
+            return true;
+        } catch (Exception $e) {
+            echo "Lỗi" . $e->getMessage();
+        }
+    }
 
 
 

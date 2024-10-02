@@ -30,10 +30,10 @@ function UploadFile($file, $folderUpload)
 
     // Sanitize file name
     $fileName = basename($file['name']);
-    $fileName = preg_replace('/[^a-zA-Z0-9_-]/', '_', $fileName); // Only allow safe characters
+    $fileName = preg_replace('/[^a-zA-Z0-9_-]/', '.', $fileName); // Only allow safe characters
 
     // Create a unique path
-    $pathStorage = $folderUpload . time() . '_' . $fileName;
+    $pathStorage = $folderUpload . time() . '.' . $fileName;
     $from = $file['tmp_name'];
     $to = PATH_ROOT . $pathStorage;
 
@@ -77,4 +77,26 @@ function deleteSessionError()
         session_unset();
         session_destroy();
     }
+}
+
+
+
+function uploadFileAlbum($file, $folderUpload, $key)
+{
+
+    $pathStorage = $folderUpload . time() . $file['name'][$key];
+    $from = $file['tmp_name'][$key];
+    $to = PATH_ROOT . $pathStorage;
+
+    // Ensure the upload directory exists
+    if (!is_dir(PATH_ROOT . $folderUpload)) {
+        mkdir(PATH_ROOT . $folderUpload, 0755, true);
+    }
+
+    // Move the uploaded file
+    if (move_uploaded_file($from, $to)) {
+        return $pathStorage;
+    }
+
+    return null;
 }

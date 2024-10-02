@@ -40,10 +40,7 @@
                         </div>
                         <form action="<?= BASE_URL_ADMIN . '?act=update-danh-muc&id=' . $danhmuc['id'] ?>" method="POST">
                             <div class="card-body">
-                                <div class="form-group">
-                                    <label>ID danh mục</label>
-                                    <input type="text" class="form-control" name="id" value="<?= $danhmuc['id'] ?>" readonly>
-                                </div>
+                               
                                 <div class="form-group">
                                     <label>Tên danh mục</label>
                                     <input type="text" class="form-control" name="ten_danh_muc" value="<?= $danhmuc['ten_danh_muc'] ?>" placeholder="Nhập tên danh mục">

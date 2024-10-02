@@ -9,7 +9,39 @@
 <!-- sidebar  -->
 <?php include './views/layout/sidebar.php' ?>
 <!-- End sidebar  -->
+<style>
+    .input-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
 
+    .input-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        /* Để thêm một khoảng cách nhỏ giữa các hàng nếu cần */
+    }
+
+    .btn-add,
+    .btn-delete {
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
+    input.form-control {
+        flex-grow: 1;
+        margin: 0 5px;
+    }
+
+    .btn-add,
+    .btn-delete {
+        width: 40px;
+        text-align: center;
+    }
+</style>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -68,14 +100,16 @@
                                         <p class="text-danger"><?= $_SESSION['error']['hinh_anh'] ?></p>
                                     <?php } ?>
                                 </div>
-                                <div class="form-group col-6 ">
+                                <div class="form-group col-6">
                                     <label>Album ảnh</label>
-                                    <input type="file" class="form-control" name="img_array[]" multiple>
-
+                                    <div id="image-input-container" class="input-container">
+                                        <div class="input-group">
+                                            <button type="button" id="add-input" class="btn-add">+</button>
+                                            <input type="file" class="form-control" name="img_array[]" multiple>
+                                            <button type="button" class="btn-delete" onclick="removeInput(this)">X</button>
+                                        </div>
+                                    </div>
                                 </div>
-
-
-
                                 <div class="form-group col-6 ">
                                     <label>Số lượng</label>
                                     <input type="number" class="form-control" name="so_luong" placeholder="Nhập số lượng">
@@ -148,7 +182,62 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+<script>
+    document.getElementById('add-input').addEventListener('click', function() {
+        addNewInputGroup();
+    });
 
+    function addNewInputGroup() {
+        const container = document.getElementById('image-input-container');
+
+        // Tạo phần tử mới
+        const newInputGroup = document.createElement('div');
+        newInputGroup.classList.add('input-group');
+
+        // Tạo nút +
+        const addButton = document.createElement('button');
+        addButton.type = 'button';
+        addButton.classList.add('btn-add');
+        addButton.textContent = '+';
+        addButton.onclick = function() {
+            addNewInputGroup(); // Đệ quy để thêm nhóm mới khi click vào dấu +
+        };
+
+        // Tạo input file
+        const inputFile = document.createElement('input');
+        inputFile.type = 'file';
+        inputFile.name = 'img_array[]';
+        inputFile.classList.add('form-control');
+        inputFile.multiple = true;
+
+        // Tạo nút X
+        const deleteButton = document.createElement('button');
+        deleteButton.type = 'button';
+        deleteButton.classList.add('btn-delete');
+        deleteButton.textContent = 'X';
+        deleteButton.onclick = function() {
+            removeInput(deleteButton);
+        };
+
+        // Thêm các phần tử vào nhóm
+        newInputGroup.appendChild(addButton);
+        newInputGroup.appendChild(inputFile);
+        newInputGroup.appendChild(deleteButton);
+
+        // Thêm nhóm mới vào container
+        container.appendChild(newInputGroup);
+    }
+
+    function removeInput(button) {
+        const container = document.getElementById('image-input-container');
+        const inputGroups = container.getElementsByClassName('input-group');
+
+        // Kiểm tra nếu còn hơn 1 nhóm mới cho phép xóa
+        if (inputGroups.length > 1) {
+            button.parentElement.remove();
+        }
+    }
+</script>
 <!-- Footer  -->
 <?php include './views/layout/footer.php' ?>
 <!-- End Footer  -->
