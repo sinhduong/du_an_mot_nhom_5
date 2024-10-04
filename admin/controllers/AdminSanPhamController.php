@@ -209,25 +209,7 @@ class AdminSanPhamController
         }
     }
 
-    public function deleteSanPham()
-    {
-        if (isset($_GET['id_san_pham'])) {
-            $id = intval($_GET['id_san_pham']);
-            $sanPham = $this->modelSanPham->getDetailSanPham($id);
 
-            if ($sanPham) {
-                $old_file = $sanPham['hinh_anh'];
-                if (!empty($old_file) && file_exists($old_file)) {
-                    unlink($old_file); // Delete the image file
-                }
-
-                // Delete the product from the database
-                $this->modelSanPham->destroySanPham($id);
-                header("location:" . BASE_URL_ADMIN . '?act=san-pham');
-                exit();
-            }
-        }
-    }
     public function postEditAlbumSanPham()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -276,6 +258,58 @@ class AdminSanPhamController
             }
             header("location: " . BASE_URL_ADMIN . '?act=form-sua-san-pham&id_san_pham=' . $san_pham_id);
             exit();
+        }
+    }
+
+
+    public function deleteSanPham()
+    {
+        $id = $_GET['id_san_pham'];
+        $sanPham = $this->modelSanPham->getDetailSanPham($id);
+        $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
+
+        // Nếu sản phẩm tồn tại
+        if ($sanPham) {
+            // Xóa file hình ảnh chính của sản phẩm
+            deleteFile($sanPham['hinh_anh']);
+
+            // Xóa sản phẩm khỏi cơ sở dữ liệu
+            $this->modelSanPham->destroySanPham($id);
+        }
+
+        // Nếu có danh sách ảnh album sản phẩm
+        if ($listAnhSanPham) {
+            foreach ($listAnhSanPham as $anhSP) {
+                // Xóa từng file hình ảnh trong album
+                deleteFile($anhSP['link_hinh_anh']);
+
+                // Xóa thông tin ảnh album khỏi cơ sở dữ liệu
+                $this->modelSanPham->destroyAnhSanPham($anhSP['id']);
+            }
+        }
+
+        // Chuyển hướng về trang quản lý sản phẩm sau khi xóa
+        header("location:" . BASE_URL_ADMIN . '?act=san-pham');
+        exit();
+    }
+
+
+
+
+    public function detailSanPham()
+    {
+        if (isset($_GET['id_san_pham'])) {
+            $id = intval($_GET['id_san_pham']); // Sanitize input
+            $sanPham = $this->modelSanPham->getDetailSanPham($id);
+            $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
+            // var_dump($listAnhSanPham);die;
+
+            if ($sanPham) {
+                require_once './views/sanpham/detailSanPham.php';
+            } else {
+                header("Location: " . BASE_URL_ADMIN . '?act=san-pham');
+                exit();
+            }
         }
     }
 

@@ -69,6 +69,7 @@ function DeleteFile($file)
 
     return false; // File does not exist
 }
+
 function deleteSessionError()
 {
     if (isset($_SESSION['flash'])) {

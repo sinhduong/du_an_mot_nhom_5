@@ -34,6 +34,7 @@ match ($act) {
     'update-san-pham' => (new AdminSanPhamController())->postEditSanPham($_GET['id']),
     'sua-album-san-pham' => (new AdminSanPhamController())->postEditAlbumSanPham($_GET['id']),
     'delete-san-pham' => (new AdminSanPhamController())->deleteSanPham($_GET['id']),
+    'chi-tiet-san-pham' => (new AdminSanPhamController())->detailSanPham(),
 
     // Route quản lý tài khoản quản trị
     'list-tai-khoan-quan-tri' => (new AdminTaikhoanController())->danhSachQuanTri(),
