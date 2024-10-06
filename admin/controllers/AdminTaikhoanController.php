@@ -120,18 +120,17 @@ class AdminTaikhoanController
     public function resetPassword()
     {
         $tai_khoan_id = $_GET['id_quan_tri'];
-        $tai_khoan=$this->modelTaiKhoan->getDetailTaiKhoan($tai_khoan_id);
+        $tai_khoan = $this->modelTaiKhoan->getDetailTaiKhoan($tai_khoan_id);
         $password = password_hash('123@123ab', PASSWORD_BCRYPT);
         $status = $this->modelTaiKhoan->resetPassword($tai_khoan_id, $password);
 
-        if ($status && $tai_khoan['chuc_vu_id']==1) {
+        if ($status && $tai_khoan['chuc_vu_id'] == 1) {
             header("location: " . BASE_URL_ADMIN . '?act=list-tai-khoan-quan-tri');
             exit();
-        }elseif($status && $tai_khoan['chuc_vu_id']==2){
+        } elseif ($status && $tai_khoan['chuc_vu_id'] == 2) {
             header("location: " . BASE_URL_ADMIN . '?act=list-tai-khoan-khach-hang');
             exit();
-        }
-         else {
+        } else {
             var_dump('lỗi khi reset tài khoản');
             die;
         }
@@ -193,7 +192,7 @@ class AdminTaikhoanController
             // Nếu không có lỗi, tiến hành cập nhật tài khoản
             if (empty($error)) {
                 // Cập nhật tài khoản
-                $this->modelTaiKhoan->updateKhachHang($khach_hang_id, $ho_ten, $email, $so_dien_thoai,$ngay_sinh,$gioi_tinh,$dia_chi, $trang_thai);
+                $this->modelTaiKhoan->updateKhachHang($khach_hang_id, $ho_ten, $email, $so_dien_thoai, $ngay_sinh, $gioi_tinh, $dia_chi, $trang_thai);
 
                 // Điều hướng về trang danh sách tài khoản quản trị sau khi cập nhật thành công
                 header("location: " . BASE_URL_ADMIN . '?act=list-tai-khoan-khach-hang');
@@ -206,15 +205,16 @@ class AdminTaikhoanController
             }
         }
     }
-    public function detailKhachHang(){
-        $id_khach_hang=$_GET['id_khach_hang'];
+    public function detailKhachHang()
+    {
+        $id_khach_hang = $_GET['id_khach_hang'];
         // var_dump($id_khach_hang);
 
-        $khachHang=$this->modelTaiKhoan->getDetailTaiKhoan($id_khach_hang);
+        $khachHang = $this->modelTaiKhoan->getDetailTaiKhoan($id_khach_hang);
 
-        $listDonHang=$this->modelDonHang->getDonHangFromKhachHang($id_khach_hang);
+        $listDonHang = $this->modelDonHang->getDonHangFromKhachHang($id_khach_hang);
 
-        $listBinhLuan=$this->modelSanPham->getBinhLuanFromKhachHang($id_khach_hang);
+        $listBinhLuan = $this->modelSanPham->getBinhLuanFromKhachHang($id_khach_hang);
         // var_dump($listDonHang);die;
 
         require_once './views/taikhoan/khachhang/detailKhachHang.php';
@@ -228,34 +228,52 @@ class AdminTaikhoanController
 
 
 
-    public function formLogin(){
+    public function formLogin()
+    {
         require_once './views/auth/formLogin.php';
-        // deleteSessionError();
+        deleteSessionError();
     }
-    public function login(){
-        if($_SERVER['REQUEST_METHOD']=='POST'){
+    public function login()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // lấy email và pass gửi lên từ form
-            $email=$_POST['email'];
-            $password=$_POST['password'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
             // var_dump($email);die;
-            
+
             // xử lý kiểm tra thông tin đăng nhập
-            $user=$this->modelTaiKhoan->checkLogin($email,$password);
-            if($user==$email){
+            $user = $this->modelTaiKhoan->checkLogin($email, $password);
+            if ($user == $email) {
                 // đăng nhập thành công
                 // lưu thông tin vào session
-                $_SESSION['user_admin']=$user;
-                header("location:". BASE_URL_ADMIN );
+                $_SESSION['user_admin'] = $user;
+                header("location:" . BASE_URL_ADMIN);
                 exit();
-            }else{
+            } else {
                 // Lỗi thì lưu lỗi vào session
-                $_SESSION['error']=$user;
-                $_SESSION['flash']=true;
-                header("location".BASE_URL_ADMIN. '?action=login-admin');
+                $_SESSION['error'] = $user;
+                // var_dump($_SESSION['error']);die;
+                $_SESSION['flash'] = true;
+                header("location:" . BASE_URL_ADMIN . '?act=login-admin');
                 exit();
             }
-
+        }
+    }
+    public function logout()
+    {
+        if (isset($_SESSION['user_admin'])) {
+            unset($_SESSION['user_admin']);
+            header("location: " . BASE_URL_ADMIN . '?act=login-admin');
+            exit();
         }
     }
 
+    function checkLoginAdmin()
+    {
+        if (!isset($_SESSION['user_admin'])) {
+            header("location:" . BASE_URL_ADMIN . '?act=login-admin');
+            // include_once './views/auth/formLogin.php';
+            exit();
+        }
+    }
 }

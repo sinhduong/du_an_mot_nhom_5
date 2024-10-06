@@ -70,7 +70,7 @@ function DeleteFile($file)
     return false; // File does not exist
 }
 
-function deleteSessionError()
+function   vgmh()
 {
     if (isset($_SESSION['flash'])) {
         // hủy session sau khi tải trang
@@ -100,4 +100,20 @@ function uploadFileAlbum($file, $folderUpload, $key)
     }
 
     return null;
+}
+
+function deleteSessionError()
+{
+    if (isset($_SESSION['flash'])) {
+        // hủy session sau khi tải trang
+        unset($_SESSION['flash']);
+        session_unset();
+        // session_destroy();
+    }
+}
+
+function formatDate($date)
+{
+
+    return date("d-m-Y", strtotime($date));
 }

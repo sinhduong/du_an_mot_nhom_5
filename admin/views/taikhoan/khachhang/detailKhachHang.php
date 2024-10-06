@@ -102,12 +102,12 @@
                                     <td><?= $donHang['ten_trang_thai'] ?></td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-don-hang$id_don_hang=' . $donHang['id'] ?>">
+                                            <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-don-hang&id_don_hang=' . htmlspecialchars($donHang['id']) ?>">
                                                 <button class="btn btn-primary"><i class="fa fa-eye"></i></button>
                                             </a>
                                         </div>
                                         <div class="btn-group">
-                                            <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-don-hang$id_don_hang=' . $donHang['id'] ?>">
+                                            <a href="<?= BASE_URL_ADMIN . '?act=form-sua-don-hang&id_don_hang=' . htmlspecialchars($donHang['id']) ?>">
                                                 <button class="btn btn-warning"><i class="fa fa-cogs"></i></button>
                                             </a>
                                         </div>

@@ -128,7 +128,7 @@ class AdminTaiKhoan
             if ($user && password_verify($mat_khau, $user['mat_khau'])) {
                 if ($user['chuc_vu_id'] == 1) {
                     if ($user['trang_thai'] == 1) {
-                        return $user; //đăng nhập thành công
+                        return $email; //đăng nhập thành công
                     } else {
                         return "tài khoản bị cấm";
                     }

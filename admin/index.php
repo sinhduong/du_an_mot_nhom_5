@@ -2,10 +2,14 @@
 session_start();
 require_once '../commons/env.php';
 require_once '../commons/function.php';
+
+// checkLoginAdmin();
+
 require_once './controllers/AdminDanhMucController.php';
 require_once './controllers/AdminSanPhamController.php';
 require_once './controllers/AdminBaoCaoThongKeController.php';
 require_once './controllers/AdminTaikhoanController.php';
+require_once './controllers/AdminDonHangController.php';
 require_once './models/AdminDanhMuc.php';
 require_once './models/AdminSanpham.php';
 require_once './models/AdminDonHang.php';
@@ -52,6 +56,12 @@ match ($act) {
     'update-khach-hang' => (new AdminTaikhoanController())->postEditKhachHang(),
     'chi-tiet-khach-hang' => (new AdminTaikhoanController())->detailKhachHang(),
 
+    // route đơn hàng 
+    'don-hang' => (new AdminDonHangController())->danhSachDonHang(),
+    'chi-tiet-don-hang' => (new AdminDonHangController())->detailDonHang($_GET['id_don_hang']),
+    'form-sua-don-hang' => (new AdminDonHangController())->formEditDonHang(),
+    'update-don-hang' => (new AdminDonHangController())->postEditDonHang($_GET['id']),
+
 
     // route bình luận
     'update-trang-thai-binh-luan' => (new AdminSanPhamController())->updateTrangThaiBinhLuan(),
@@ -61,4 +71,6 @@ match ($act) {
     // route auth
     'login-admin' => (new AdminTaiKhoanController())->formLogin(),
     'check-login-admin' => (new AdminTaiKhoanController())->login(),
+    'logout-admin' => (new AdminTaiKhoanController())->logout(),
+
 };

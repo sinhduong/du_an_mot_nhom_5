@@ -355,12 +355,12 @@ a:hover {
   display: flex;
   justify-content: space-between;
 }
-
 .error-message {
   color: red;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   margin-left: 2.5rem;
-  margin-top: -0.5rem;
-  display: none;
-  /* Ẩn thông báo lỗi ban đầu */
+  margin-top: -0.25rem;
+  display: block; 
+  font-weight: bold;
+  text-align: center;
 }

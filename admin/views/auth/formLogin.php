@@ -14,14 +14,20 @@
 <body class="body">
     <main class="box">
         <!-- Login Form -->
-        <form action="<?=BASE_URL_ADMIN. '?act=check-login-admin'?>" class="form" id="loginForm" method="POST">
-            <h3>Login</h3>
+        <form action="<?= BASE_URL_ADMIN . '?act=check-login-admin' ?>" class="form" id="loginForm" method="POST">
+            <?php if (isset($_SESSION['error'])) { ?>
+                                    <h3 style="color: red"><?= $_SESSION['error'] ?></h3>
+                <?php unset($_SESSION['error']); ?>
+            <?php } else { ?>
+                <h3>Đăng nhập</h3>
+            <?php } ?>
+
             <div class="input-group">
-                <input type="text" name="email" placeholder="email">
+                <input type="text" name="email" placeholder="Email" value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>">
                 <ion-icon class="icon" name="mail"></ion-icon>
             </div>
             <div class="input-group">
-                <input type="password" id="passwordField" name="password" placeholder="Password">
+                <input type="pass" id="passwordField" name="password" placeholder="Mật khẩu">
                 <ion-icon class="icon" id="togglePassword" name="lock-closed"></ion-icon>
             </div>
             <div class="button">
@@ -42,8 +48,9 @@
             </div>
         </form>
 
+
         <!-- Register Form -->
-        <form action="" class="form hidden" id="registerForm">
+        <!-- <form action="" class="form hidden" id="registerForm">
             <h3>Register</h3>
             <div class="input-group">
                 <input type="text" name="username" placeholder="Username">
@@ -70,9 +77,9 @@
                 <p>Already have an account?</p>
                 <a href="#" id="showLoginForm">Login</a>
             </div>
-        </form>
+        </form> -->
         <!-- Forgot Password Form -->
-        <form action="" class="form hidden" id="forgotPasswordForm">
+        <!-- <form action="" class="form hidden" id="forgotPasswordForm">
             <h3>Forgot Password</h3>
             <div class="input-group">
                 <input type="email" name="email" placeholder="Enter your email address">
@@ -85,7 +92,7 @@
                 <p>Remember your password?</p>
                 <a href="#" id="showLoginFormFromForgot">Login</a>
             </div>
-        </form>
+        </form> -->
     </main>
 </body>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
