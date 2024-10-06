@@ -5,7 +5,7 @@ class homeControllers
 
     public function home()
     {
-        echo ('đây là trang home');
+        require_once './views/home.php';
     }
 
     public function trangchu()
