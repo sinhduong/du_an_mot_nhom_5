@@ -2,7 +2,6 @@
 require_once './commons/env.php';
 require_once './commons/function.php';
 require_once './cotrollers/homeControllers.php';
-require_once './models/ancd.php';
 require_once './models/SanPham.php';
 
 
@@ -16,6 +15,7 @@ match ($act) {
    'trangchu' => (new homeControllers())->trangchu(),
    // BASE_URL/?act=trangchu
 
-   'danh-sach-san-pham' => (new homeControllers())->danhSachSanPham()
+   // 'danh-sach-san-pham' => (new homeControllers())->danhSachSanPham()
    // BASE_URL/?act=danh-sach-san-pham
+   'chi-tiet-san-pham' =>(new homeControllers())->chiTietSanPham(),
 };

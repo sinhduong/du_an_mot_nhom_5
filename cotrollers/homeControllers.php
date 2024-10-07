@@ -5,6 +5,9 @@ class homeControllers
 
     public function home()
     {
+        $listSanPham= $this->modelSanPham->getAllSanPham();
+        $listSanPhamBuy= $this->modelSanPham->getAllSanPhamBuy();
+        $listSanPhamShort= $this->modelSanPham->getAllSanPhamShort();
         require_once './views/home.php';
     }
 
@@ -18,10 +21,20 @@ class homeControllers
         $this->modelSanPham = new SanPham();
     }
 
-    public function danhSachSanPham()
-    {
-        $listProducts = $this->modelSanPham->GetAllProduct();
-        // var_dump($listProducts);
-        require_once './views/listProduct.php';
-    }
+  public function chiTietSanPham(){
+    if (isset($_GET['id_san_pham'])) {
+        $id = intval($_GET['id_san_pham']); // Sanitize input
+        $sanPham = $this->modelSanPham->getDetailSanPham($id);
+        $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
+        $listBinhLuan = $this->modelSanPham->getBinhLuanFromSanPham($id);
+        // var_dump($listAnhSanPham);die;
+
+        if ($sanPham) {
+            require_once './views/detailSanPham.php';
+        } else {
+            header("Location: " . BASE_URL);
+            exit();
+        }
+    } 
+  }
 }

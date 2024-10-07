@@ -117,3 +117,7 @@ function formatDate($date)
 
     return date("d-m-Y", strtotime($date));
 }
+
+ function  formatPrice($price){
+    return  number_format($price, 0 ,',','.');
+}
