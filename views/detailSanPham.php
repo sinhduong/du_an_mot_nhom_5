@@ -15,11 +15,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h1 class="page-title">Product Detalis</h1>
+                        <h1 class="page-title">Chi tiết sản phẩm</h1>
                         <ul class="breadcrumb justify-content-center">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="shop.html">Shop</a></li>
-                            <li class="current"><a href="product-details.html">Product Detalis Tab Style One</a></li>
+                            <li><a href="<?= BASE_URL ?>">Trang chủ</a></li>
+                            <li><a href="#">Sản phẩm</a></li>
+                            <!-- <li class="current"><a href="product-details.html">Chi tiết sản phẩm</a></li> -->
                         </ul>
                     </div>
                 </div>
@@ -34,111 +34,72 @@
                             <div class="col-lg-6">
                                 <!-- Tab Content Start -->
                                 <div class="tab-content product-details-thumb-large" id="myTabContent-3">
-                                    <div class="tab-pane fade show active" id="product-large-one">
-                                        <div class="product-details-img easyzoom">
-                                            <a class="popup-btn" href="assets/img/products/3-900x900.jpg">
-                                                <img src="assets/img/products/3-900x900.jpg" alt="product">
-                                            </a>
+                                    <?php foreach ($listAnhSanPham as $key => $anhSanPham): ?>
+                                        <div class="tab-pane fade <?= $key === 0 ? 'show active' : '' ?>" id="product-large-<?= $key ?>">
+                                            <div class="product-details-img easyzoom">
+                                                <a class="popup-btn" href="<?= BASE_URL . $anhSanPham['link_hinh_anh'] ?>">
+                                                    <img src="<?= BASE_URL . $anhSanPham['link_hinh_anh'] ?>" alt="product">
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="product-large-two">
-                                        <div class="product-details-img easyzoom">
-                                            <a class="popup-btn" href="assets/img/products/4-900x900.jpg">
-                                                <img src="assets/img/products/4-900x900.jpg" alt="product">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="product-large-three">
-                                        <div class="product-details-img easyzoom">
-                                            <a class="popup-btn" href="assets/img/products/5-900x900.jpg">
-                                                <img src="assets/img/products/5-900x900.jpg" alt="product">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="product-large-four">
-                                        <div class="product-details-img easyzoom">
-                                            <a class="popup-btn" href="assets/img/products/6-900x900.jpg">
-                                                <img src="assets/img/products/6-900x900.jpg" alt="product">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="product-large-five">
-                                        <div class="product-details-img easyzoom">
-                                            <a class="popup-btn" href="assets/img/products/10-900x900.jpg">
-                                                <img src="assets/img/products/10-900x900.jpg" alt="product">
-                                            </a>
-                                        </div>
-                                    </div>
+                                    <?php endforeach; ?>
                                 </div>
                                 <!-- Tab Content End -->
 
                                 <!-- Product Thumbnail Carousel Start -->
                                 <div class="product-details-thumbnail">
                                     <div class="thumb-menu product-details-thumb-menu nav-vertical-center" id="thumbmenu-horizontal">
-                                        <div class="thumb-menu-item">
-                                            <a href="#product-large-one" data-bs-toggle="tab" class="nav-link active">
-                                                <img src="assets/img/products/3-450x450.jpg" alt="product thumb">
-                                            </a>
-                                        </div>
-                                        <div class="thumb-menu-item">
-                                            <a href="#product-large-two" data-bs-toggle="tab" class="nav-link">
-                                                <img src="assets/img/products/4-450x450.jpg" alt="product thumb">
-                                            </a>
-                                        </div>
-                                        <div class="thumb-menu-item">
-                                            <a href="#product-large-three" data-bs-toggle="tab" class="nav-link">
-                                                <img src="assets/img/products/5-450x450.jpg" alt="product thumb">
-                                            </a>
-                                        </div>
-                                        <div class="thumb-menu-item">
-                                            <a href="#product-large-four" data-bs-toggle="tab" class="nav-link">
-                                                <img src="assets/img/products/6-450x450.jpg" alt="product thumb">
-                                            </a>
-                                        </div>
-                                        <div class="thumb-menu-item">
-                                            <a href="#product-large-five" data-bs-toggle="tab" class="nav-link">
-                                                <img src="assets/img/products/10-450x450.jpg" alt="product thumb">
-                                            </a>
-                                        </div>
+                                        <?php foreach ($listAnhSanPham as $key => $anhSanPham): ?>
+                                            <div class="thumb-menu-item">
+                                                <a href="#product-large-<?= $key ?>" data-bs-toggle="tab" class="nav-link <?= $key === 0 ? 'active' : '' ?>">
+                                                    <img src="<?= BASE_URL . $anhSanPham['link_hinh_anh'] ?>" alt="product thumb">
+                                                </a>
+                                            </div>
+                                        <?php endforeach; ?>
                                     </div>
                                 </div>
                                 <!-- Product Thumbnail Carousel End -->
                             </div>
+
                             <div class="col-lg-6">
                                 <!-- Single Product Content Start -->
                                 <div class="product-details-content">
                                     <div class="product-details-top">
-                                        <h2 class="product-details-name">Aliquam lobortis</h2>
+                                        <h2 class="product-details-name"><?= $sanPham['ten_san_pham'] ?></h2>
                                         <div class="ratings-wrap">
                                             <div class="ratings">
                                                 <i class="fa fa-star rated"></i>
                                                 <i class="fa fa-star rated"></i>
                                                 <i class="fa fa-star rated"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star rated"></i>
+                                                <i class="fa fa-star rated"></i>
                                             </div>
                                             <span>
-                                                <a class="review-btn" href="#singleProductTab">1 Reviews</a>
-                                                <a class="review-btn" href="#singleProductTab">write a review</a>
+                                                <?php $countComment = count($listBinhLuan); ?>
+                                                <a class="review-btn" href="#singleProductTab"><?= $countComment . ' bình luận' ?></a>
+                                                <!-- <a class="review-btn" href="#singleProductTab">write a review</a> -->
                                             </span>
                                         </div>
                                         <ul class="product-details-list list-unstyled">
-                                            <li>Brand: <a href="#">Apple</a></li>
-                                            <li>Product Code: Watches</li>
-                                            <li>Reward Points: 600</li>
-                                            <li>Availability: In Stock</li>
+                                            <li>Danh mục: <a href="#"><?= $sanPham['ten_danh_muc'] ?></a></li>
+                                            <li>Mô tả : <?= $sanPham['mo_ta'] ?></li>
                                         </ul>
-                                        <div class="product-details-price-wrapper">
-                                            <span class="money">$550.00</span>
-                                            <span class="product-price-old">
-                                                <span class="money">$700.00</span>
-                                            </span>
+                                        <!-- product-details-price-wrapper -->
+                                        <div class="product-price-wrapper">
+                                            <?php if ($sanPham['gia_khuyen_mai']) { ?>
+                                                <span class="money"><?= formatPrice($sanPham['gia_khuyen_mai']) . 'đ' ?></span>
+                                                <span class="product-price-old">
+                                                    <span class="money"><?= formatPrice($sanPham['gia_san_pham']) . 'đ' ?></span>
+                                                </span>
+                                            <?php } else { ?>
+                                                <span class="money"><?= formatPrice($sanPham['gia_san_pham']) . 'đ' ?></span>
+                                            <?php } ?>
                                         </div>
                                     </div>
 
                                     <div class="product-details-bottom">
 
-                                        <p class="product-details-availability"><i class="fa fa-check-circle"></i>200 In Stock</p>
+                                        <p class="product-details-availability"><i class="fa fa-check-circle"></i><?=$sanPham['so_luong'].' Trong kho'?></p>
                                         <div class="product-details-action-wrapper mb--20">
                                             <div class="product-details-action-top d-flex align-items-center mb--20">
                                                 <div class="quantity">
