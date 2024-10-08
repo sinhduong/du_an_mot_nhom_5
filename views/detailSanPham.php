@@ -99,32 +99,32 @@
 
                                     <div class="product-details-bottom">
 
-                                        <p class="product-details-availability"><i class="fa fa-check-circle"></i><?=$sanPham['so_luong'].' Trong kho'?></p>
+                                        <p class="product-details-availability"><i class="fa fa-check-circle"></i><?= $sanPham['so_luong'] . ' Trong kho' ?></p>
                                         <div class="product-details-action-wrapper mb--20">
                                             <div class="product-details-action-top d-flex align-items-center mb--20">
-                                                <div class="quantity">
+                                                <div class="quantity mb-lg-2 w-25">
                                                     <span>Qty: </span>
-                                                    <input type="number" class="quantity-input" name="qty" id="pro_qty" value="1" min="1">
+                                                    <input type="number" class="quantity-input w-50" name="qty" id="pro_qty" value="1" min="1">
                                                 </div>
                                                 <button type="button" class="btn btn-medium btn-style-2 add-to-cart">
                                                     Add To Cart
                                                 </button>
                                             </div>
                                             <div class="product-details-action-bottom">
-                                                <a href="wishlist.html">+Add to wishlist</a>
-                                                <a href="compare.html">+Add to compare</a>
+                                                <!-- <a href="wishlist.html">+Add to wishlist</a>
+                                                <a href="compare.html">+Add to compare</a> -->
                                             </div>
                                         </div>
                                         <p class="product-details-tags">
-                                            Tags: <a href="shop.html">Sport</a>,
-                                            <a href="shop.html">Luxury</a>
+                                            <!-- Tags: <a href="shop.html">Sport</a>,
+                                            <a href="shop.html">Luxury</a> -->
                                         </p>
                                         <div class="social-share">
-                                            <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" class="facebook share-button">
+                                            <a href="#" rel="noopener noreferrer" class="facebook share-button">
                                                 <i class="fa fa-facebook"></i>
                                                 <span>Like</span>
                                             </a>
-                                            <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" class="twitter share-button">
+                                            <a href="#" rel="noopener noreferrer" class="twitter share-button">
                                                 <i class="fa fa-twitter"></i>
                                                 <span>Tweet</span>
                                             </a>
@@ -147,141 +147,60 @@
                             <div class="col-12">
                                 <ul class="product-details-tab-head nav nav-tab" id="singleProductTab" role="tablist">
                                     <li class="nav-item product-details-tab-item">
-                                        <a class="nav-link product-details-tab-link active" id="nav-desc-tab" data-bs-toggle="tab" href="#nav-desc" role="tab" aria-controls="nav-desc" aria-selected="true">Description</a>
-                                    </li>
-                                    <li class="nav-item product-details-tab-item">
-                                        <a class="nav-link product-details-tab-link" id="nav-details-tab" data-bs-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-details" aria-selected="true">Additional Information</a>
-                                    </li>
-
-                                    <li class="nav-item product-details-tab-item">
-                                        <a class="nav-link product-details-tab-link" id="nav-review-tab" data-bs-toggle="tab" href="#nav-review" role="tab" aria-controls="nav-review" aria-selected="true">review (2)</a>
+                                        <a class="nav-link product-details-tab-link" id="nav-review-tab" data-bs-toggle="tab" href="#nav-review" role="tab" aria-controls="nav-review" aria-selected="true">Bình luận (<?= $countComment ?>)</a>
                                     </li>
                                 </ul>
                                 <div class="product-details-tab-content tab-content">
-                                    <div class="tab-pane fade show active" id="nav-desc" role="tabpanel" aria-labelledby="nav-desc-tab">
-                                        <p class="product-details-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla. Donec a neque libero.</p>
-                                        <p class="product-details-description">
-                                            Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio quis mi.
-                                        </p>
-                                    </div>
-                                    <div class="tab-pane" role="tabpanel" id="nav-details" aria-labelledby="nav-details-tab">
-                                        <div class="product-details-additional-info">
-                                            <h3>Additional Information</h3>
-                                            <div class="table-content table-responsive">
-                                                <table class="shop_attributes">
-                                                    <tr>
-                                                        <th>Color: </th>
-                                                        <td>
-                                                            <p>Black, Blue, Gold</p>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Size: </th>
-                                                        <td>
-                                                            <p>XXL, XL, L, M</p>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" role="tabpanel" id="nav-review" aria-labelledby="nav-review-tab">
+                                    <div class="tab-pane fade show active" role="tabpanel" id="nav-review" aria-labelledby="nav-review-tab">
                                         <div class="product-details-review-wrap">
-                                            <h2 class="mb--20">2 REVIEWS FOR ALIQUAM LOBORTIS</h2>
+                                            <!-- <div class="review mb--40">
+                                                <div class="review__single">
+                                                    <div class="review__meta">
+                                                        <p class="review__author">HasTech</p>
+                                                        <p class="review__date">October 12, 2014</p>
+                                                    </div>
+                                                    <div class="review__content">
+                                                        <p class="review__text">
+                                                            It’s both good and bad. If Nikon had achieved a high-quality wide lens camera with a 1 inch sensor, that would have been a very competitive product. So in that sense, it’s good for us. But actually, from the perspective of driving the 1 inch sensor market, we want to stimulate this market and that means multiple manufacturers.
+                                                        </p>
+                                                        <div class="ratings">
+                                                            <i class="fa fa-star rated"></i>
+                                                            <i class="fa fa-star rated"></i>
+                                                            <i class="fa fa-star rated"></i>
+                                                            <i class="fa fa-star rated"></i>
+                                                            <i class="fa fa-star rated"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
                                             <div class="review mb--40">
-                                                <div class="review__single">
-                                                    <div class="review__meta">
-                                                        <p class="review__author">HasTech</p>
-                                                        <p class="review__date">October 12, 2014</p>
-                                                    </div>
-                                                    <div class="review__content">
-                                                        <p class="review__text">
-                                                            It’s both good and bad. If Nikon had achieved a high-quality wide lens camera with a 1 inch sensor, that would have been a very competitive product. So in that sense, it’s good for us. But actually, from the perspective of driving the 1 inch sensor market, we want to stimulate this market and that means multiple manufacturers.
-                                                        </p>
-                                                        <div class="ratings">
-                                                            <i class="fa fa-star rated"></i>
-                                                            <i class="fa fa-star rated"></i>
-                                                            <i class="fa fa-star rated"></i>
-                                                            <i class="fa fa-star rated"></i>
-                                                            <i class="fa fa-star rated"></i>
+                                                <?php foreach ($listBinhLuan as $binhLuan): ?>
+                                                    <div class="review__single d-flex align-items-start">
+                                                        <div class="review__avatar me-3">
+                                                            <img src="<?= $binhLuan['anh_dai_dien'] ?>" alt="Avatar" class="rounded-circle" style="width: 100px; height: 50px; object-fit: cover;">
+                                                        </div>
+                                                        <div class="review__content flex-grow-1" style="min-height: 100px;">
+                                                            <div class="review__meta">
+                                                                <p class="review__author">Khách hàng</p>
+                                                                <p class="review__date">Ngày nhập: <?= $binhLuan['ngay_dang'] ?></p>
+                                                            </div>
+                                                            <div class="review__text">
+                                                                <?= $binhLuan['noi_dung'] ?>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="review__single">
-                                                    <div class="review__meta">
-                                                        <p class="review__author">HasTech</p>
-                                                        <p class="review__date">October 12, 2014</p>
-                                                    </div>
-                                                    <div class="review__content">
-                                                        <p class="review__text">
-                                                            It’s both good and bad. If Nikon had achieved a high-quality wide lens camera with a 1 inch sensor, that would have been a very competitive product. So in that sense, it’s good for us. But actually, from the perspective of driving the 1 inch sensor market, we want to stimulate this market and that means multiple manufacturers.
-                                                        </p>
-                                                        <div class="ratings">
-                                                            <i class="fa fa-star rated"></i>
-                                                            <i class="fa fa-star rated"></i>
-                                                            <i class="fa fa-star rated"></i>
-                                                            <i class="fa fa-star rated"></i>
-                                                            <i class="fa fa-star rated"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <?php endforeach; ?>
                                             </div>
-                                            <h2 class="mb--20">Add a Review</h2>
+
+
                                             <form class="form form--review">
                                                 <div class="form__group clearfix mb--20">
-                                                    <label class="form__label d-block">Your Ratings</label>
-                                                    <div class="rating">
-                                                        <input type="radio" id="star5" name="rating" value="5" />
-                                                        <label class="full" for="star5" title="Awesome - 5 stars">
-                                                        </label>
-                                                        <input type="radio" id="star4half" name="rating" value="4 and a half" />
-                                                        <label class="half" for="star4half" title="Pretty good - 4.5 stars">
-                                                        </label>
-                                                        <input type="radio" id="star4" name="rating" value="4" />
-                                                        <label class="full" for="star4" title="Pretty good - 4 stars">
-                                                        </label>
-                                                        <input type="radio" id="star3half" name="rating" value="3 and a half" />
-                                                        <label class="half" for="star3half" title="Meh - 3.5 stars">
-                                                        </label>
-                                                        <input type="radio" id="star3" name="rating" value="3" />
-                                                        <label class="full" for="star3" title="Meh - 3 stars">
-                                                        </label>
-                                                        <input type="radio" id="star2half" name="rating" value="2 and a half" />
-                                                        <label class="half" for="star2half" title="Kinda bad - 2.5 stars">
-                                                        </label>
-                                                        <input type="radio" id="star2" name="rating" value="2" />
-                                                        <label class="full" for="star2" title="Kinda bad - 2 stars">
-                                                        </label>
-                                                        <input type="radio" id="star1half" name="rating" value="1 and a half" />
-                                                        <label class="half" for="star1half" title="Meh - 1.5 stars">
-                                                        </label>
-                                                        <input type="radio" id="star1" name="rating" value="1" />
-                                                        <label class="full" for="star1" title="Sucks big time - 1 star">
-                                                        </label>
-                                                        <input type="radio" id="starhalf" name="rating" value="half" />
-                                                        <label class="half" for="starhalf" title="Sucks big time - 0.5 stars">
-                                                        </label>
-                                                    </div>
                                                 </div>
                                                 <div class="form__group clearfix mb--20">
-                                                    <label class="form__label d-block" for="review_name">Name <sup>*</sup></label>
-                                                    <input id="review_name" name="review_name" class="form__input">
-                                                </div>
-                                                <div class="form__group clearfix mb--20">
-                                                    <label class="form__label d-block" for="review_email">Email <sup>*</sup></label>
-                                                    <input id="review_email" name="review_email" class="form__input">
-                                                </div>
-                                                <div class="form__group clearfix mb--20">
-                                                    <label class="form__label d-block" for="review">Your Review <sup>*</sup></label>
+                                                    <label class="form__label d-block" for="review">Nội dung bình luận <sup>*</sup></label>
                                                     <textarea id="review" name="review" class="form__input form__input--textarea"></textarea>
                                                     <div class="help-block">
-                                                        <span>Note: </span>
-                                                        HTML is not translated!
                                                     </div>
-                                                </div>
-                                                <div class="form__group text-right">
-                                                    <button type="submit" class="btn btn-medium btn-style-1">Continue</button>
-                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -296,333 +215,153 @@
                         <div class="row">
                             <div class="col-12 mb--20">
                                 <div class="section-title">
-                                    <h2>Related Products</h2>
+                                    <h2>Sản phẩm liên quan</h2>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <div class="product-carousel nav-top js-product-carousel-2">
-                                    <div class="mirora-product">
-                                        <div class="product-img">
-                                            <img src="assets/img/products/2-450x450.jpg" alt="Product" class="primary-image" />
-                                            <img src="assets/img/products/2-2-450x450.jpg" alt="Product" class="secondary-image" />
-                                            <div class="product-img-overlay">
-                                                <span class="product-label discount">
-                                                    -7%
-                                                </span>
-                                                <a data-bs-toggle="modal" data-bs-target="#productModal" class="btn btn-transparent btn-fullwidth btn-medium btn-style-1">Quick View</a>
+                                <div class="product-carousel js-product-carousel-2">
+                                    <?php foreach ($listSanPhamCungDanhMuc as $key => $sanPham): ?>
+                                        <div class="product-carousel-group">
+                                            <div class="mirora-product">
+                                                <div class="product-img">
+                                                    <img src="<?= BASE_URL .  $sanPham['hinh_anh'] ?>" alt="Product" class="primary-image" />
+                                                    <img src="<?= BASE_URL .  $sanPham['hinh_anh'] ?>" alt="Product" class="secondary-image" />
+                                                    <div class="product-img-overlay">
+                                                        <?php
+                                                        $ngay_nhap = new DateTime($sanPham['ngay_nhap']);
+                                                        $ngayHienTai = new DateTime();
+                                                        $tinhNgay = $ngayHienTai->diff($ngay_nhap);
+                                                        if ($tinhNgay->days <= 7) {
+                                                        ?>
+                                                            <span class="product-label ">
+                                                                Mới
+                                                            </span>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                        <?php if ($sanPham['gia_khuyen_mai']) {
+                                                        ?>
+                                                            <span class="product-label discount">
+                                                                Giảm giá
+                                                            </span>
+                                                        <?php } ?>
+                                                        <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>" data-bs-target="#productModal" class="btn btn-transparent btn-fullwidth btn-medium btn-style-1">Chi tiết</a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content text-center">
+                                                    <span>Cartier</span>
+                                                    <h4><a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>"><?= $sanPham['ten_san_pham'] ?></a></h4>
+                                                    <div class="product-price-wrapper">
+                                                        <?php if ($sanPham['gia_khuyen_mai']) { ?>
+                                                            <span class="money"><?= formatPrice($sanPham['gia_khuyen_mai']) . 'đ' ?></span>
+                                                            <span class="product-price-old">
+                                                                <span class="money"><?= formatPrice($sanPham['gia_san_pham']) . 'đ' ?></span>
+                                                            </span>
+                                                        <?php } else { ?>
+                                                            <span class="money"><?= formatPrice($sanPham['gia_san_pham']) . 'đ' ?></span>
+                                                        <?php } ?>
+                                                    </div>
+                                                </div>
+                                                <div class="mirora_product_action text-center position-absolute">
+                                                    <div class="product-rating">
+                                                        <span>
+                                                            <i class="fa fa-star theme-star"></i>
+                                                            <i class="fa fa-star theme-star"></i>
+                                                            <i class="fa fa-star theme-star"></i>
+                                                            <i class="fa fa-star theme-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </span>
+                                                    </div>
+                                                    <p>
+                                                        It is a long established fact that a reader will be distracted by the readable content...
+                                                    </p>
+                                                    <div class="product-action">
+                                                        <a class="same-action" href="wishlist.html" title="wishlist">
+                                                            <i class="fa fa-heart-o"></i>
+                                                        </a>
+                                                        <a class="add_cart cart-item action-cart" href="cart.html" title="wishlist"><span>Add to cart</span></a>
+                                                        <a class="same-action compare-mrg" data-bs-toggle="modal" data-bs-target="#productModal" href="compare.html">
+                                                            <i class="fa fa-sliders fa-rotate-90"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
                                             </div>
+
+
+                                            <!-- <div class="mirora-product">
+                                                    <div class="product-img">
+                                                        <img src="<?= BASE_URL .  $sanPham['hinh_anh'] ?>" alt="Product" class="primary-image" />
+                                                        <img src="<?= BASE_URL .  $sanPham['hinh_anh'] ?>" alt="Product" class="secondary-image" />
+                                                        <div class="product-img-overlay">
+                                                            <?php
+                                                            $ngay_nhap = new DateTime($sanPham['ngay_nhap']);
+                                                            $ngayHienTai = new DateTime();
+                                                            $tinhNgay = $ngayHienTai->diff($ngay_nhap);
+                                                            if ($tinhNgay->days <= 7) {
+                                                            ?>
+                                                                <span class="product-label ">
+                                                                    Mới
+                                                                </span>
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                            <?php if ($sanPham['gia_khuyen_mai']) {
+                                                            ?>
+                                                                <span class="product-label discount">
+                                                                    Giảm giá
+                                                                </span>
+                                                            <?php } ?>
+                                                            <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>"  data-bs-target="#productModal" class="btn btn-transparent btn-fullwidth btn-medium btn-style-1">Chi tiết</a>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-content text-center">
+                                                        <span>Cartier</span>
+                                                        <h4><a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>"><?= $sanPham['ten_san_pham'] ?></a></h4>
+                                                        <div class="product-price-wrapper">
+                                                            <?php if ($sanPham['gia_khuyen_mai']) { ?>
+                                                                <span class="money"><?= formatPrice($sanPham['gia_khuyen_mai']) . 'đ' ?></span>
+                                                                <span class="product-price-old">
+                                                                    <span class="money"><?= formatPrice($sanPham['gia_san_pham']) . 'đ' ?></span>
+                                                                </span>
+                                                            <?php } else { ?>
+                                                                <span class="money"><?= formatPrice($sanPham['gia_san_pham']) . 'đ' ?></span>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mirora_product_action text-center position-absolute">
+                                                        <div class="product-rating">
+                                                            <span>
+                                                                <i class="fa fa-star theme-star"></i>
+                                                                <i class="fa fa-star theme-star"></i>
+                                                                <i class="fa fa-star theme-star"></i>
+                                                                <i class="fa fa-star theme-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                            </span>
+                                                        </div>
+                                                        <p>
+                                                            It is a long established fact that a reader will be distracted by the readable content...
+                                                        </p>
+                                                        <div class="product-action">
+                                                            <a class="same-action" href="wishlist.html" title="wishlist">
+                                                                <i class="fa fa-heart-o"></i>
+                                                            </a>
+                                                            <a class="add_cart cart-item action-cart" href="cart.html" title="wishlist"><span>Add to cart</span></a>
+                                                            <a class="same-action compare-mrg" data-bs-toggle="modal" data-bs-target="#productModal" href="compare.html">
+                                                                <i class="fa fa-sliders fa-rotate-90"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+
                                         </div>
-                                        <div class="product-content text-center">
-                                            <span>Cartier</span>
-                                            <h4><a href="product-details.html">Acer Aspire E 15</a></h4>
-                                            <div class="product-price-wrapper">
-                                                <span class="money">$550.00</span>
-                                                <span class="product-price-old">
-                                                    <span class="money">$700.00</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="mirora_product_action text-center position-absolute">
-                                            <div class="product-rating">
-                                                <span>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </span>
-                                            </div>
-                                            <p>
-                                                It is a long established fact that a reader will be distracted by the readable content...
-                                            </p>
-                                            <div class="product-action">
-                                                <a class="same-action" href="wishlist.html" title="wishlist">
-                                                    <i class="fa fa-heart-o"></i>
-                                                </a>
-                                                <a class="add_cart cart-item action-cart" href="cart.html" title="wishlist"><span>Add to cart</span></a>
-                                                <a class="same-action compare-mrg" data-bs-toggle="modal" data-bs-target="#productModal" href="compare.html">
-                                                    <i class="fa fa-sliders fa-rotate-90"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mirora-product">
-                                        <div class="product-img">
-                                            <img src="assets/img/products/4-450x450.jpg" alt="Product" class="primary-image" />
-                                            <img src="assets/img/products/4-4-450x450.jpg" alt="Product" class="secondary-image" />
-                                            <div class="product-img-overlay">
-                                                <span class="product-label discount">
-                                                    -7%
-                                                </span>
-                                                <a data-bs-toggle="modal" data-bs-target="#productModal" class="btn btn-transparent btn-fullwidth btn-medium btn-style-1">Quick View</a>
-                                            </div>
-                                        </div>
-                                        <div class="product-content text-center">
-                                            <span>Cartier</span>
-                                            <h4><a href="product-details.html">Acer Aspire E 15</a></h4>
-                                            <div class="product-price-wrapper">
-                                                <span class="money">$550.00</span>
-                                                <span class="product-price-old">
-                                                    <span class="money">$700.00</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="mirora_product_action text-center position-absolute">
-                                            <div class="product-rating">
-                                                <span>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </span>
-                                            </div>
-                                            <p>
-                                                It is a long established fact that a reader will be distracted by the readable content...
-                                            </p>
-                                            <div class="product-action">
-                                                <a class="same-action" href="wishlist.html" title="wishlist">
-                                                    <i class="fa fa-heart-o"></i>
-                                                </a>
-                                                <a class="add_cart cart-item action-cart" href="cart.html" title="wishlist"><span>Add to cart</span></a>
-                                                <a class="same-action compare-mrg" data-bs-toggle="modal" data-bs-target="#productModal" href="compare.html">
-                                                    <i class="fa fa-sliders fa-rotate-90"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mirora-product">
-                                        <div class="product-img">
-                                            <img src="assets/img/products/6-450x450.jpg" alt="Product" class="primary-image" />
-                                            <img src="assets/img/products/6-6-450x450.jpg" alt="Product" class="secondary-image" />
-                                            <div class="product-img-overlay">
-                                                <span class="product-label discount">
-                                                    -7%
-                                                </span>
-                                                <a data-bs-toggle="modal" data-bs-target="#productModal" class="btn btn-transparent btn-fullwidth btn-medium btn-style-1">Quick View</a>
-                                            </div>
-                                        </div>
-                                        <div class="product-content text-center">
-                                            <span>Cartier</span>
-                                            <h4><a href="product-details.html">Acer Aspire E 15</a></h4>
-                                            <div class="product-price-wrapper">
-                                                <span class="money">$550.00</span>
-                                                <span class="product-price-old">
-                                                    <span class="money">$700.00</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="mirora_product_action text-center position-absolute">
-                                            <div class="product-rating">
-                                                <span>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </span>
-                                            </div>
-                                            <p>
-                                                It is a long established fact that a reader will be distracted by the readable content...
-                                            </p>
-                                            <div class="product-action">
-                                                <a class="same-action" href="wishlist.html" title="wishlist">
-                                                    <i class="fa fa-heart-o"></i>
-                                                </a>
-                                                <a class="add_cart cart-item action-cart" href="cart.html" title="wishlist"><span>Add to cart</span></a>
-                                                <a class="same-action compare-mrg" data-bs-toggle="modal" data-bs-target="#productModal" href="compare.html">
-                                                    <i class="fa fa-sliders fa-rotate-90"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mirora-product">
-                                        <div class="product-img">
-                                            <img src="assets/img/products/8-450x450.jpg" alt="Product" class="primary-image" />
-                                            <img src="assets/img/products/8-8-450x450.jpg" alt="Product" class="secondary-image" />
-                                            <div class="product-img-overlay">
-                                                <span class="product-label discount">
-                                                    -7%
-                                                </span>
-                                                <a data-bs-toggle="modal" data-bs-target="#productModal" class="btn btn-transparent btn-fullwidth btn-medium btn-style-1">Quick View</a>
-                                            </div>
-                                        </div>
-                                        <div class="product-content text-center">
-                                            <span>Cartier</span>
-                                            <h4><a href="product-details.html">Acer Aspire E 15</a></h4>
-                                            <div class="product-price-wrapper">
-                                                <span class="money">$550.00</span>
-                                                <span class="product-price-old">
-                                                    <span class="money">$700.00</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="mirora_product_action text-center position-absolute">
-                                            <div class="product-rating">
-                                                <span>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </span>
-                                            </div>
-                                            <p>
-                                                It is a long established fact that a reader will be distracted by the readable content...
-                                            </p>
-                                            <div class="product-action">
-                                                <a class="same-action" href="wishlist.html" title="wishlist">
-                                                    <i class="fa fa-heart-o"></i>
-                                                </a>
-                                                <a class="add_cart cart-item action-cart" href="cart.html" title="wishlist"><span>Add to cart</span></a>
-                                                <a class="same-action compare-mrg" data-bs-toggle="modal" data-bs-target="#productModal" href="compare.html">
-                                                    <i class="fa fa-sliders fa-rotate-90"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mirora-product">
-                                        <div class="product-img">
-                                            <img src="assets/img/products/10-450x450.jpg" alt="Product" class="primary-image" />
-                                            <img src="assets/img/products/10-10-450x450.jpg" alt="Product" class="secondary-image" />
-                                            <div class="product-img-overlay">
-                                                <span class="product-label discount">
-                                                    -7%
-                                                </span>
-                                                <a data-bs-toggle="modal" data-bs-target="#productModal" class="btn btn-transparent btn-fullwidth btn-medium btn-style-1">Quick View</a>
-                                            </div>
-                                        </div>
-                                        <div class="product-content text-center">
-                                            <span>Cartier</span>
-                                            <h4><a href="product-details.html">Acer Aspire E 15</a></h4>
-                                            <div class="product-price-wrapper">
-                                                <span class="money">$550.00</span>
-                                                <span class="product-price-old">
-                                                    <span class="money">$700.00</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="mirora_product_action text-center position-absolute">
-                                            <div class="product-rating">
-                                                <span>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </span>
-                                            </div>
-                                            <p>
-                                                It is a long established fact that a reader will be distracted by the readable content...
-                                            </p>
-                                            <div class="product-action">
-                                                <a class="same-action" href="wishlist.html" title="wishlist">
-                                                    <i class="fa fa-heart-o"></i>
-                                                </a>
-                                                <a class="add_cart cart-item action-cart" href="cart.html" title="wishlist"><span>Add to cart</span></a>
-                                                <a class="same-action compare-mrg" data-bs-toggle="modal" data-bs-target="#productModal" href="compare.html">
-                                                    <i class="fa fa-sliders fa-rotate-90"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mirora-product">
-                                        <div class="product-img">
-                                            <img src="assets/img/products/12-450x450.jpg" alt="Product" class="primary-image" />
-                                            <img src="assets/img/products/12-12-450x450.jpg" alt="Product" class="secondary-image" />
-                                            <div class="product-img-overlay">
-                                                <span class="product-label discount">
-                                                    -7%
-                                                </span>
-                                                <a data-bs-toggle="modal" data-bs-target="#productModal" class="btn btn-transparent btn-fullwidth btn-medium btn-style-1">Quick View</a>
-                                            </div>
-                                        </div>
-                                        <div class="product-content text-center">
-                                            <span>Cartier</span>
-                                            <h4><a href="product-details.html">Acer Aspire E 15</a></h4>
-                                            <div class="product-price-wrapper">
-                                                <span class="money">$550.00</span>
-                                                <span class="product-price-old">
-                                                    <span class="money">$700.00</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="mirora_product_action text-center position-absolute">
-                                            <div class="product-rating">
-                                                <span>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </span>
-                                            </div>
-                                            <p>
-                                                It is a long established fact that a reader will be distracted by the readable content...
-                                            </p>
-                                            <div class="product-action">
-                                                <a class="same-action" href="wishlist.html" title="wishlist">
-                                                    <i class="fa fa-heart-o"></i>
-                                                </a>
-                                                <a class="add_cart cart-item action-cart" href="cart.html" title="wishlist"><span>Add to cart</span></a>
-                                                <a class="same-action compare-mrg" data-bs-toggle="modal" data-bs-target="#productModal" href="compare.html">
-                                                    <i class="fa fa-sliders fa-rotate-90"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mirora-product">
-                                        <div class="product-img">
-                                            <img src="assets/img/products/14-450x450.jpg" alt="Product" class="primary-image" />
-                                            <img src="assets/img/products/14-14-450x450.jpg" alt="Product" class="secondary-image" />
-                                            <div class="product-img-overlay">
-                                                <span class="product-label discount">
-                                                    -7%
-                                                </span>
-                                                <a data-bs-toggle="modal" data-bs-target="#productModal" class="btn btn-transparent btn-fullwidth btn-medium btn-style-1">Quick View</a>
-                                            </div>
-                                        </div>
-                                        <div class="product-content text-center">
-                                            <span>Cartier</span>
-                                            <h4><a href="product-details.html">Acer Aspire E 15</a></h4>
-                                            <div class="product-price-wrapper">
-                                                <span class="money">$550.00</span>
-                                                <span class="product-price-old">
-                                                    <span class="money">$700.00</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="mirora_product_action text-center position-absolute">
-                                            <div class="product-rating">
-                                                <span>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </span>
-                                            </div>
-                                            <p>
-                                                It is a long established fact that a reader will be distracted by the readable content...
-                                            </p>
-                                            <div class="product-action">
-                                                <a class="same-action" href="wishlist.html" title="wishlist">
-                                                    <i class="fa fa-heart-o"></i>
-                                                </a>
-                                                <a class="add_cart cart-item action-cart" href="cart.html" title="wishlist"><span>Add to cart</span></a>
-                                                <a class="same-action compare-mrg" data-bs-toggle="modal" data-bs-target="#productModal" href="compare.html">
-                                                    <i class="fa fa-sliders fa-rotate-90"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
                         </div>
                     </section>
-                    <!-- Related Product End -->
                 </div>
             </div>
         </div>
