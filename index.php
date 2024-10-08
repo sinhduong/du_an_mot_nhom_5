@@ -1,8 +1,14 @@
 <?php
+session_start();
+if (session_status() !== PHP_SESSION_ACTIVE) {
+   die('Session không hoạt động');
+}
+
 require_once './commons/env.php';
 require_once './commons/function.php';
 require_once './cotrollers/homeControllers.php';
 require_once './models/SanPham.php';
+require_once './models/TaiKhoan.php';
 
 
 
@@ -10,12 +16,13 @@ $act = $_GET['act'] ?? '/';
 // var_dump($_GET['act']);die();
 
 match ($act) {
-   '/' => (new homeControllers())->home(), //Trường hợp đặc biệt
+   '/' => (new homeControllers())->home(),
+   'chi-tiet-san-pham' => (new homeControllers())->chiTietSanPham(),
 
-   'trangchu' => (new homeControllers())->trangchu(),
-   // BASE_URL/?act=trangchu
+   // auth
+   'login' => (new homeControllers())->formLogin(),
+   'check-login' => (new homeControllers())->postLogin(),
 
-   // 'danh-sach-san-pham' => (new homeControllers())->danhSachSanPham()
-   // BASE_URL/?act=danh-sach-san-pham
-   'chi-tiet-san-pham' =>(new homeControllers())->chiTietSanPham(),
+   // giỏ hàng
+   'them-gio-hang'=>(new homeControllers())->addGioHang(),
 };

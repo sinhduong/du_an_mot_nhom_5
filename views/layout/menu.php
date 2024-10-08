@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="header-top-nav d-flex justify-content-lg-end justify-content-center">
-                        <div class="language-selector header-top-nav__item">
+                        <!-- <div class="language-selector header-top-nav__item">
                             <div class="dropdown header-top__dropdown">
                                 <a class="dropdown-toggle" id="languageID" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Việt Nam
@@ -45,19 +45,14 @@
                                     <a class="dropdown-item" href="#"><img src="assets/img/header/2.jpg" alt="Korea"> Korea</a>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="currency-selector header-top-nav__item">
                             <div class="dropdown header-top__dropdown">
-
-                                <a class="dropdown-toggle" id="currencyID" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    VND
-                                    <i class="fa fa-angle-down"></i>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="currencyID">
-                                    <a class="dropdown-item" href="#">&euro; VND</a>
-                                    <a class="dropdown-item" href="#">&pound; BTC</a>
-                                    <a class="dropdown-item" href="#">&dollar; USDT</a>
-                                </div>
+                                <?php if (isset($_SESSION['user_client'])): ?>
+                                    <a class="dropdown-toggle" id="currencyID" aria-haspopup="true" aria-expanded="false">
+                                        <?php echo $_SESSION['user_client']; ?>
+                                    </a>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="user-info header-top-nav__item">
@@ -67,9 +62,11 @@
                                     <i class="fa fa-angle-down"></i>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="userID">
-                                    <a class="dropdown-item" href="register.html">Đăng Ký</a>
-                                    <a class="dropdown-item" href="login-register.html">Đăng Nhập</a>
-                                    <a class="dropdown-item" href="login-register.html">Tài khoản</a>
+                                    <?php if (!isset($_SESSION['user_client'])) { ?>
+                                        <a class="dropdown-item" href="<?=BASE_URL .'?act=login'?>">Đăng Nhập</a>
+                                    <?php } else { ?>
+                                        <a class="dropdown-item" href="<?=BASE_URL .'?act=login'?>">Tài khoản</a>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +85,7 @@
                     </div>
                 </div>
                 <div class="col-lg-2 col-12 order-lg-2 order-1 text-center">
-                    <a href="<?=BASE_URL?>" class="logo-box mb-md--30">
+                    <a href="<?= BASE_URL ?>" class="logo-box mb-md--30">
                         <img src="assets/img/logo/logo.png" alt="logo">
                     </a>
                 </div>
@@ -182,9 +179,9 @@
                     <nav class="main-navigation">
                         <ul class="mainmenu">
                             <li class="mainmenu__item active menu-item-has-children has-children">
-                                <a href="<?=BASE_URL?>" class="mainmenu__link">Trang Chủ</a>
+                                <a href="<?= BASE_URL ?>" class="mainmenu__link">Trang Chủ</a>
                                 <ul class="sub-menu">
-                                    <li><a href="<?=BASE_URL?>">Home 1</a></li>
+                                    <li><a href="<?= BASE_URL ?>">Home 1</a></li>
                                     <li><a href="index-2.html">Home 2</a></li>
                                     <li><a href="index-3.html">Home 3</a></li>
                                     <li><a href="index-4.html">Home 4</a></li>
@@ -210,7 +207,7 @@
                                             </li>
                                         </ul>
                                     </li>
-                             
+
                                 </ul>
                             </li>
                             <li class="mainmenu__item menu-item-has-children has-children">

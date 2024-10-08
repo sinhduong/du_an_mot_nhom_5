@@ -101,18 +101,19 @@
 
                                         <p class="product-details-availability"><i class="fa fa-check-circle"></i><?= $sanPham['so_luong'] . ' Trong kho' ?></p>
                                         <div class="product-details-action-wrapper mb--20">
-                                            <div class="product-details-action-top d-flex align-items-center mb--20">
-                                                <div class="quantity mb-lg-2 w-25">
-                                                    <span>Qty: </span>
-                                                    <input type="number" class="quantity-input w-50" name="qty" id="pro_qty" value="1" min="1">
+                                            <form action="<?= BASE_URL . '?act=them-gio-hang' ?>" method="POST">
+                                                <div class="product-details-action-top d-flex align-items-center mb--20">
+                                                    <div class="quantity mb-lg-2 w-25">
+                                                        <span>Qty: </span>
+                                                        <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
+                                                        <input type="number" class="quantity-input w-50" name="so_luong" id="pro_qty" value="1" min="1">
+                                                    </div>
+                                                    <button type="submit" class="btn btn-medium btn-style-2 add-to-cart">
+                                                        Thêm
+                                                    </button>
                                                 </div>
-                                                <button type="button" class="btn btn-medium btn-style-2 add-to-cart">
-                                                    Add To Cart
-                                                </button>
-                                            </div>
+                                            </form>
                                             <div class="product-details-action-bottom">
-                                                <!-- <a href="wishlist.html">+Add to wishlist</a>
-                                                <a href="compare.html">+Add to compare</a> -->
                                             </div>
                                         </div>
                                         <p class="product-details-tags">
@@ -181,8 +182,8 @@
                                                         </div>
                                                         <div class="review__content flex-grow-1" style="min-height: 100px;">
                                                             <div class="review__meta">
-                                                                <p class="review__author">Khách hàng</p>
-                                                                <p class="review__date">Ngày nhập: <?= $binhLuan['ngay_dang'] ?></p>
+                                                                <p class="review__author"><?= $binhLuan['ho_ten'] ?></p>
+                                                                <p class="review__date">Ngày đăng: <?= $binhLuan['ngay_dang'] ?></p>
                                                             </div>
                                                             <div class="review__text">
                                                                 <?= $binhLuan['noi_dung'] ?>
@@ -277,15 +278,12 @@
                                                     <p>
                                                         It is a long established fact that a reader will be distracted by the readable content...
                                                     </p>
-                                                    <div class="product-action">
-                                                        <a class="same-action" href="wishlist.html" title="wishlist">
-                                                            <i class="fa fa-heart-o"></i>
-                                                        </a>
-                                                        <a class="add_cart cart-item action-cart" href="cart.html" title="wishlist"><span>Add to cart</span></a>
-                                                        <a class="same-action compare-mrg" data-bs-toggle="modal" data-bs-target="#productModal" href="compare.html">
-                                                            <i class="fa fa-sliders fa-rotate-90"></i>
-                                                        </a>
-                                                    </div>
+                                                    <form action="<?= BASE_URL . '?act=then-gio-hang' ?>" method="POST">
+                                                        <div class="product-action">
+                                                            <a class="add_cart cart-item action-cart" href="cart.html" title="wishlist"><span>Add to cart</span></a>
+                                                            </a>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
 

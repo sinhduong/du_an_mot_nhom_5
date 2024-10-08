@@ -143,4 +143,19 @@ class AdminTaiKhoan
             return false;
         }
     }
+    public function getTaiKhoanFromEmail($email)
+    {
+        try {
+            $sql = 'SELECT * from tai_khoans where email =:email';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(
+                [
+                    ':email' => $email
+                ]
+            );
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
 }
