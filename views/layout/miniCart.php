@@ -7,7 +7,7 @@
         </a>
         <div class="mini-cart__dropdown-menu">
             <div class="mini-cart__content" id="miniCart">
-                <div class="mini-cart__item">
+                <!-- <div class="mini-cart__item">
                     <div class="mini-cart__item--single">
                         <div class="mini-cart__item--image">
                             <img src="assets/img/products/1-1-450x450.jpg" alt="product">
@@ -48,7 +48,7 @@
                         <span class="mini-cart__calculation--item">Eco Total :</span>
                         <span class="mini-cart__calculation--ammount"> $1,288.00</span>
                     </p>
-                </div>
+                </div> -->
                 <div class="mini-cart__btn">
                     <a href="<?=BASE_URL . '?act=gio-hang'?>" class="btn btn-fullwidth btn-style-1">Xem giỏ hàng</a>
                     <a href="checkout.html" class="btn btn-fullwidth btn-style-1">Thanh toán</a>

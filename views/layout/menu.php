@@ -65,7 +65,8 @@
                                     <?php if (!isset($_SESSION['user_client'])) { ?>
                                         <a class="dropdown-item" href="<?=BASE_URL .'?act=login'?>">Đăng Nhập</a>
                                     <?php } else { ?>
-                                        <a class="dropdown-item" href="<?=BASE_URL .'?act=login'?>">Tài khoản</a>
+                                        <a class="dropdown-item" href="<?=BASE_URL .'?act=logout'?>">Đăng xuất</a>
+                                        <a class="dropdown-item" href="#">Tài khoản của tôi</a>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -108,6 +109,7 @@
                             </li>
                             
                             <?php include_once './views/layout/miniCart.php'?>
+                            
                         </ul>
                     </div>
                 </div>

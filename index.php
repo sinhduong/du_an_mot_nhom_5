@@ -22,10 +22,13 @@ match ($act) {
 
    // auth
    'login' => (new homeControllers())->formLogin(),
+   'logout' => (new homeControllers())->logout(),
    'check-login' => (new homeControllers())->postLogin(),
 
    // giỏ hàng
    'them-gio-hang'=>(new homeControllers())->addGioHang(),
    'gio-hang'=>(new homeControllers())->gioHang(),
    'thanh-toan'=>(new homeControllers())->gioHang(),
+   'update-gio-hang'=>(new homeControllers())->updateGioHang(),
+   'delete-san-pham-gio-hang'=>(new homeControllers())->deleteOneGioHang(),
 };

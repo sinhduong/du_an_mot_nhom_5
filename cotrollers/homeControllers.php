@@ -79,6 +79,19 @@ class homeControllers
             }
         }
     }
+
+
+    // logout:
+    public function logout()
+    {
+        session_start();
+        session_unset();
+        session_destroy();
+        header("Location: " . BASE_URL);
+        exit();
+    }
+
+
     public function addGioHang()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -123,8 +136,7 @@ class homeControllers
 
                 header("location:" . BASE_URL . '?act=gio-hang');
             } else {
-                var_dump('Chưa đăng nhập');
-                die;
+                header("location:" . BASE_URL . '?act=login');
             }
         }
     }
@@ -139,9 +151,11 @@ class homeControllers
             if (!$gioHang) {
                 // Nếu chưa có, tạo giỏ hàng mới
                 $gioHangID = $this->modelGioHang->addGioHang($email['id']);
+                $_SESSION['gio_hang_id'] = $gioHangID; // Lưu ID giỏ hàng vào session
                 $gioHang = ['id' => $gioHangID];
                 $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
             } else {
+                $_SESSION['gio_hang_id'] = $gioHang['id']; // Lưu ID giỏ hàng vào session
                 $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
             }
             // $checkSanPham = false;
@@ -150,6 +164,33 @@ class homeControllers
         } else {
             var_dump('Chưa đăng nhập');
             die;
+        }
+    }
+    public function updateGioHang()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $quantities = $_POST['quantity'] ?? []; // Lấy dữ liệu số lượng từ form
+            $gioHangId = $_SESSION['gio_hang_id']; // Lưu ID giỏ hàng trong session
+
+            foreach ($quantities as $sanPhamId => $soLuong) {
+                // Cập nhật số lượng cho từng sản phẩm trong giỏ hàng
+                $this->modelGioHang->updateSoLuong($gioHangId, $sanPhamId, intval($soLuong));
+            }
+
+            // Quay lại trang giỏ hàng
+            header('Location:' . BASE_URL . '?act=gio-hang');
+            exit();
+        }
+    }
+    public function deleteOneGioHang()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $sanPhamId = $_POST['san_pham_id'] ?? null;
+            if ($sanPhamId && isset($_SESSION['gio_hang_id'])) {
+                $this->modelGioHang->deleteChiTietGioHang($_SESSION['gio_hang_id'], $sanPhamId);
+            }
+            header('Location: ' . BASE_URL . '?act=gio-hang');
+            exit();
         }
     }
 }

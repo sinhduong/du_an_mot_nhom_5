@@ -1,6 +1,5 @@
 <?php require_once 'layout/header.php' ?>
 
-
 <!-- Main Wrapper Start -->
 <div class="wrapper bg--shaft">
     <!-- Header Area Start -->
@@ -10,10 +9,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h1 class="page-title">Cart</h1>
+                    <h1 class="page-title">Giỏ hàng</h1>
                     <ul class="breadcrumb justify-content-center">
-                        <li><a href="index.html">Home</a></li>
-                        <li class="current"><a href="cart.html">Cart</a></li>
+                        <li><a href="<?= BASE_URL ?>">trang chủ</a></li>
                     </ul>
                 </div>
             </div>
@@ -27,9 +25,12 @@
                     <div class="row">
                         <div class="col-12">
                             <!-- Cart Area Start -->
-                            <form action="#" class="form cart-form">
+
+                            <!-- Cart Area End -->
+
+                            <form action="<?= BASE_URL . '?act=update-gio-hang' ?>" method="POST" class="form cart-form">
                                 <div class="cart-table table-content table-responsive">
-                                    <table class="table mb--30 ">
+                                    <table class="table mb--30">
                                         <thead>
                                             <tr>
                                                 <th>Thao tác</th>
@@ -43,10 +44,9 @@
                                         <tbody>
                                             <?php
                                             $tongGioHang = 0;
-                                            foreach ($chiTietGioHang as $key => $sanPham):
+                                            foreach ($chiTietGioHang as $sanPham):
                                             ?>
-
-                                                <tr>
+                                                <tr data-id="<?= $sanPham['id'] ?>" class="cart-item">
                                                     <td><a class="delete" href="#" data-id="<?= $sanPham['id'] ?>"><i class="fa fa-times"></i></a></td>
                                                     <td>
                                                         <a href="product-details.html">
@@ -54,28 +54,21 @@
                                                         </a>
                                                     </td>
                                                     <td class="wide-column">
-                                                        <h3><a href="product-details.html"><?= $sanPham['ten_san_pham'] ?></a></h3>
+                                                        <h3><a href="#"><?= $sanPham['ten_san_pham'] ?></a></h3>
                                                     </td>
                                                     <td class="cart-product-price"><strong>
-                                                            <?php if ($sanPham['gia_khuyen_mai']) { ?>
-                                                                <?= formatPrice($sanPham['gia_khuyen_mai']) . 'đ' ?>
-                                                            <?php } else { ?>
-                                                                <?= formatPrice($sanPham['gia_san_pham']) . 'đ' ?>
-                                                            <?php } ?>
+                                                            <?= $sanPham['gia_khuyen_mai'] ? formatPrice($sanPham['gia_khuyen_mai']) . 'đ' : formatPrice($sanPham['gia_san_pham']) . 'đ' ?>
                                                         </strong></td>
                                                     <td>
                                                         <div class="quantity d-flex mb-20">
-                                                            <input type="number" class="quantity-input w-75" name="qty" id="pro_qty" value="<?= $sanPham['so_luong'] ?>" min="1">
+                                                            <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
+                                                            <input type="number" class="quantity-input w-75" name="quantity[<?= $sanPham['san_pham_id'] ?>]" data-price="<?= $sanPham['gia_khuyen_mai'] ?: $sanPham['gia_san_pham'] ?>" value="<?= $sanPham['so_luong'] ?>" min="1">
+                                                            <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                                         </div>
                                                     </td>
-                                                    <td class="cart-product-price"><strong>
+                                                    <td class="cart-product-price total-price"><strong>
                                                             <?php
-                                                            $tongTien = 0;
-                                                            if ($sanPham['gia_khuyen_mai']) {
-                                                                $tongTien = $sanPham['gia_khuyen_mai'] * $sanPham['so_luong'];
-                                                            } else {
-                                                                $tongTien = $sanPham['gia_san_pham'] * $sanPham['so_luong'];
-                                                            }
+                                                            $tongTien = $sanPham['gia_khuyen_mai'] ? $sanPham['gia_khuyen_mai'] * $sanPham['so_luong'] : $sanPham['gia_san_pham'] * $sanPham['so_luong'];
                                                             $tongGioHang += $tongTien;
                                                             echo formatPrice($tongTien) . 'đ';
                                                             ?>
@@ -89,12 +82,13 @@
                                 <div class="row">
                                     <div class="col-12 text-md-right">
                                         <div class="cart-btn-group">
-                                            <a href=" " class="btn btn-medium btn-style-3">Cập nhật</a>
+                                            <button type="submit" class="btn btn-medium btn-style-3">Cập nhật</button>
                                         </div>
                                     </div>
                                 </div>
                             </form>
-                            <!-- Cart Area End -->
+
+
                         </div>
                     </div>
                 </div>
@@ -108,7 +102,7 @@
                                         <tbody>
                                             <tr class="cart-subtotal">
                                                 <th>Tổng tiền sản phẩm</th>
-                                                <td><span class="price-ammount"><?= formatPrice($tongGioHang) . 'đ' ?></span></td>
+                                                <td><span class="sub-total price-ammount"><?= formatPrice($tongGioHang) . 'đ' ?></span></td>
                                             </tr>
                                             <tr class="shipping">
                                                 <th>Vận chuyển</th>
@@ -118,7 +112,7 @@
                                             </tr>
                                             <tr class="cart-total">
                                                 <th>Thanh toán</th>
-                                                <td><span class="price-ammount"><?= formatPrice($tongGioHang + 30000) . 'đ' ?></span></td>
+                                                <td><span class="total-amount price-ammount"><?= formatPrice($tongGioHang + 30000) . 'đ' ?></span></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -135,72 +129,53 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Hàm để cập nhật giá tổng cho một sản phẩm
-            function updateTotalPrice($row) {
-                var quantity = parseInt($row.find('.quantity-input').val());
-                var price = $row.find('.cart-product-price strong').data('price');
-                var totalPrice = quantity * price;
-                $row.find('.cart-product-price strong').text(formatPrice(totalPrice) + 'đ');
-                return totalPrice;
-            }
+            // Gán sự kiện chỉ một lần cho các nút tăng giảm
+            $('.qtybutton').off('click').on('click', function() {
+                var $button = $(this);
+                var $input = $button.closest('.quantity').find('.quantity-input');
+                var currentVal = parseInt($input.val());
+                var price = parseFloat($input.data('price'));
 
-            // Hàm định dạng giá
-            function formatPrice(price) {
-                return price.toLocaleString('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND'
-                }).replace('₫', 'đ');
-            }
-
-            // Xử lý nhấp vào nút xóa
-            $('.delete').on('click', function(e) {
-                e.preventDefault();
-                var $row = $(this).closest('tr');
-
-                $row.fadeOut(300, function() {
-                    $(this).remove();
-                    updateCartTotal(); // Cập nhật tổng giỏ hàng khi sản phẩm bị xóa
-                });
-            });
-
-            // Xử lý thay đổi số lượng
-            $('.quantity-input').on('input', function() {
-                var $row = $(this).closest('tr');
-                var quantity = parseInt($(this).val());
-
-                // Nếu số lượng nhỏ hơn 1, đặt lại về 1
-                if (quantity < 1) {
-                    $(this).val(1);
-                    quantity = 1;
+                // Kiểm tra nút nào đã được nhấp
+                if ($button.hasClass('inc')) {
+                    // Tăng thêm 1
+                    $input.val(currentVal + 1);
+                } else if ($button.hasClass('dec')) {
+                    // Giảm đi 1, đảm bảo giá trị không giảm xuống dưới 1
+                    if (currentVal > 1) {
+                        $input.val(currentVal - 1);
+                    }
                 }
 
-                var totalPrice = updateTotalPrice($row); // Cập nhật giá tổng cho sản phẩm
-                updateCartTotal(); // Cập nhật tổng giỏ hàng
+                // Cập nhật tổng sau khi thay đổi số lượng
+                updateTotal();
             });
 
-            // Hàm để cập nhật tổng giỏ hàng
-            function updateCartTotal() {
-                var totalCart = 0;
-                $('.cart-product-price strong').each(function() {
-                    var price = parseFloat($(this).text().replace('đ', '').replace('.', '').trim());
-                    totalCart += price;
+            $('.delete').on('click', function(e) {
+                e.preventDefault();
+                var productId = $(this).data('id');
+                $(this).closest('.cart-item').remove(); // Xóa sản phẩm khỏi giỏ hàng
+                updateTotal();
+            });
+
+            function updateTotal() {
+                var tongTien = 0;
+                $('.cart-item').each(function() {
+                    var $this = $(this);
+                    var $input = $this.find('.quantity-input');
+                    var price = parseFloat($input.data('price'));
+                    var quantity = parseInt($input.val());
+                    var totalPrice = price * quantity;
+                    $this.find('.total-price').text(totalPrice.toLocaleString('vi-VN') + 'đ');
+                    tongTien += totalPrice;
                 });
 
-                // Cập nhật tổng tiền với phí vận chuyển
-                var shippingCost = 30000; // phí vận chuyển
-                var grandTotal = totalCart + shippingCost;
-                $('.cart-page-total .price-ammount').text(formatPrice(grandTotal) + 'đ');
+                var vanChuyen = 30000; // Phí vận chuyển cố định
+                $('.sub-total').text(tongTien.toLocaleString('vi-VN') + 'đ');
+                $('.total-amount').text((tongTien + vanChuyen).toLocaleString('vi-VN') + 'đ');
             }
-
-            // Khởi tạo giá cho các sản phẩm
-            $('.cart-product-price strong').each(function() {
-                var price = parseFloat($(this).text().replace('đ', '').replace('.', '').trim());
-                $(this).data('price', price); // Lưu giá sản phẩm vào data attribute
-            });
         });
     </script>
-
-
 
 
 

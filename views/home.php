@@ -93,15 +93,16 @@
                                                         <p>
                                                             It is a long established fact that a reader will be distracted by the readable content...
                                                         </p>
-                                                        <div class="product-action">
-                                                            <a class="same-action" href="wishlist.html" title="wishlist">
-                                                                <i class="fa fa-heart-o"></i>
-                                                            </a>
-                                                            <a class="add_cart cart-item action-cart" href="cart.html" title="wishlist"><span>Add to cart</span></a>
-                                                            <a class="same-action compare-mrg" data-bs-toggle="modal" data-bs-target="#productModal" href="compare.html">
-                                                                <i class="fa fa-sliders fa-rotate-90"></i>
-                                                            </a>
-                                                        </div>
+                                                        <form action="<?= BASE_URL . '?act=them-gio-hang' ?>" method="POST">
+                                                            <div class="product-action">
+                                                                <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
+                                                                <input type="hidden" name="so_luong" value="1"> 
+                                                                <button type="submit" class="add_cart cart-item action-cart" title="wishlist">
+                                                                    <span>Thêm giỏ</span>
+                                                                </button>
+                                                            </div>
+                                                        </form>
+
                                                     </div>
                                                 </div>
 
@@ -176,7 +177,7 @@
                                         <?php endforeach; ?>
                                     </div>
                                 </div>
-                             
+
                             </div>
                         </div>
                     </div>
