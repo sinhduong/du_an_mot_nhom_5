@@ -24,7 +24,7 @@ class homeControllers
         $this->modelSanPham = new SanPham();
         $this->modelTaiKhoan = new TaiKhoan();
         $this->modelGioHang = new GioHang();
-        // $this->modelDonHang = new DonHang();
+        $this->modelDonHang = new DonHang();
     }
 
     public function chiTietSanPham()
@@ -198,22 +198,33 @@ class homeControllers
 
     // thanh toán:
     public function ThanhToan()
-    {
-        if (isset($_SESSION['user_client'])) {
-            $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
-            $gioHang = $this->modelGioHang->getGioHangFromUser($user['id']);
-            if (!$gioHang) {
-                $gioHangId = $this->modelGioHang->addgioHang($user['id']);
-                $gioHang = ['id' => $gioHangId];
-                $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
-            }
+{
+    // Check if the user is logged in
+    if (isset($_SESSION['user_client'])) {
+        // Retrieve user information
+        $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+        
+        // Get the shopping cart associated with the user
+        $gioHang = $this->modelGioHang->getGioHangFromUser($user['id']);
 
-            require_once './views/thanhToan.php';
-        } else {
-            $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
+        // If the shopping cart does not exist, create a new one
+        if (!$gioHang) {
+            $gioHangId = $this->modelGioHang->addgioHang($user['id']);
+            $gioHang = ['id' => $gioHangId];
         }
+        
+        // Retrieve details of the shopping cart
+        $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
+
+        // Load the payment view with the shopping cart details
         require_once './views/thanhToan.php';
+    } else {
+        // Handle case for unauthenticated users
+        // Consider redirecting to login or showing error
+        header("Location: login.php"); // Example redirection
+        exit;
     }
+}
     public function postThanhToan()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

@@ -10,6 +10,7 @@ require_once './cotrollers/homeControllers.php';
 require_once './models/SanPham.php';
 require_once './models/TaiKhoan.php';
 require_once './models/GioHang.php';
+require_once './models/DonHang.php';
 
 
 
@@ -28,7 +29,7 @@ match ($act) {
    // giỏ hàng
    'them-gio-hang' => (new homeControllers())->addGioHang(),
    'gio-hang' => (new homeControllers())->gioHang(),
-   'thanh-toan' => (new homeControllers())->gioHang(),
+   
    'update-gio-hang' => (new homeControllers())->updateGioHang(),
    'delete-san-pham-gio-hang' => (new homeControllers())->deleteOneGioHang(),
 

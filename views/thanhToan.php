@@ -1,4 +1,6 @@
 <?php include_once 'layout/header.php' ?>
+<div class="wrapper bg--shaft">
+
 <?php include_once 'layout/menu.php' ?>
 
 <main>
@@ -12,122 +14,130 @@
                         <!-- User Action End -->
                     </div>
                 </div>
-                <form action="<?= BASE_URL.'?act=xu-ly-thanh-toan'?>" method="POST">
-                <div class="row">
-                    <div class="col-12">
-                        <!-- Checkout Area Start -->
-                        <div class="checkout-wrapper bg--2">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="checkout-title">
-                                        <h2>THÔNG TIN NGƯỜI NHẬN</h2>
+                <form action="<?= BASE_URL . '?act=xu-ly-thanh-toan' ?>" method="POST">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Checkout Area Start -->
+                            <div class="checkout-wrapper bg--2">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="checkout-title">
+                                            <h2>THÔNG TIN NGƯỜI NHẬN</h2>
+                                        </div>
+
+                                        <div class="checkout-form">
+                                            <div class="form-row mb--30">
+                                                <div class="form__group col-md-12 mb-sm--30">
+                                                    <label for="ten_nguoi_nhan" class="form__label">Họ Và Tên: <span>*</span></label>
+                                                    <input type="text" name="ten_nguoi_nhan" value="<?= $user['ho_ten'] ?>" id="ten_nguoi_nhan" class="form__input form__input--2" placeholder="Nhập họ và tên" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-row mb--30">
+                                                <div class="form__group col-12">
+                                                    <label for="dia_chi_nguoi_nhan" class="form__label">Địa Chỉ: <span>*</span></label>
+                                                    <input type="text" name="dia_chi_nguoi_nhan" value="<?= $user['dia_chi'] ?>" id="dia_chi_nguoi_nhan" class="form__input form__input--2" placeholder="Nhập địa chỉ" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-row mb--30">
+                                                <div class="form__group col-md-12 mb-sm--30">
+                                                    <label for="sdt_nguoi_nhan" class="form__label">Số Điện Thoại: <span>*</span></label>
+                                                    <input type="text" name="sdt_nguoi_nhan" id="sdt_nguoi_nhan" value="<?= $user['so_dien_thoai'] ?>" class="form__input form__input--2" placeholder="Nhập số điện thoại" required>
+                                                </div>
+                                                <div class="form__group col-md-12">
+                                                    <label for="email_nguoi_nhan" class="form__label">Email: <span></span></label>
+                                                    <input type="email" name="email_nguoi_nhan" value="<?= $user['email'] ?>" id="email_nguoi_nhan" class="form__input form__input--2" placeholder="Nhập địa chỉ email">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form__group col-12">
+                                                    <label for="ghi_chu" class="form__label">Ghi Chú:</label>
+                                                    <textarea class="form__input form__input--2 form__input--textarea" id="ghi_chu" name="ghi_chu" placeholder="Ghi Chú..."></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <div class="col-lg-6 mt-md--30">
+                                        <div class="order-details">
+                                            <h3 class="heading-tertiary">Thông tin đơn hàng</h3>
+                                            <div class="order-table table-content table-responsive mb--30">
+                                                <table class="table">
+                                                    <thead>
 
-                                    <div class="checkout-form">
-                                        <div class="form-row mb--30">
-                                            <div class="form__group col-md-12 mb-sm--30">
-                                                <label for="ten_nguoi_nhan" class="form__label">Họ Và Tên: <span>*</span></label>
-                                                <input type="text" name="ten_nguoi_nhan" value="<?=$user['ho_ten']?>" id="ten_nguoi_nhan" class="form__input form__input--2" placeholder="Nhập họ và tên" required>
-                                            </div>
-                                        </div>
-                                        <div class="form-row mb--30">
-                                            <div class="form__group col-12">
-                                                <label for="dia_chi_nguoi_nhan" class="form__label">Địa Chỉ: <span>*</span></label>
-                                                <input type="text" name="dia_chi_nguoi_nhan"value="<?=$user['dia_chi']?>" id="dia_chi_nguoi_nhan" class="form__input form__input--2" placeholder="Nhập địa chỉ" required>
-                                            </div>
-                                        </div>
-                                        <div class="form-row mb--30">
-                                            <div class="form__group col-md-12 mb-sm--30">
-                                                <label for="sdt_nguoi_nhan" class="form__label">Số Điện Thoại: <span>*</span></label>
-                                                <input type="text" name="sdt_nguoi_nhan" id="sdt_nguoi_nhan"value="<?=$user['so_dien_thoai']?>" class="form__input form__input--2" placeholder="Nhập số điện thoại" required>
-                                            </div>
-                                            <div class="form__group col-md-12">
-                                                <label for="email_nguoi_nhan" class="form__label">Email: <span></span></label>
-                                                <input type="email" name="email_nguoi_nhan" value="<?=$user['email']?>" id="email_nguoi_nhan" class="form__input form__input--2" placeholder="Nhập địa chỉ email">
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form__group col-12">
-                                                <label for="ghi_chu" class="form__label">Ghi Chú:</label>
-                                                <textarea class="form__input form__input--2 form__input--textarea" id="ghi_chu" name="ghi_chu" placeholder="Ghi Chú..."></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mt-md--30">
-                                    <div class="order-details">
-                                        <h3 class="heading-tertiary">Thông tin đơn hàng</h3>
-                                        <div class="order-table table-content table-responsive mb--30">
-                                            <table class="table">
-                                                <thead>
-                                                   
-                                                    <tr>
-                                                        <th>Sản Phẩm</th>
-                                                     
-                                                        <th>Giá Tiền</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                <?php $tongGioHang=0;
-                                                foreach ($chiTietGioHang as $key =>$sanPham): ?>
-                                                    <tr>
-                                                        <td><a href=""><?= $sanPham['ten_san_pham']?><strong> x <?= $sanPham['so_luong']?></strong></a></td>
-                                                       
-                                                        <td>
-                                                            <?php $tongTien=0;
-                                                            if($sanPham['gia_khuyen_mai']){
-                                                                $tongTien=$sanPham['gia_khuyen_mai'] * $sanPham['so_luong'];
-                                                            }else{
-                                                                $tongTien=$sanPham['gia_san_pham'] * $sanPham['so_luong'];
-                                                            }
+                                                        <tr>
+                                                            <th>Sản Phẩm</th>
 
-                                                             $tongGioHang +=$tongTien;
-                                                             echo formatPrice($tongTien).'vnd';
+                                                            <th>Giá Tiền</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
+                                                        $tongGioHang = 0; // Initialize total cart amount
 
-                                                             ?>
-                                                        </td>
-                                                    </tr>
-                                             <?php endforeach; ?>
-                                                </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <td>
-                                                            Tổng sản phẩm
-                                                        </td>
-                                                        <input type="hidden" name="tong_tien" value="<?=$tongGioHang?>">
-                                                        <td><strong><?=formatPrice($tongGioHang).'vnd';?></strong></td>
+                                                        foreach ($chiTietGioHang as $key => $sanPham): ?>
+                                                            <tr>
+                                                                <td>
+                                                                    <a href=""><?= htmlspecialchars($sanPham['ten_san_pham']) ?><strong> x <?= intval($sanPham['so_luong']) ?></strong></a>
+                                                                </td>
+                                                                <td>
+                                                                    <?php
+                                                                    $tongTien = 0; // Initialize total price for the current product
 
-                                                    </tr>
-                                                </tfoot>
-                                            </table>
-                                        </div>
-                                        <div class="checkout-payment">
-                                            <div class="payment-btn-group">
-                                                <h5>Chọn phương thức thanh toán</h5> <br>
-                                                <div class="custom-radio payment-radio">
-                                                <input style="width: 20px;" id="option1" type="radio" value="1" name="phuong_thuc_thanh_toan_id" required />
-                                                    <label class="payment-label" for="option1">Thanh Toán Khi Nhận Hàng</label>
-                                                </div> <br>
-                                                <div class="custom-radio payment-radio">
-                                                    <input style="width: 20px;" id="option2" type="radio" value="2" name="phuong_thuc_thanh_toan_id" required />
-                                                    <label class="payment-label" for="option2">Thanh toán VNPAY</label>
-                                                </div> <br>
-                                                
+                                                                    // Calculate the total price based on promotional price or regular price
+                                                                    if ($sanPham['gia_khuyen_mai']) {
+                                                                        $tongTien = $sanPham['gia_khuyen_mai'] * $sanPham['so_luong'];
+                                                                    } else {
+                                                                        $tongTien = $sanPham['gia_san_pham'] * $sanPham['so_luong'];
+                                                                    }
+
+                                                                    // Add to the overall cart total
+                                                                    $tongGioHang += $tongTien;
+
+                                                                    // Display the formatted price
+                                                                    echo formatPrice($tongTien) . ' vnd';
+                                                                    ?>
+                                                                </td>
+                                                            </tr>
+                                                        <?php endforeach; ?>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td>
+                                                                Tổng sản phẩm
+                                                            </td>
+                                                            <input type="hidden" name="tong_tien" value="<?= $tongGioHang ?>">
+                                                            <td><strong><?= formatPrice($tongGioHang) . 'vnd'; ?></strong></td>
+
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
                                             </div>
-                                            
-                                            <p class="alert alert-danger" style="display: none;" id="messageLogin">Vui lòng đăng nhập để đặt hàng!</p>
+                                            <div class="checkout-payment">
+                                                <div class="payment-btn-group">
+                                                    <h5>Chọn phương thức thanh toán</h5> <br>
+                                                    <div class="custom-radio payment-radio">
+                                                        <input style="width: 20px;" id="option1" type="radio" value="1" name="phuong_thuc_thanh_toan_id" required />
+                                                        <label class="payment-label" for="option1">Thanh Toán Khi Nhận Hàng</label>
+                                                    </div> <br>
+                                                    <div class="custom-radio payment-radio">
+                                                        <input style="width: 20px;" id="option2" type="radio" value="2" name="phuong_thuc_thanh_toan_id" required />
+                                                        <label class="payment-label" for="option2">Thanh toán VNPAY</label>
+                                                    </div> <br>
 
-                      <div class="buttons">
-                        <button type="submit" class="btn btn-sqr">Thanh toán</button>
-                      </div>
+                                                </div>
+
+                                                <p class="alert alert-danger" style="display: none;" id="messageLogin">Vui lòng đăng nhập để đặt hàng!</p>
+
+                                                <div class="buttons">
+                                                    <button type="submit" class="btn btn-sqr">Thanh toán</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- Checkout Area End -->
                         </div>
-                        <!-- Checkout Area End -->
                     </div>
-                </div>
                 </form>
             </div>
         </div>
