@@ -32,6 +32,9 @@
 	*Verical Menu Expand
 	***********************/ 
 
+
+
+
 	function verticalMenuExpand(){
 		$('.vertical-has-children > a').on('click', function(e){
 			e.preventDefault();

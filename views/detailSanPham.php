@@ -103,9 +103,9 @@
                                         <div class="product-details-action-wrapper mb--20">
                                             <form action="<?= BASE_URL . '?act=them-gio-hang' ?>" method="POST">
                                                 <div class="product-details-action-top d-flex align-items-center mb--20">
+                                                    <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
                                                     <div class="quantity mb-lg-2 w-25">
                                                         <span>Qty: </span>
-                                                        <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
                                                         <input type="number" class="quantity-input w-50" name="so_luong" id="pro_qty" value="1" min="1">
                                                     </div>
                                                     <button type="submit" class="btn btn-medium btn-style-2 add-to-cart">

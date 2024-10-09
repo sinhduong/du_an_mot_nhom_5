@@ -3,6 +3,7 @@ class homeControllers
 {
     public $modelSanPham;
     public $modelTaiKhoan;
+    public $modelGioHang;
 
     public function home()
     {
@@ -21,6 +22,7 @@ class homeControllers
     {
         $this->modelSanPham = new SanPham();
         $this->modelTaiKhoan = new TaiKhoan();
+        $this->modelGioHang = new GioHang();
     }
 
     public function chiTietSanPham()
@@ -81,22 +83,73 @@ class homeControllers
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_SESSION['user_client'])) {
+                // Lấy thông tin tài khoản từ email người dùng
                 $email = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
-                // Lấy dữ liệu giỏ hàng của người dùng
-                // var_dump($email['id']);
-                // die;
 
-                $gioHang = $this->modelGioHang->getGioHangFromID($email['id']);
+                // Kiểm tra xem người dùng đã có giỏ hàng chưa
+                $gioHang = $this->modelGioHang->getGioHangFromUser($email['id']);
+                if (!$gioHang) {
+                    // Nếu chưa có, tạo giỏ hàng mới
+                    $gioHangID = $this->modelGioHang->addGioHang($email['id']);
+                    $gioHang = ['id' => $gioHangID];
+                    $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
+                } else {
+                    // Nếu đã có, lấy chi tiết giỏ hàng
+                    $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
+                }
+
+                // Lấy thông tin sản phẩm từ POST
+                $san_pham_id = $_POST['san_pham_id'];
+                $so_luong = intval($_POST['so_luong']);
+                $checkSanPham = false;
+
+                // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+                if (isset($chiTietGioHang)) {
+                    foreach ($chiTietGioHang as $detail) {
+                        if ($detail['san_pham_id'] == $san_pham_id) {
+                            // Nếu đã có, cập nhật số lượng
+                            $newSoLuong = $detail['so_luong'] + $so_luong;
+                            $this->modelGioHang->updateSoLuong($gioHang['id'], $san_pham_id, $newSoLuong);
+                            $checkSanPham = true;
+                            break;
+                        }
+                    }
+                }
+
+                // Nếu sản phẩm chưa có trong giỏ hàng, thêm mới sản phẩm
+                if (!$checkSanPham) {
+                    $this->modelGioHang->addDetailGioHang($gioHang['id'], $san_pham_id, $so_luong);
+                }
+
+                header("location:" . BASE_URL . '?act=gio-hang');
             } else {
                 var_dump('Chưa đăng nhập');
                 die;
             }
+        }
+    }
+    public function gioHang()
+    {
+        if (isset($_SESSION['user_client'])) {
+            // Lấy thông tin tài khoản từ email người dùng
+            $email = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
 
-            // Lấy thông tin sản phẩm từ POST
-            $sanPhamID = $_POST['san_pham_id'];
-            $soLuong = intval($_POST['so_luong']);
-            // var_dump($sanPhamID, $soLuong); 
-            // die; 
+            // Kiểm tra xem người dùng đã có giỏ hàng chưa
+            $gioHang = $this->modelGioHang->getGioHangFromUser($email['id']);
+            if (!$gioHang) {
+                // Nếu chưa có, tạo giỏ hàng mới
+                $gioHangID = $this->modelGioHang->addGioHang($email['id']);
+                $gioHang = ['id' => $gioHangID];
+                $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
+            } else {
+                $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
+            }
+            // $checkSanPham = false;
+
+            require_once './views/gioHang.php';
+        } else {
+            var_dump('Chưa đăng nhập');
+            die;
         }
     }
 }
