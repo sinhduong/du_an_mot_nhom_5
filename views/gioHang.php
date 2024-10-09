@@ -95,6 +95,7 @@
                 <div class="cart-page-total-wrapper">
                     <div class="row justify-content-end">
                         <div class="col-xl-6 col-lg-8 col-md-10">
+                            <form action="<?=BASE_URL . '?act=thanh-toan'?>" method="POST">
                             <div class="cart-page-total bg--dark-3">
                                 <h2>Cart Totals</h2>
                                 <div class="cart-calculator-table table-content table-responsive">
@@ -117,8 +118,9 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <a href="checkout.html" class="btn btn-medium btn-style-3">Đặt hàng</a>
+                                <button type="submit"  class="btn btn-medium btn-style-3">Đặt hàng</button>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>

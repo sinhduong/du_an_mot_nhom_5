@@ -26,9 +26,15 @@ match ($act) {
    'check-login' => (new homeControllers())->postLogin(),
 
    // giỏ hàng
-   'them-gio-hang'=>(new homeControllers())->addGioHang(),
-   'gio-hang'=>(new homeControllers())->gioHang(),
-   'thanh-toan'=>(new homeControllers())->gioHang(),
-   'update-gio-hang'=>(new homeControllers())->updateGioHang(),
-   'delete-san-pham-gio-hang'=>(new homeControllers())->deleteOneGioHang(),
+   'them-gio-hang' => (new homeControllers())->addGioHang(),
+   'gio-hang' => (new homeControllers())->gioHang(),
+   'thanh-toan' => (new homeControllers())->gioHang(),
+   'update-gio-hang' => (new homeControllers())->updateGioHang(),
+   'delete-san-pham-gio-hang' => (new homeControllers())->deleteOneGioHang(),
+
+
+   // thanh toán
+
+   'thanh-toan' => (new homeControllers())->ThanhToan(),
+   'xu-ly-thanh-toan' => (new homeControllers())->postThanhToan(),
 };
