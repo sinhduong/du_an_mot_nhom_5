@@ -45,4 +45,59 @@ class AdminDanhMucController
             }
         }
     }
+    public function formEditDanhMuc()
+    {
+        if (isset($_GET['id_danh_muc'])) {
+            $id = intval($_GET['id_danh_muc']); // Sanitize input
+            $danhmuc = $this->modelDanhMuc->getDetailDanhMuc($id);
+
+            if ($danhmuc) {
+                require_once './views/danhmuc/editDanhMuc.php';
+            } else {
+                header("Location: " . BASE_URL_ADMIN . '?act=danh-muc');
+                exit();
+            }
+        } else {
+            header("Location: " . BASE_URL_ADMIN . '?act=danh-muc');
+            exit();
+        }
+    }
+    public function postEditDanhMuc($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $ten_danh_muc = $_POST['ten_danh_muc'];
+            $mo_ta = $_POST['mo_ta'];
+
+            $error = [];
+            if (empty($ten_danh_muc)) {
+                $error['ten_danh_muc'] = 'tên danh mục không được bỏ trống';
+            }
+
+            if (empty($error)) {
+                $this->modelDanhMuc->updateDanhMuc($id, $ten_danh_muc, $mo_ta);
+                header("location: " . BASE_URL_ADMIN . '?act=danh-muc');
+                exit();
+            } else {
+                $danhmuc = ['id' => $id, 'ten_danh_muc' => $ten_danh_muc, 'mo_ta' => $mo_ta];
+                require_once './views/danhmuc/editDanhMuc.php';
+            }
+        }
+    }
+    public function deleteDanhMuc()
+    {
+        if (isset($_GET['id_danh_muc'])) {
+            $id = intval($_GET['id_danh_muc']); // Lấy id từ URL
+            $danhmuc = $this->modelDanhMuc->getDetailDanhMuc($id);
+
+            if ($danhmuc) {
+                $this->modelDanhMuc->destroyDanhMuc($id);
+                header("location: " . BASE_URL_ADMIN . '?act=danh-muc');
+                exit();
+            } else {
+                echo "Danh mục không tồn tại.";
+            }
+        } else {
+            echo "ID danh mục không hợp lệ.";
+        }
+    }
 }
