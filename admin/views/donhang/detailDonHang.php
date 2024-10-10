@@ -12,7 +12,7 @@
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-     
+
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -26,7 +26,7 @@
                     </ol> -->
                 </div>
                 <div class="col-sm-2 ">
-            
+
                     <form action="" method="post" class="form-group">
                         <select name="" id="" form-group>
                             <?php foreach ($listTrangThaiDonHang as $key => $trangThai): ?>
@@ -38,13 +38,13 @@
                         </select>
                     </form>
                 </div>
-                
+
             </div>
         </div>
     </section>
 
     <!-- Main content -->
-    
+
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -118,6 +118,7 @@
                                     <thead>
                                         <tr>
                                             <th>STT</th>
+                                            <th>Ảnh sản phẩm</th>
                                             <th>Tên sản phẩm</th>
                                             <th>Đơn giá</th>
                                             <th>Số lượng</th>
@@ -130,6 +131,9 @@
 
                                             <tr>
                                                 <td><?= $key + 1 ?></td>
+                                                <td>
+                                                    <img src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" style="width: 100px" class="product-image" alt="Product Image">
+                                                </td>
                                                 <td><?= $sanPham['ten_san_pham'] ?></td>
                                                 <td><?= $sanPham['don_gia'] ?></td>
                                                 <td><?= $sanPham['so_luong'] ?></td>
@@ -164,7 +168,7 @@
                                         </tr>
                                         <tr>
                                             <th>Tổng tiền:</th>
-                                            <td><?= $tong_tien + 300000 ?></td>
+                                            <td><?= $tong_tien + 30000 ?></td>
                                         </tr>
                                     </table>
                                 </div>

@@ -67,6 +67,7 @@
                                     <?php } else { ?>
                                         <a class="dropdown-item" href="<?=BASE_URL .'?act=logout'?>">Đăng xuất</a>
                                         <a class="dropdown-item" href="#">Tài khoản của tôi</a>
+                                        <a class="dropdown-item" href="<?=BASE_URL . '?act=don-hang'?>">Lịch sử mua hàng</a>
                                     <?php } ?>
                                 </div>
                             </div>
