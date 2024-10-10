@@ -41,7 +41,7 @@
                                     <div class="checkout-form mb--30">
                                         <p><?= 'Họ tên : ' . $donHang['ho_ten'] ?> </p>
                                         <p><?= 'Email : ' . $donHang['email'] ?> </p>
-                                        <p><?= 'Số điện thoại : ' . $donHang['so_dien_thoai'] ?>: </p>
+                                        <p><?= 'Số điện thoại : ' . $donHang['so_dien_thoai'] ?> </p>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
@@ -75,7 +75,22 @@
                                     </div>
                                     <div class="checkout-form mb--30" style="text-align:center;">
 
-                                        <p>đang giao</p>
+                                        <p>
+                                            <?php
+                                            if ($donHang['trang_thai_id'] == 1) {
+                                                $colorAlerts = 'primary';
+                                            } elseif ($donHang['trang_thai_id'] >= 2 && $donHang['trang_thai_id'] <= 9) {
+                                                $colorAlerts = 'warning';
+                                            } elseif ($donHang['trang_thai_id'] == 10) {
+                                                $colorAlerts = 'success';
+                                            } else {
+                                                $colorAlerts = 'danger';
+                                            }
+                                            ?>
+                                        <div class="alert alert-<?= $colorAlerts ?>" role="alert">
+                                            Đơn Hàng:<?= $donHang['ten_trang_thai'] ?>
+                                        </div>
+                                        </p>
 
                                     </div>
                                 </div>
@@ -112,15 +127,6 @@
                                             <td class="wide-column"><?= $sanPham['so_luong'] ?></td>
                                             <td class="wide-column"><?= $sanPham['thanh_tien'] ?></td>
 
-                                            <td>
-                                                <a class="btn btn-medium btn-style-1">
-                                                    View
-                                                </a>
-                                                <!-- <a href="<?= BASE_URL_ADMIN . '?act=form-sua-don-hang&id_don_hang=' . htmlspecialchars($donHang['id']) ?>">
-                                                        <button class="btn btn-warning">Hủy</button>
-                                                    </a> -->
-
-                                            </td>
                                         </tr>
                                     <?php endforeach ?>
                                 </tbody>

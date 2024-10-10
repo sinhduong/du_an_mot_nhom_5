@@ -105,6 +105,8 @@
                                                         foreach ($chiTietGioHang as $key => $sanPham): ?>
                                                             <tr>
                                                                 <td>
+                                                                    <input type="hidden" name="product_id[]" value="<?= $sanPham['san_pham_id'] ?>">
+                                                                    <input type="hidden" name="quantity[]" value="<?= $sanPham['so_luong'] ?>">
                                                                     <a href=""><?= htmlspecialchars($sanPham['ten_san_pham']) ?><strong> x <?= intval($sanPham['so_luong']) ?></strong></a>
                                                                 </td>
                                                                 <td>
@@ -113,9 +115,13 @@
 
                                                                     // Calculate the total price based on promotional price or regular price
                                                                     if ($sanPham['gia_khuyen_mai']) {
+                                                                        echo '<input type="hidden" name="price[]" value="' . $sanPham['gia_khuyen_mai'] . '">';
                                                                         $tongTien = $sanPham['gia_khuyen_mai'] * $sanPham['so_luong'];
+                                                                        echo '<input type="hidden" name="total_price[]" value="' . $tongTien . '">';
                                                                     } else {
+                                                                        echo '<input type="hidden" name="price[]" value="' . $sanPham['gia_san_pham'] . '">';
                                                                         $tongTien = $sanPham['gia_san_pham'] * $sanPham['so_luong'];
+                                                                        echo '<input type="hidden" name="total_price[]" value="' . $tongTien . '">';
                                                                     }
 
                                                                     // Add to the overall cart total

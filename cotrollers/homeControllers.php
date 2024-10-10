@@ -65,6 +65,29 @@ class homeControllers
             }
         }
     }
+    public function postBinhLuan()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $san_pham_id = $_POST['san_pham_id']; // Changed to POST instead of GET
+            $tai_khoan_id = $_POST['tai_khoan_id'];
+            $noi_dung = $_POST['noi_dung'];
+            $ngay_dang = date('Y-m-d H:i:s');
+            $trang_thai = 1;
+
+            // Check if content is not empty
+            if (!empty($noi_dung)) {
+                // Call method to save comment
+                $this->modelSanPham->insertBinhBluanByIDSP($san_pham_id, $tai_khoan_id, $noi_dung, $ngay_dang, $trang_thai);
+                header("Location: " . BASE_URL . "?act=chi-tiet-san-pham&id_san_pham=" . $san_pham_id);
+                exit();
+            } else {
+                // Handle error - content should not be empty
+                echo "Nội dung bình luận không được để trống.";
+            }
+        }
+    }
+
+
 
 
 
@@ -216,6 +239,8 @@ class homeControllers
 
     public function ThanhToan()
     {
+        // var_dump($_SESSION['user_client']);
+        // die();
         if (isset($_SESSION['user_client'])) {
             $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
             $gioHang = $this->modelGioHang->getGioHangFromUser($user['id']);
@@ -235,7 +260,6 @@ class homeControllers
     public function postThanhToan()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // var_dump($_POST);die;
             // Lấy dữ liệu từ form
             $ten_nguoi_nhan = $_POST['ten_nguoi_nhan'];
             $email_nguoi_nhan = $_POST['email_nguoi_nhan'];
@@ -245,11 +269,19 @@ class homeControllers
             $tong_tien = $_POST['tong_tien'];
             $phuong_thuc_thanh_toan_id = $_POST['phuong_thuc_thanh_toan_id'];
             $ngay_dat = date('Y-m-d');
-            $trang_thai_id = 1; // Trạng thái đơn hàng mặc định là 1
+            $trang_thai_id = 1;// Trạng thái mặc định
             $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
             $tai_khoan_id = $user['id'];
-            $ma_don_hang = 'DH-' . rand(1000, 9999); // Tạo mã đơn hàng ngẫu nhiên
+            $ma_don_hang = 'DH-' . rand(1000, 9999);
 
+            $product_ids = $_POST['product_id'];
+            $quantities = $_POST['quantity'];
+            $prices = $_POST['price'];
+            $total_prices = $_POST['total_price'];
+            // var_dump($prices);
+            // var_dump($total_prices);
+            // var_dump($quantities);
+            // die();
             // Thêm thông tin đơn hàng vào cơ sở dữ liệu
             $donHangId = $this->modelDonHang->addDonHang(
                 $tai_khoan_id,
@@ -265,27 +297,23 @@ class homeControllers
                 $trang_thai_id
             );
 
+            // Kiểm tra DonHangId
             if ($donHangId) {
-                // Lấy chi tiết giỏ hàng
-                $chiTietGioHang = $this->modelGioHang->getDetailGioHang($user['id']);
-
-                // Thêm từng sản phẩm trong giỏ hàng vào chi tiết đơn hàng
-                foreach ($chiTietGioHang as $item) {
+                foreach ($product_ids as $index => $product_id) {
                     $this->modelDonHang->addChiTietDonHang(
                         $donHangId,
-                        $item['san_pham_id'],
-                        $item['so_luong'],
-                        $item['don_gia'],
-                        $item['thanh_tien']
+                        $product_id,
+                        $prices[$index],
+                        $quantities[$index],
+                        $total_prices[$index]
                     );
                 }
-
-                // Xóa giỏ hàng sau khi đơn hàng được thêm thành công
+                // Xóa giỏ hàng
                 $this->modelGioHang->clearGioHang($tai_khoan_id);
-
-                // Chuyển hướng người dùng đến trang chi tiết đơn hàng
                 header('location:' . BASE_URL . '?act=don-hang');
                 exit;
+            } else {
+                die('Không thể tạo đơn hàng');
             }
         }
     }

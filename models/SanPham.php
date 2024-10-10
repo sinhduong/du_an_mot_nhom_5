@@ -76,6 +76,27 @@ class SanPham
             return false; // Trả về false để xử lý lỗi ở controller
         }
     }
+    public function insertBinhBluanByIDSP($san_pham_id, $tai_khoan_id, $noi_dung, $ngay_dang, $trang_thai)
+    {
+        try {
+            $sql = "INSERT INTO binh_luan (san_pham_id, tai_khoan_id, noi_dung, ngay_dang, trang_thai)
+                VALUES (:san_pham_id, :tai_khoan_id, :noi_dung, :ngay_dang, :trang_thai)";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                'san_pham_id' => $san_pham_id,
+                'tai_khoan_id' => $tai_khoan_id,
+                'noi_dung' => $noi_dung,
+                'ngay_dang' => $ngay_dang,
+                'trang_thai' => $trang_thai,
+            ]);
+
+            return true;
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+            return false; // Trả về false nếu có lỗi
+        }
+    }
 
     public function getBinhLuanFromSanPham($id)
     {
@@ -86,7 +107,7 @@ class SanPham
                     WHERE binh_luans.san_pham_id = :id';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([':id' => $id]);
-    
+
             // Lấy tất cả các bình luận liên quan đến sản phẩm
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
@@ -97,8 +118,8 @@ class SanPham
     {
         try {
             $sql = "SELECT san_phams.*, danh_mucs.ten_danh_muc FROM san_phams INNER JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id 
-            where san_phams.danh_muc_id=". $danh_muc_id;
-            
+            where san_phams.danh_muc_id=" . $danh_muc_id;
+
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
 

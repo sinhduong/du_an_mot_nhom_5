@@ -130,12 +130,11 @@
                                 <a href="" class="mainmenu__link">Cửa hàng</a>
                                 <ul class="sub-menu">
                                     <li class="menu-item-has-children has-children">
-                                        <a href="#">Blog Grid</a>
+                                        <a href="#">Danh mục</a>
                                         <ul class="sub-menu">
-                                            <li><a href="blog.html">Left Sidebar</a></li>
-                                            <li><a href="blog-right-sidebar.html">Right Sidebar</a></li>
-                                            <li><a href="blog-3-column.html">Three Column</a></li>
-                                            <li><a href="blog-4-column.html">Four Column</a></li>
+                                            <li><a href="">sản phẩm 1</a></li>
+                                            <li><a href="">sản phẩm 2</a></li>
+                                            <li><a href="">sản phẩm 3</a></li>
                                         </ul>
                                     </li>
                                 </ul>

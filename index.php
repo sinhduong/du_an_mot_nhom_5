@@ -21,6 +21,9 @@ match ($act) {
    '/' => (new homeControllers())->home(),
    'chi-tiet-san-pham' => (new homeControllers())->chiTietSanPham(),
 
+   // Bình luận
+   'add-binh-luan' => (new homeControllers())->postBinhLuan(),
+
    // auth
    'login' => (new homeControllers())->formLogin(),
    'logout' => (new homeControllers())->logout(),
@@ -41,7 +44,7 @@ match ($act) {
 
    // Đơn hàng
    'don-hang' => (new homeControllers())->danhSachDonHang(),
-   'chi-tiet-don-hang' => (new homeControllers())->detailDonHang(),
+   'chi-tiet-don-hang' => (new homeControllers())->detailDonHang($_GET['id_don_hang']),
 
 
 
