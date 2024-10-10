@@ -278,10 +278,13 @@
                                                     <p>
                                                         It is a long established fact that a reader will be distracted by the readable content...
                                                     </p>
-                                                    <form action="<?= BASE_URL . '?act=then-gio-hang' ?>" method="POST">
+                                                    <form action="<?= BASE_URL . '?act=them-gio-hang' ?>" method="POST">
                                                         <div class="product-action">
-                                                            <a class="add_cart cart-item action-cart" href="cart.html" title="wishlist"><span>Add to cart</span></a>
-                                                            </a>
+                                                            <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
+                                                            <input type="hidden" name="so_luong" value="1">
+                                                            <button type="submit" class="add_cart cart-item action-cart" title="wishlist">
+                                                                <span>Thêm giỏ</span>
+                                                            </button>
                                                         </div>
                                                     </form>
                                                 </div>

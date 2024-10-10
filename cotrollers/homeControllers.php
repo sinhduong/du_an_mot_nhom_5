@@ -27,6 +27,26 @@ class homeControllers
         $this->modelDonHang = new DonHang();
     }
 
+
+    // menu con
+    public   function contact()
+    {
+        require_once './views/lienHe.php';
+    }
+    public   function gioiThieu()
+    {
+        require_once './views/gioiThieu.php';
+    }
+    public   function blog()
+    {
+        require_once './views/blog.php';
+    }
+
+
+
+
+    // 
+
     public function chiTietSanPham()
     {
         if (isset($_GET['id_san_pham'])) {
@@ -276,7 +296,7 @@ class homeControllers
 
     public function danhSachDonHang()
     {
-        
+
         $listDonHang = $this->modelDonHang->getAllDonHang();
 
         require_once './views/donhang/listDonHang.php';

@@ -42,4 +42,13 @@ match ($act) {
    // Đơn hàng
    'don-hang' => (new homeControllers())->danhSachDonHang(),
    'chi-tiet-don-hang' => (new homeControllers())->detailDonHang(),
+
+
+
+
+   // thanh menu
+   'contact' => (new homeControllers())->contact(),
+   'gioi-Thieu' => (new homeControllers())->gioiThieu(),
+   'blog' => (new homeControllers())->blog(),
+
 };
