@@ -6,6 +6,29 @@ class TaiKhoan
     {
         $this->conn = connectDB();
     }
+
+    public function dangKy($ho_ten, $email, $mat_khau)
+    {
+        try {
+            // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
+            $hashPassword = password_hash($mat_khau, PASSWORD_DEFAULT);
+
+            $sql = "INSERT INTO tai_khoans (ho_ten, email, mat_khau) VALUES (:ho_ten, :email, :mat_khau)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                'ho_ten' => $ho_ten,
+                'email' => $email,
+                'mat_khau' => $hashPassword,  // Lưu mật khẩu đã mã hóa
+            ]);
+
+            return true;
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+            return false;
+        }
+    }
+
+
     public function checkLogin($email, $mat_khau)
     {
         try {

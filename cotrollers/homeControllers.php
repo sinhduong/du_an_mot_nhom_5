@@ -98,6 +98,7 @@ class homeControllers
         require_once './views/auth/formLogin.php';
         deleteSessionError();
     }
+
     public function postLogin()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -135,6 +136,40 @@ class homeControllers
         header("Location: " . BASE_URL);
         exit();
     }
+
+
+    public function formDangKy()
+    {
+        require_once './views/auth/formDangKy.php';
+        deleteSessionError();
+    }
+    public function postDangKy()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $ho_ten = $_POST['ho_ten'];
+            $email = $_POST['email'];
+            $mat_khau = $_POST['mat_khau'];
+            $confirm_mat_khau = $_POST['confirm_mat_khau'];
+
+            // Kiểm tra mật khẩu và mật khẩu xác nhận có khớp không
+            if ($mat_khau !== $confirm_mat_khau) {
+                $_SESSION['error'] = 'Mật khẩu và mật khẩu xác nhận không khớp!';
+                header("location: " . BASE_URL . '?act=dang-ky');
+                exit();
+            }
+
+            // Nếu khớp, tiến hành đăng ký
+            $isRegistered = $this->modelTaiKhoan->dangKy($ho_ten, $email, $mat_khau);
+
+            if ($isRegistered) {
+                header("location: " . BASE_URL . '?act=login');
+            } else {
+                $_SESSION['error'] = 'Đăng ký thất bại, vui lòng thử lại!';
+                header("location: " . BASE_URL . '?act=dang-ky');
+            }
+        }
+    }
+
 
 
     public function addGioHang()
@@ -269,7 +304,7 @@ class homeControllers
             $tong_tien = $_POST['tong_tien'];
             $phuong_thuc_thanh_toan_id = $_POST['phuong_thuc_thanh_toan_id'];
             $ngay_dat = date('Y-m-d');
-            $trang_thai_id = 1;// Trạng thái mặc định
+            $trang_thai_id = 1; // Trạng thái mặc định
             $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
             $tai_khoan_id = $user['id'];
             $ma_don_hang = 'DH-' . rand(1000, 9999);
@@ -324,11 +359,17 @@ class homeControllers
 
     public function danhSachDonHang()
     {
+        // Lấy tài khoản từ session
+        $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+        $tai_khoan_id = $user['id']; // Lấy ID tài khoản
 
-        $listDonHang = $this->modelDonHang->getAllDonHang();
+        // Lấy danh sách đơn hàng của tài khoản hiện tại
+        $listDonHang = $this->modelDonHang->getDonHangByTaiKhoan($tai_khoan_id);
 
+        // Gọi view để hiển thị
         require_once './views/donhang/listDonHang.php';
     }
+
 
     public function detailDonHang()
     {

@@ -28,6 +28,9 @@ match ($act) {
    'login' => (new homeControllers())->formLogin(),
    'logout' => (new homeControllers())->logout(),
    'check-login' => (new homeControllers())->postLogin(),
+   
+   'dang-ky' => (new homeControllers())->formDangKy(),
+   'xu-ly-dang-ky' => (new homeControllers())->postDangKy(),
 
    // giỏ hàng
    'them-gio-hang' => (new homeControllers())->addGioHang(),

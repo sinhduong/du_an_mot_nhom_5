@@ -64,6 +64,7 @@
                                 <div class="dropdown-menu" aria-labelledby="userID">
                                     <?php if (!isset($_SESSION['user_client'])) { ?>
                                         <a class="dropdown-item" href="<?= BASE_URL . '?act=login' ?>">Đăng Nhập</a>
+                                        <a class="dropdown-item" href="<?= BASE_URL . '?act=dang-ky' ?>">Đăng Ký</a>
                                     <?php } else { ?>
                                         <a class="dropdown-item" href="<?= BASE_URL . '?act=logout' ?>">Đăng xuất</a>
                                         <a class="dropdown-item" href="#">Tài khoản của tôi</a>
