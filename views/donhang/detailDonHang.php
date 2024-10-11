@@ -125,7 +125,7 @@
                                             <td class="wide-column"><?= $sanPham['ten_san_pham'] ?></td>
                                             <td class="wide-column"><?= formatPrice($sanPham['don_gia']) . ' đ' ?></td>
                                             <td class="wide-column"><?= $sanPham['so_luong'] ?></td>
-                                            <td class="wide-column"><?= formatPrice($sanPham['thanh_tien']+30000) . ' đ'  ?></td>
+                                            <td class="wide-column"><?= formatPrice($sanPham['thanh_tien']) . ' đ'  ?></td>
 
                                         </tr>
                                     <?php endforeach ?>

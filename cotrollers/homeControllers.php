@@ -65,9 +65,27 @@ class homeControllers
             }
         }
     }
-   
 
+    public function postBinhLuan()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            var_dump($_POST);
+            die;
 
+            $san_pham_id = $_POST['san_pham_id'];
+            $tai_khoan_id = $_POST['tai_khoan_id'];
+            $noi_dung = $_POST['noi_dung'];
+            $ngay_dang = date('Y-m-d H:i:s');
+            $trang_thai = 0;
+            if (!empty($noi_dung)) {
+                $this->modelSanPham->insertBinhBluanByIDSP($san_pham_id, $tai_khoan_id, $noi_dung, $ngay_dang, $trang_thai);
+                header("Location: " . BASE_URL . "?act=chi-tiet-san-pham&id_san_pham=" . $san_pham_id);
+                exit();
+            } else {
+                echo "Nội dung bình luận không được để trống.";
+            }
+        }
+    }
 
 
 
@@ -335,25 +353,7 @@ class homeControllers
     }
 
 
-    public function postBinhLuan()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            var_dump($_POST);
-            die;
-            // $san_pham_id = $_POST['san_pham_id'];
-            // $tai_khoan_id = $_POST['tai_khoan_id'];
-            // $noi_dung = $_POST['noi_dung'];
-            // $ngay_dang = date('Y-m-d H:i:s');
-            // $trang_thai = 1;
-            // if (!empty($noi_dung)) {
-            //     $this->modelSanPham->insertBinhBluanByIDSP($san_pham_id, $tai_khoan_id, $noi_dung, $ngay_dang, $trang_thai);
-            //     header("Location: " . BASE_URL . "?act=chi-tiet-san-pham&id_san_pham=" . $san_pham_id);
-            //     exit();
-            // } else {
-            //     echo "Nội dung bình luận không được để trống.";
-            // }
-        }
-    }
+
 
 
     // Đơn hàng

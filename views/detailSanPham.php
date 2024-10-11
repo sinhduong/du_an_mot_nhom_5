@@ -148,12 +148,15 @@
                                             </div>
                                             <form action="<?= BASE_URL . '?act=add-binh-luan' ?>" method="post" class="form form--review">
                                                 <div class="form__group clearfix mb--20">
-                                                    <input type="hidden" name="ngay_dang">
+                                                    <input type="hidden" name="san_pham_id" value="<?= $id ?>">
+                                                    <input type="hidden" name="tai_khoan_id" value="">
+                                                    <!-- <input type="hidden" name="trang_thai" value="0"> -->
                                                     <label class="form__label d-block" name="noi_dung" for="review">Nội dung bình luận <sup>*</sup></label>
-                                                    <textarea id="review" name="review" class="form__input form__input--textarea"></textarea>
+                                                    <textarea id="review" name="noi_dung" class="form__input form__input--textarea"></textarea>
                                                     <button type="submit" class="btn btn-medium btn-style-2 add-to-cart" style="float: right;">
                                                         Thêm
                                                     </button>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -227,25 +230,15 @@
                                                     <p>
                                                         It is a long established fact that a reader will be distracted by the readable content...
                                                     </p>
-                                                    <?php
-                                                    // Check if the user is logged in
-                                                    if (isset($_SESSION['user_client']) && !empty($_SESSION['user_client'])) {
-                                                    ?>
-                                                        <form action="<?= BASE_URL . '?act=add-binh-luan' ?>" method="post" class="form form--review">
+                                                    <form action="<?= BASE_URL . '?act=them-gio-hang' ?>" method="POST">
+                                                        <div class="product-action">
                                                             <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
-                                                            <input type="hidden" name="tai_khoan_id" value="<?= $_SESSION['user']['id'] ?>"> <!-- Updated this line -->
-                                                            <div class="form__group clearfix mb--20">
-                                                                <label class="form__label d-block" for="review">Nội dung bình luận <sup>*</sup></label>
-                                                                <textarea id="review" name="noi_dung" class="form__input form__input--textarea" required></textarea> <!-- Added 'required' -->
-                                                                <button type="submit" class="btn btn-medium btn-style-2 add-to-cart" style="float: right;">
-                                                                    Thêm
-                                                                </button>
-                                                            </div>
-                                                        </form>
-                                                    <?php } else { ?>
-                                                        <a href="<?= BASE_URL . '?act=login' ?>">Vui lòng đăng nhập để bình luận</a>
-                                                    <?php } ?>
-
+                                                            <input type="hidden" name="so_luong" value="1">
+                                                            <button type="submit" class="add_cart cart-item action-cart" title="wishlist">
+                                                                <span>Thêm giỏ</span>
+                                                            </button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>

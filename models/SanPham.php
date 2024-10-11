@@ -76,6 +76,21 @@ class SanPham
             return false; // Trả về false để xử lý lỗi ở controller
         }
     }
+    public function getTaiKhoanFromEmail($email)
+    {
+        try {
+            $sql = 'SELECT * from tai_khoans where email =:email';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(
+                [
+                    ':email' => $email
+                ]
+            );
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
     public function insertBinhBluanByIDSP($san_pham_id, $tai_khoan_id, $noi_dung, $ngay_dang, $trang_thai)
     {
         try {

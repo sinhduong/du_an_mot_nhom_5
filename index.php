@@ -1,8 +1,5 @@
 <?php
 session_start();
-if (session_status() !== PHP_SESSION_ACTIVE) {
-   die('Session không hoạt động');
-}
 
 require_once './commons/env.php';
 require_once './commons/function.php';
@@ -29,7 +26,7 @@ match ($act) {
    'login' => (new homeControllers())->formLogin(),
    'logout' => (new homeControllers())->logout(),
    'check-login' => (new homeControllers())->postLogin(),
-   
+
    'dang-ky' => (new homeControllers())->formDangKy(),
    'xu-ly-dang-ky' => (new homeControllers())->postDangKy(),
 
@@ -57,5 +54,4 @@ match ($act) {
    'contact' => (new homeControllers())->contact(),
    'gioi-Thieu' => (new homeControllers())->gioiThieu(),
    'blog' => (new homeControllers())->blog(),
-
 };

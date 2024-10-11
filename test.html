@@ -1,83 +1,70 @@
+public function postLogin()
+{
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // lấy email và pass gửi lên từ form
+        $email = $_POST['email'];
+        $password = $_POST['password'];
 
-  <div class="main-content-wrapper">
-    <div class="checkout-area pt--40 pb--80 pt-md--30 pb-md--60">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <!-- User Action Start -->
-
-                    <!-- User Action End -->
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                   
-                    <div class="checkout-wrapper bg--2">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="checkout-title">
-                                    <h2>Thông tin nhận hàng</h2>
-                                </div>
-                                <div class="checkout-form mb--30">
-
-                                    <p>Người nhận:</p>
-                                    <p>Email: </p>
-                                    <p>Địa chỉ: </p>
-                                    <p>Số điện thoại: </p>
-                                    <p>Ngày đặt: </p>
-                                    <p>Tổng đơn hàng: </p>
-                                    <p>Phương thức thanh toán: </p>
-                                    <p>Trạng thái đơn hàng: </p>
-
-                                </div>
-                                <a href=""><input name="dongydathang" type="submit" class="btn btn-style-3" value="Tiếp tục mua hàng"></a>
-                            </div>
+        // xử lý kiểm tra thông tin đăng nhập
+        $user = $this->modelTaiKhoan->checkLogin($email, $password);
+        if (is_array($user)) {
+            // đăng nhập thành công, lưu thông tin vào session
+            $_SESSION['user_client'] = [
+                'id' => $user['id'], // Lưu id người dùng
+                'email' => $user['email'], // Lưu email nếu cần
+                'ho_ten' => $user['ho_ten'], // Lưu thêm họ tên nếu cần
+            ];
+            header("location:" . BASE_URL);
+            exit();
+        } else {
+            // Lỗi thì lưu lỗi vào session
+            $_SESSION['error'] = $user;
+            $_SESSION['flash'] = true;
+            header("location:" . BASE_URL . '?act=login');
+            exit();
+        }
+    }
+}
 
 
-                            <div class="col-lg-6 mt-md--30">
-                                <div class="order-details">
-                                    <h3 class="heading-tertiary">Thông tin đơn hàng</h3>
-                                    <div class="order-table table-content table-responsive mb--30">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Sản Phẩm</th>
-                                                    <th>Số lượng</th>
-                                                    <th>Giá Tiền</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><img src="" alt="">re</td>
-                                                    <td>re</td>
-                                                    <td>re</td>
-                                                </tr>
-                                                </ul>
-                                            </tbody>
-                                            <tfoot>
 
-                                                <tr class="order-total">
-                                                    <th>Tổng Đơn Hàng</th>
-                                                    <td colspan="3"><span class="order-total-ammount"></span></td>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                    <div class="checkout-payment">
-                                        <div class="payment-btn-group">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+<div class="currency-selector header-top-nav__item">
+    <div class="dropdown header-top__dropdown">
+        <?php if (isset($_SESSION['user_client'])): ?>
+            <a class="dropdown-toggle" id="currencyID" aria-haspopup="true" aria-expanded="false">
+                <?php echo $_SESSION['user_client']['ho_ten']; ?> <!-- Hiển thị tên người dùng -->
+            </a>
+        <?php endif; ?>
     </div>
 </div>
 
 
 
 
- 
+public function checkLogin($email, $mat_khau)
+{
+    try {
+        $sql = "SELECT * from tai_khoans where email=:email";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['email' => $email]);
+        $user = $stmt->fetch();
+
+        if ($user && password_verify($mat_khau, $user['mat_khau'])) {
+            if ($user['chuc_vu_id'] == 2) {
+                if ($user['trang_thai'] == 1) {
+                    return $user; // trả về thông tin người dùng
+                } else {
+                    return "Tài khoản bị cấm";
+                }
+            } else {
+                return "Tài khoản không có quyền đăng nhập";
+            }
+        } else {
+            return "Bạn nhập sai thông tin mật khẩu tài khoản";
+        }
+    } catch (\Exception $e) {
+        echo "Lỗi" . $e->getMessage();
+        return false;
+    }
+}
