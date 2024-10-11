@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="checkout-form mb--30">
 
-                                        <p><?= 'Tổng tiền : ' . formatPrice($donHang['tong_tien']) . ' đ'  ?></p>
+                                        <p><?= 'Tổng tiền : ' . formatPrice($donHang['tong_tien']+30000) . ' đ'  ?></p>
                                         <p><?= 'Ghi chú : ' . $donHang['ghi_chu'] ?></p>
                                         <p><?= 'Phương thức thanh toán : ' . $donHang['ten_phuong_thuc'] ?></p>
 
@@ -125,7 +125,7 @@
                                             <td class="wide-column"><?= $sanPham['ten_san_pham'] ?></td>
                                             <td class="wide-column"><?= formatPrice($sanPham['don_gia']) . ' đ' ?></td>
                                             <td class="wide-column"><?= $sanPham['so_luong'] ?></td>
-                                            <td class="wide-column"><?= formatPrice($sanPham['thanh_tien']) . ' đ'  ?></td>
+                                            <td class="wide-column"><?= formatPrice($sanPham['thanh_tien']+30000) . ' đ'  ?></td>
 
                                         </tr>
                                     <?php endforeach ?>

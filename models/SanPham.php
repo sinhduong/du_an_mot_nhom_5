@@ -91,12 +91,13 @@ class SanPham
                 'trang_thai' => $trang_thai,
             ]);
 
-            return true;
-        } catch (Exception $e) {
-            echo "Lỗi: " . $e->getMessage();
-            return false; // Trả về false nếu có lỗi
+            return $this->conn->lastInsertId();
+        } catch (PDOException $e) {
+            echo "Lỗi SQL: " . $e->getMessage();
+            return false;
         }
     }
+
 
     public function getBinhLuanFromSanPham($id)
     {
@@ -121,6 +122,23 @@ class SanPham
             where san_phams.danh_muc_id=" . $danh_muc_id;
 
             $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
+
+
+    // tìm kiếm
+    public function timKiemTheoTen($search_input)
+    {
+        try {
+            $sql = "SELECT * from san_phams where ten_san_pham like :search_input";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':search_input', $search_input, PDO::PARAM_STR);
+            $search_input = '%' . $search_input . '%';  // Thêm dấu % để tìm kiếm chuỗi tương tự
             $stmt->execute();
 
             return $stmt->fetchAll();

@@ -162,7 +162,7 @@
                                                     <h5>Chọn phương thức thanh toán</h5> <br>
                                                     <div class="custom-radio payment-radio">
                                                         <input style="width: 20px;" id="option1" type="radio" value="1"
-                                                            name="phuong_thuc_thanh_toan_id" required />
+                                                            name="phuong_thuc_thanh_toan_id" checked required />
                                                         <label class="payment-label" for="option1">Thanh Toán Khi Nhận
                                                             Hàng</label>
                                                     </div> <br>

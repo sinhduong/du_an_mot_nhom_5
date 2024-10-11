@@ -1,7 +1,9 @@
 <li class="mini-cart-icon">
     <div class="mini-cart mini-cart--1">
         <a class="mini-cart__dropdown-toggle bordered-icon" id="cartDropdown">
-            <span class="mini-cart__count">0</span>
+            <!-- <span class="mini-cart__count">
+                0
+            </span> -->
             <i class="icon_cart_alt mini-cart__icon"></i>
             <!-- <span class="mini-cart__ammount">80.00 <i class="fa fa-angle-down"></i></span> -->
         </a>

@@ -65,27 +65,8 @@ class homeControllers
             }
         }
     }
-    public function postBinhLuan()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $san_pham_id = $_POST['san_pham_id']; // Changed to POST instead of GET
-            $tai_khoan_id = $_POST['tai_khoan_id'];
-            $noi_dung = $_POST['noi_dung'];
-            $ngay_dang = date('Y-m-d H:i:s');
-            $trang_thai = 1;
+   
 
-            // Check if content is not empty
-            if (!empty($noi_dung)) {
-                // Call method to save comment
-                $this->modelSanPham->insertBinhBluanByIDSP($san_pham_id, $tai_khoan_id, $noi_dung, $ngay_dang, $trang_thai);
-                header("Location: " . BASE_URL . "?act=chi-tiet-san-pham&id_san_pham=" . $san_pham_id);
-                exit();
-            } else {
-                // Handle error - content should not be empty
-                echo "Nội dung bình luận không được để trống.";
-            }
-        }
-    }
 
 
 
@@ -354,6 +335,26 @@ class homeControllers
     }
 
 
+    public function postBinhLuan()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            var_dump($_POST);
+            die;
+            // $san_pham_id = $_POST['san_pham_id'];
+            // $tai_khoan_id = $_POST['tai_khoan_id'];
+            // $noi_dung = $_POST['noi_dung'];
+            // $ngay_dang = date('Y-m-d H:i:s');
+            // $trang_thai = 1;
+            // if (!empty($noi_dung)) {
+            //     $this->modelSanPham->insertBinhBluanByIDSP($san_pham_id, $tai_khoan_id, $noi_dung, $ngay_dang, $trang_thai);
+            //     header("Location: " . BASE_URL . "?act=chi-tiet-san-pham&id_san_pham=" . $san_pham_id);
+            //     exit();
+            // } else {
+            //     echo "Nội dung bình luận không được để trống.";
+            // }
+        }
+    }
+
 
     // Đơn hàng
 
@@ -380,5 +381,16 @@ class homeControllers
         $sanPhamDonHang = $this->modelDonHang->getListSPDonHang($don_hang_id);
         $listTrangThaiDonHang = $this->modelDonHang->getAllTrangThaiDonHang();
         require_once './views/donhang/detailDonHang.php';
+    }
+
+
+
+
+    // tìm kiếm
+    public function timKiemSP()
+    {
+        $search_input = isset($_POST['search_input']) ? $_POST['search_input'] : '';
+        $tiemKiemSP = $this->modelSanPham->timKiemTheoTen($search_input);
+        require_once './views/sanPham/keySanPham.php';
     }
 }

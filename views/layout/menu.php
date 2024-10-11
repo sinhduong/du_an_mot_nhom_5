@@ -95,8 +95,8 @@
                 <div class="col-lg-5 col-md-7 col-sm-6 order-lg-3 order-3">
                     <div class="header-toolbar">
                         <div class="search-form-wrapper search-hide">
-                            <form action="#" class="search-form">
-                                <input type="text" name="search" id="search" class="search-form__input" placeholder="Nhập tên sản phẩm...">
+                            <form action="<?= BASE_URL . '?act=tim-kiem-san-pham' ?>" class="search-form" method="post">
+                                <input type="text" name="search_input" id="search_input" class="search-form__input" placeholder="Nhập tên sản phẩm...">
                                 <button type="submit" class="search-form__submit">
                                     <i class="icon_search"></i>
                                 </button>
@@ -161,3 +161,5 @@
         </div>
     </div>
 </header>
+<script>
+</script>

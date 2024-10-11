@@ -20,6 +20,7 @@ $act = $_GET['act'] ?? '/';
 match ($act) {
    '/' => (new homeControllers())->home(),
    'chi-tiet-san-pham' => (new homeControllers())->chiTietSanPham(),
+   'tim-kiem-san-pham' => (new homeControllers())->timKiemSP(),
 
    // Bình luận
    'add-binh-luan' => (new homeControllers())->postBinhLuan(),
