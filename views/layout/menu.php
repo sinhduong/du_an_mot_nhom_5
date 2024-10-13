@@ -48,9 +48,9 @@
                         </div> -->
                         <div class="currency-selector header-top-nav__item">
                             <div class="dropdown header-top__dropdown">
-                                <?php if (isset($_SESSION['user_client'])): ?>
+                                <?php if (isset($_SESSION['email'])): ?>
                                     <a class="dropdown-toggle" id="currencyID" aria-haspopup="true" aria-expanded="false">
-                                        <?php echo $_SESSION['user_client']; ?>
+                                        <?php echo $_SESSION['email']; ?>
                                     </a>
                                 <?php endif; ?>
                             </div>
@@ -62,7 +62,7 @@
                                     <i class="fa fa-angle-down"></i>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="userID">
-                                    <?php if (!isset($_SESSION['user_client'])) { ?>
+                                    <?php if (!isset($_SESSION['email'])) { ?>
                                         <a class="dropdown-item" href="<?= BASE_URL . '?act=login' ?>">Đăng Nhập</a>
                                         <a class="dropdown-item" href="<?= BASE_URL . '?act=dang-ky' ?>">Đăng Ký</a>
                                     <?php } else { ?>
@@ -107,7 +107,6 @@
                                 <a href="#" class="bordered-icon search-btn" aria-expanded="false"><i class="icon_search"></i></a>
                             </li>
                             <li class="wishlist-icon">
-                                <!-- <a href="wishlist.html" class="bordered-icon"><i class="fa fa-heart"></i></a> -->
                             </li>
 
                             <?php include_once './views/layout/miniCart.php' ?>
@@ -130,14 +129,12 @@
                             <li class="mainmenu__item menu-item-has-children has-children">
                                 <a href="" class="mainmenu__link">Cửa hàng</a>
                                 <ul class="sub-menu">
-                                    <li class="menu-item-has-children has-children">
-                                        <a href="#">Danh mục</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="">sản phẩm 1</a></li>
-                                            <li><a href="">sản phẩm 2</a></li>
-                                            <li><a href="">sản phẩm 3</a></li>
-                                        </ul>
-                                    </li>
+                                    <?php foreach ($listDanhMuc as $danhmuc): ?>
+                                        <li class="menu has-children">
+                                            <a href="#"><?= $danhmuc['ten_danh_muc'] ?></a>
+                                        </li>
+                                    <?php endforeach; ?>
+
                                 </ul>
                             </li>
                             <li class="mainmenu__item menu">

@@ -132,7 +132,11 @@
                                                 <?php foreach ($listBinhLuan as $binhLuan): ?>
                                                     <div class="review__single d-flex align-items-start">
                                                         <div class="review__avatar me-3">
-                                                            <img src="<?= $binhLuan['anh_dai_dien'] ?>" alt="Avatar" class="rounded-circle" style="width: 100px; height: 50px; object-fit: cover;">
+                                                            <?php if (!$binhLuan['anh_dai_dien']) { ?>
+                                                                <img src="https://lienquan.garena.vn/wp-content/uploads/2024/05/2225114632e2b46f7cf7b9fe6386f7db5a55d2269d2721.jpg" alt="Avatar" class="rounded-circle" style="width: 100px; height: 50px; object-fit: cover;">
+                                                            <?php } else { ?>
+                                                                <img src="<?= $binhLuan['anh_dai_dien'] ?>" alt="Avatar" class="rounded-circle" style="width: 100px; height: 50px; object-fit: cover;">
+                                                            <?php } ?>
                                                         </div>
                                                         <div class="review__content flex-grow-1" style="min-height: 100px;">
                                                             <div class="review__meta">
@@ -146,18 +150,29 @@
                                                     </div>
                                                 <?php endforeach; ?>
                                             </div>
-                                            <form action="<?= BASE_URL . '?act=add-binh-luan' ?>" method="post" class="form form--review">
-                                                <div class="form__group clearfix mb--20">
-                                                    <input type="hidden" name="san_pham_id" value="<?= $id ?>">
-                                                    <input type="hidden" name="tai_khoan_id" value="">
-                                                    <!-- <input type="hidden" name="trang_thai" value="0"> -->
-                                                    <label class="form__label d-block" name="noi_dung" for="review">Nội dung bình luận <sup>*</sup></label>
-                                                    <textarea id="review" name="noi_dung" class="form__input form__input--textarea"></textarea>
-                                                    <button type="submit" class="btn btn-medium btn-style-2 add-to-cart" style="float: right;">
-                                                        Thêm
-                                                    </button>
-                                                </div>
-                                            </form>
+                                            <?php if (isset($_SESSION['id'])): ?>
+                                                <?php if (isset($_SESSION['cmt_err'])) : ?>
+                                                    <p class="text-danger fs-16 fw-300"><?= $_SESSION['cmt_err'] ?></p>
+                                                <?php endif;
+                                                unset($_SESSION['cmt_err']) ?>
+                                                <form action="<?= BASE_URL . '?act=add-binh-luan' ?>" method="post" class="form form--review">
+                                                    <div class="form__group clearfix mb--20">
+                                                        <input type="hidden" name="san_pham_id" value="<?= $id ?>">
+                                                        <input type="hidden" name="tai_khoan_id" value="<?= $_SESSION['id'] ?>">
+                                                        <label class="form__label d-block" for="review">Nội dung bình luận <sup>*</sup></label>
+                                                        <textarea id="review" name="noi_dung" class="form__input form__input--textarea"></textarea>
+                                                        <?php if (isset($error['noi_dung'])) { ?>
+                                                            <p class="text-danger"><?= $error['noi_dung'] ?></p>
+                                                        <?php } ?>
+                                                        <button type="submit" class="btn btn-medium btn-style-2 add-to-cart" style="float: right;">
+                                                            Thêm
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            <?php else: ?>
+                                                <p class="text-danger">Bạn phải đăng nhập để bình luận</p>
+                                                <a href="<?= BASE_URL . '?act=login' ?>" class="btn btn-medium btn-style-2">Login</a>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>

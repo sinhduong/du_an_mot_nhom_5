@@ -11,6 +11,7 @@ class homeControllers
         $listSanPham = $this->modelSanPham->getAllSanPham();
         $listSanPhamBuy = $this->modelSanPham->getAllSanPhamBuy();
         $listSanPhamShort = $this->modelSanPham->getAllSanPhamShort();
+        $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
         require_once './views/home.php';
     }
 
@@ -43,7 +44,12 @@ class homeControllers
     }
 
 
+    // public function loadAllDanhmuc()
+    // {
 
+    //     // var_dump($listDanhMuc);die;
+    //     require_once './views/layout/menu.php';
+    // }
 
     // 
 
@@ -54,6 +60,7 @@ class homeControllers
             $sanPham = $this->modelSanPham->getDetailSanPham($id);
             $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
             $listBinhLuan = $this->modelSanPham->getBinhLuanFromSanPham($id);
+            $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
             $listSanPhamCungDanhMuc = $this->modelSanPham->getListSanPhamDanhMuc($sanPham['danh_muc_id']);
             // var_dump($listSanPhamCungDanhMuc);die;
 
@@ -69,23 +76,26 @@ class homeControllers
     public function postBinhLuan()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            var_dump($_POST);
-            die;
-
             $san_pham_id = $_POST['san_pham_id'];
             $tai_khoan_id = $_POST['tai_khoan_id'];
             $noi_dung = $_POST['noi_dung'];
             $ngay_dang = date('Y-m-d H:i:s');
             $trang_thai = 0;
-            if (!empty($noi_dung)) {
+            $error = [];
+            if (empty($noi_dung)) {
+                $error['noi_dung'] = 'Nội dung không được bỏ trống';
+                $_SESSION['cmt_err'] = $error['noi_dung'];
+            }
+            if (empty($error)) {
                 $this->modelSanPham->insertBinhBluanByIDSP($san_pham_id, $tai_khoan_id, $noi_dung, $ngay_dang, $trang_thai);
                 header("Location: " . BASE_URL . "?act=chi-tiet-san-pham&id_san_pham=" . $san_pham_id);
                 exit();
             } else {
-                echo "Nội dung bình luận không được để trống.";
+                header("Location: " . BASE_URL . "?act=chi-tiet-san-pham&id_san_pham=" . $san_pham_id);
             }
         }
     }
+
 
 
 
@@ -101,23 +111,21 @@ class homeControllers
     public function postLogin()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // lấy email và pass gửi lên từ form
             $email = $_POST['email'];
             $password = $_POST['password'];
-            // var_dump($email);die;
 
-            // xử lý kiểm tra thông tin đăng nhập
-            $user = $this->modelTaiKhoan->checkLogin($email, $password);
-            if ($user == $email) {
-                // đăng nhập thành công
-                // lưu thông tin vào session
-                $_SESSION['user_client'] = $user;
+            // Xử lý kiểm tra thông tin đăng nhập
+            $user = $this->modelTaiKhoan->getUserLogin($email, $password);
+
+            if (is_array($user)) {
+                // Đăng nhập thành công
+                $_SESSION['email'] = $user['email'];
+                $_SESSION['id'] = $user['id'];
                 header("location:" . BASE_URL);
                 exit();
             } else {
-                // Lỗi thì lưu lỗi vào session
-                $_SESSION['error'] = $user;
-                // var_dump($_SESSION['error']);die;
+                // Đăng nhập thất bại, lưu lỗi vào session
+                $_SESSION['error'] = $user; // Lưu thông báo lỗi từ model
                 $_SESSION['flash'] = true;
                 header("location:" . BASE_URL . '?act=login');
                 exit();
@@ -174,9 +182,9 @@ class homeControllers
     public function addGioHang()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (isset($_SESSION['user_client'])) {
+            if (isset($_SESSION['email'])) {
                 // Lấy thông tin tài khoản từ email người dùng
-                $email = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+                $email = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['email']);
 
                 // Kiểm tra xem người dùng đã có giỏ hàng chưa
                 $gioHang = $this->modelGioHang->getGioHangFromUser($email['id']);
@@ -221,9 +229,9 @@ class homeControllers
     }
     public function gioHang()
     {
-        if (isset($_SESSION['user_client'])) {
+        if (isset($_SESSION['email'])) {
             // Lấy thông tin tài khoản từ email người dùng
-            $email = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+            $email = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['email']);
 
             // Kiểm tra xem người dùng đã có giỏ hàng chưa
             $gioHang = $this->modelGioHang->getGioHangFromUser($email['id']);
@@ -273,10 +281,10 @@ class homeControllers
 
     public function ThanhToan()
     {
-        // var_dump($_SESSION['user_client']);
+        // var_dump($_SESSION['email']);
         // die();
-        if (isset($_SESSION['user_client'])) {
-            $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+        if (isset($_SESSION['email'])) {
+            $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['email']);
             $gioHang = $this->modelGioHang->getGioHangFromUser($user['id']);
             if (!$gioHang) {
                 $gioHangId = $this->modelGioHang->addgioHang($user['id']);
@@ -304,7 +312,7 @@ class homeControllers
             $phuong_thuc_thanh_toan_id = $_POST['phuong_thuc_thanh_toan_id'];
             $ngay_dat = date('Y-m-d');
             $trang_thai_id = 1; // Trạng thái mặc định
-            $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+            $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['email']);
             $tai_khoan_id = $user['id'];
             $ma_don_hang = 'DH-' . rand(1000, 9999);
 
@@ -361,7 +369,7 @@ class homeControllers
     public function danhSachDonHang()
     {
         // Lấy tài khoản từ session
-        $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+        $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['email']);
         $tai_khoan_id = $user['id']; // Lấy ID tài khoản
 
         // Lấy danh sách đơn hàng của tài khoản hiện tại

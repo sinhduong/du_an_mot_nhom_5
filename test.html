@@ -9,7 +9,7 @@ public function postLogin()
         $user = $this->modelTaiKhoan->checkLogin($email, $password);
         if (is_array($user)) {
             // đăng nhập thành công, lưu thông tin vào session
-            $_SESSION['user_client'] = [
+            $_SESSION['email'] = [
                 'id' => $user['id'], // Lưu id người dùng
                 'email' => $user['email'], // Lưu email nếu cần
                 'ho_ten' => $user['ho_ten'], // Lưu thêm họ tên nếu cần
@@ -31,9 +31,9 @@ public function postLogin()
 
 <div class="currency-selector header-top-nav__item">
     <div class="dropdown header-top__dropdown">
-        <?php if (isset($_SESSION['user_client'])): ?>
+        <?php if (isset($_SESSION['email'])): ?>
             <a class="dropdown-toggle" id="currencyID" aria-haspopup="true" aria-expanded="false">
-                <?php echo $_SESSION['user_client']['ho_ten']; ?> <!-- Hiển thị tên người dùng -->
+                <?php echo $_SESSION['email']['ho_ten']; ?> <!-- Hiển thị tên người dùng -->
             </a>
         <?php endif; ?>
     </div>

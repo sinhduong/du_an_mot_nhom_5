@@ -94,8 +94,9 @@ class SanPham
     public function insertBinhBluanByIDSP($san_pham_id, $tai_khoan_id, $noi_dung, $ngay_dang, $trang_thai)
     {
         try {
-            $sql = "INSERT INTO binh_luan (san_pham_id, tai_khoan_id, noi_dung, ngay_dang, trang_thai)
+            $sql = "INSERT INTO binh_luans (san_pham_id, tai_khoan_id, noi_dung, ngay_dang, trang_thai)
                 VALUES (:san_pham_id, :tai_khoan_id, :noi_dung, :ngay_dang, :trang_thai)";
+// var_dump($this->conn);
 
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
@@ -161,4 +162,16 @@ class SanPham
             echo "Lỗi: " . $e->getMessage();
         }
     }
+    public function getAllDanhMucClient() {
+        try {
+            $sql = "SELECT * FROM danh_mucs limit 5";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+    
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
+    
 }
