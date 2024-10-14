@@ -186,6 +186,7 @@ class homeControllers
                 $_SESSION['error'] = $user; // Lưu thông báo lỗi từ model
                 $_SESSION['flash'] = true;
                 header("location:" . BASE_URL . '?act=login');
+                // hiih
                 exit();
             }
         }
