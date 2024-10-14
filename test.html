@@ -1,0 +1,70 @@
+public function postLogin()
+{
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // lấy email và pass gửi lên từ form
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        // xử lý kiểm tra thông tin đăng nhập
+        $user = $this->modelTaiKhoan->checkLogin($email, $password);
+        if (is_array($user)) {
+            // đăng nhập thành công, lưu thông tin vào session
+            $_SESSION['email'] = [
+                'id' => $user['id'], // Lưu id người dùng
+                'email' => $user['email'], // Lưu email nếu cần
+                'ho_ten' => $user['ho_ten'], // Lưu thêm họ tên nếu cần
+            ];
+            header("location:" . BASE_URL);
+            exit();
+        } else {
+            // Lỗi thì lưu lỗi vào session
+            $_SESSION['error'] = $user;
+            $_SESSION['flash'] = true;
+            header("location:" . BASE_URL . '?act=login');
+            exit();
+        }
+    }
+}
+
+
+
+
+<div class="currency-selector header-top-nav__item">
+    <div class="dropdown header-top__dropdown">
+        <?php if (isset($_SESSION['email'])): ?>
+            <a class="dropdown-toggle" id="currencyID" aria-haspopup="true" aria-expanded="false">
+                <?php echo $_SESSION['email']['ho_ten']; ?> <!-- Hiển thị tên người dùng -->
+            </a>
+        <?php endif; ?>
+    </div>
+</div>
+
+
+
+
+public function checkLogin($email, $mat_khau)
+{
+    try {
+        $sql = "SELECT * from tai_khoans where email=:email";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['email' => $email]);
+        $user = $stmt->fetch();
+
+        if ($user && password_verify($mat_khau, $user['mat_khau'])) {
+            if ($user['chuc_vu_id'] == 2) {
+                if ($user['trang_thai'] == 1) {
+                    return $user; // trả về thông tin người dùng
+                } else {
+                    return "Tài khoản bị cấm";
+                }
+            } else {
+                return "Tài khoản không có quyền đăng nhập";
+            }
+        } else {
+            return "Bạn nhập sai thông tin mật khẩu tài khoản";
+        }
+    } catch (\Exception $e) {
+        echo "Lỗi" . $e->getMessage();
+        return false;
+    }
+}
