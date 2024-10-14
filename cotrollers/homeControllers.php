@@ -162,6 +162,7 @@ class homeControllers
     //   auth 
     public function formLogin()
     {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
         require_once './views/auth/formLogin.php';
         deleteSessionError();
     }
@@ -287,6 +288,7 @@ class homeControllers
     }
     public function gioHang()
     {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
         if (isset($_SESSION['email'])) {
             // Lấy thông tin tài khoản từ email người dùng
             $email = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['email']);
@@ -426,6 +428,7 @@ class homeControllers
 
     public function danhSachDonHang()
     {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
         // Lấy tài khoản từ session
         $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['email']);
         $tai_khoan_id = $user['id']; // Lấy ID tài khoản
@@ -440,6 +443,7 @@ class homeControllers
 
     public function detailDonHang()
     {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
         $don_hang_id = $_GET['id_don_hang'];
         // lấy thông tin dơn hàng ở bảng 
         $donHang = $this->modelDonHang->getDetailDonHang($don_hang_id);
@@ -455,6 +459,7 @@ class homeControllers
     // tìm kiếm
     public function timKiemSP()
     {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
         $search_input = isset($_POST['search_input']) ? $_POST['search_input'] : '';
         $tiemKiemSP = $this->modelSanPham->timKiemTheoTen($search_input);
         require_once './views/sanPham/keySanPham.php';
