@@ -48,9 +48,9 @@
                         </div> -->
                         <div class="currency-selector header-top-nav__item">
                             <div class="dropdown header-top__dropdown">
-                                <?php if (isset($_SESSION['user_client'])): ?>
+                                <?php if (isset($_SESSION['email'])): ?>
                                     <a class="dropdown-toggle" id="currencyID" aria-haspopup="true" aria-expanded="false">
-                                        <?php echo $_SESSION['user_client']; ?>
+                                        <?php echo $_SESSION['email']; ?>
                                     </a>
                                 <?php endif; ?>
                             </div>
@@ -62,11 +62,13 @@
                                     <i class="fa fa-angle-down"></i>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="userID">
-                                    <?php if (!isset($_SESSION['user_client'])) { ?>
-                                        <a class="dropdown-item" href="<?=BASE_URL .'?act=login'?>">Đăng Nhập</a>
+                                    <?php if (!isset($_SESSION['email'])) { ?>
+                                        <a class="dropdown-item" href="<?= BASE_URL . '?act=login' ?>">Đăng Nhập</a>
+                                        <a class="dropdown-item" href="<?= BASE_URL . '?act=dang-ky' ?>">Đăng Ký</a>
                                     <?php } else { ?>
-                                        <a class="dropdown-item" href="<?=BASE_URL .'?act=logout'?>">Đăng xuất</a>
+                                        <a class="dropdown-item" href="<?= BASE_URL . '?act=logout' ?>">Đăng xuất</a>
                                         <a class="dropdown-item" href="#">Tài khoản của tôi</a>
+                                        <a class="dropdown-item" href="<?= BASE_URL . '?act=don-hang' ?>">Lịch sử mua hàng</a>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -93,8 +95,8 @@
                 <div class="col-lg-5 col-md-7 col-sm-6 order-lg-3 order-3">
                     <div class="header-toolbar">
                         <div class="search-form-wrapper search-hide">
-                            <form action="#" class="search-form">
-                                <input type="text" name="search" id="search" class="search-form__input" placeholder="Nhập tên sản phẩm...">
+                            <form action="<?= BASE_URL . '?act=tim-kiem-san-pham' ?>" class="search-form" method="post">
+                                <input type="text" name="search_input" id="search_input" class="search-form__input" placeholder="Nhập tên sản phẩm...">
                                 <button type="submit" class="search-form__submit">
                                     <i class="icon_search"></i>
                                 </button>
@@ -105,11 +107,10 @@
                                 <a href="#" class="bordered-icon search-btn" aria-expanded="false"><i class="icon_search"></i></a>
                             </li>
                             <li class="wishlist-icon">
-                                <!-- <a href="wishlist.html" class="bordered-icon"><i class="fa fa-heart"></i></a> -->
                             </li>
-                            
-                            <?php include_once './views/layout/miniCart.php'?>
-                            
+
+                            <?php include_once './views/layout/miniCart.php' ?>
+
                         </ul>
                     </div>
                 </div>
@@ -122,89 +123,31 @@
                 <div class="col-12 position-static text-center">
                     <nav class="main-navigation">
                         <ul class="mainmenu">
-                            <li class="mainmenu__item active menu-item-has-children has-children">
+                            <li class="mainmenu__item active  has-children">
                                 <a href="<?= BASE_URL ?>" class="mainmenu__link">Trang Chủ</a>
-                                <ul class="sub-menu">
-                                    <li><a href="<?= BASE_URL ?>">Home 1</a></li>
-                                    <li><a href="index-2.html">Home 2</a></li>
-                                    <li><a href="index-3.html">Home 3</a></li>
-                                    <li><a href="index-4.html">Home 4</a></li>
-                                </ul>
                             </li>
-                            <li class="mainmenu__item menu-item-has-children">
-                                <a href="#" class="mainmenu__link">Cửa Hàng</a>
-                                <ul class="megamenu five-column">
-                                    <li>
-                                        <a class="megamenu-title" href="#">Shop Grid</a>
-                                        <ul>
-                                            <li>
-                                                <a href="shop.html">Left Sidebar</a>
-                                            </li>
-                                            <li>
-                                                <a href="shop-right-sidebar.html">Right Sidebar</a>
-                                            </li>
-                                            <li>
-                                                <a href="shop-fullwidth.html">Three Column</a>
-                                            </li>
-                                            <li>
-                                                <a href="shop-fullwidth-4-column.html">Four Column</a>
-                                            </li>
-                                        </ul>
-                                    </li>
+                            <li class="mainmenu__item menu-item-has-children has-children">
+                                <a href="<?= BASE_URL . '?act=shop-danh-muc-san-pham' ?>" class="mainmenu__link">Cửa hàng</a>
+                                <ul class="sub-menu">
+                                    <?php foreach ($listDanhMuc as $danhmuc): ?>
+                                        <li class="menu has-children">
+                                            <a href="<?= BASE_URL . '?act=load-san-pham-theo-danh-muc&id=' . $danhmuc['id'] ?>">
+                                                <?= $danhmuc['ten_danh_muc'] ?>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>
+
 
                                 </ul>
                             </li>
-                            <li class="mainmenu__item menu-item-has-children has-children">
-                                <a href="blog.html" class="mainmenu__link">Blog</a>
-                                <ul class="sub-menu">
-                                    <li class="menu-item-has-children has-children">
-                                        <a href="#">Blog Grid</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="blog.html">Left Sidebar</a></li>
-                                            <li><a href="blog-right-sidebar.html">Right Sidebar</a></li>
-                                            <li><a href="blog-3-column.html">Three Column</a></li>
-                                            <li><a href="blog-4-column.html">Four Column</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children has-children">
-                                        <a href="#">Blog List</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="blog-list.html">Full Width</a></li>
-                                            <li><a href="blog-list-left-sidebar.html">left Sidebar</a></li>
-                                            <li><a href="blog-list-right-sidebar.html">Right Sidebar</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children has-children">
-                                        <a href="#">Blog Details</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="blog-details-image.html">Standard Post</a></li>
-                                            <li><a href="blog-details-image.html">Image Post</a></li>
-                                            <li><a href="blog-details-audio.html">Audio Post</a></li>
-                                            <li><a href="blog-details-video.html">Video Post</a></li>
-                                            <li><a href="blog-details-gallery.html">Gallery Post</a></li>
-                                            <li><a href="blog-details-right-sidebar.html">Right Sidebar</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="mainmenu__item menu-item-has-children has-children">
-                                <a href="#" class="mainmenu__link">Pages</a>
-                                <ul class="sub-menu">
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="compare.html">compare</a></li>
-                                    <li><a href="wishlist.html">wishlist</a></li>
-                                    <li><a href="my-account.html">my account</a></li>
-                                    <li><a href="404.html">404</a></li>
-                                    <li><a href="faq.html">Faq</a></li>
-                                    <li><a href="login-register.html">Login Register</a></li>
-                                </ul>
+                            <li class="mainmenu__item menu">
+                                <a href="<?= BASE_URL . '?act=blog' ?>" class="mainmenu__link">Blog</a>
                             </li>
                             <li class="mainmenu__item">
-                                <a href="#" class="mainmenu__link">Giới thiệu</a>
+                                <a href="<?= BASE_URL . '?act=gioi-Thieu' ?>" class="mainmenu__link">Giới thiệu</a>
                             </li>
                             <li class="mainmenu__item">
-                                <a href="#" class="mainmenu__link">Địa chỉ</a>
+                                <a href="<?= BASE_URL . '?act=contact' ?>" class="mainmenu__link">Địa chỉ</a>
                             </li>
                         </ul>
                     </nav>
@@ -218,3 +161,5 @@
         </div>
     </div>
 </header>
+<script>
+</script>

@@ -126,7 +126,7 @@ class AdminTaiKhoan
             $user = $stmt->fetch();
 
             if ($user && password_verify($mat_khau, $user['mat_khau'])) {
-                if ($user['chuc_vu_id'] == 1) {
+                if ($user['chuc_vu_id'] == 2) {
                     if ($user['trang_thai'] == 1) {
                         return $email; //đăng nhập thành công
                     } else {

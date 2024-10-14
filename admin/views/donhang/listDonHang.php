@@ -16,7 +16,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Quản lý danh sách sản phẩm</h1>
+                    <h1>Quản lý đơn hàng</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -59,8 +59,8 @@
                                                 <td><?= htmlspecialchars($donHang['ma_don_hang']) ?></td>
                                                 <td><?= htmlspecialchars($donHang['ten_nguoi_nhan']) ?></td>
                                                 <td><?= htmlspecialchars($donHang['sdt_nguoi_nhan']) ?></td>
-                                                <td><?= htmlspecialchars($donHang['ngay_dat']) ?></td>
-                                                <td><?= htmlspecialchars($donHang['tong_tien']) ?></td>
+                                                <td><?= formatDate($donHang['ngay_dat']) ?></td>
+                                                <td><?= formatPrice($donHang['tong_tien']+30000) . ' đ'?></td>
                                                 <td><?= htmlspecialchars($donHang['ten_trang_thai']) ?></td>
                                                 <td>
                                                     <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-don-hang&id_don_hang=' . htmlspecialchars($donHang['id']) ?>">
