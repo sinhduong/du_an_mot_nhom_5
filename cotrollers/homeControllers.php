@@ -9,9 +9,8 @@ class homeControllers
     public function home()
     {
         $listSanPham = $this->modelSanPham->getAllSanPham();
-        $listSanPhamBuy = $this->modelSanPham->getAllSanPhamBuy();
-        $listSanPhamShort = $this->modelSanPham->getAllSanPhamShort();
         $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
+
         require_once './views/home.php';
     }
 
@@ -32,24 +31,83 @@ class homeControllers
     // menu con
     public   function contact()
     {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
         require_once './views/lienHe.php';
     }
     public   function gioiThieu()
     {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
         require_once './views/gioiThieu.php';
     }
     public   function blog()
     {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
         require_once './views/blog.php';
     }
 
+    public function shopSanPhamSM()
+    {
+        $listSanPham = $this->modelSanPham->getAllSanPham();
+        $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
+        require_once './views/sanPham/shop.php';
+    }
+    public function locSanPham()
+    {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
 
-    // public function loadAllDanhmuc()
-    // {
+        // Lấy tất cả sản phẩm trước khi lọc
+        $listSanPham = $this->modelSanPham->getAllSanPham();
 
-    //     // var_dump($listDanhMuc);die;
-    //     require_once './views/layout/menu.php';
-    // }
+        // Kiểm tra request từ URL để áp dụng bộ lọc
+        if (isset($_GET['filter'])) {
+            switch ($_GET['filter']) {
+                case 're':
+                    // Sắp xếp sản phẩm theo giá tăng dần
+                    usort($listSanPham, function ($a, $b) {
+                        $giaA = !$a['gia_khuyen_mai'] ? $a['gia_san_pham'] : $a['gia_khuyen_mai'];
+                        $giaB = !$b['gia_khuyen_mai'] ? $b['gia_san_pham'] : $b['gia_khuyen_mai'];
+                        return $giaA <=> $giaB; // Tăng dần
+                    });
+                    break;
+
+                case 'dat':
+                    // Sắp xếp sản phẩm theo giá giảm dần
+                    usort($listSanPham, function ($a, $b) {
+                        $giaA = !$a['gia_khuyen_mai'] ? $a['gia_san_pham'] : $a['gia_khuyen_mai'];
+                        $giaB = !$b['gia_khuyen_mai'] ? $b['gia_san_pham'] : $b['gia_khuyen_mai'];
+                        return $giaB <=> $giaA; // Giảm dần
+                    });
+                    break;
+
+
+                case 'ngay_nhap':
+                    $listSanPham = array_filter($listSanPham, function ($sanPham) {
+                        return $this->modelSanPham->getLatestSanPham();
+                    });
+                    break;
+            }
+        }
+
+        // Trả về view với danh sách sản phẩm đã được lọc
+        require_once './views/sanPham/shop.php';
+    }
+
+    public function loadSanPhamTheoDanhMuc()
+    {
+        // Lấy id danh mục từ URL
+        $danhMucId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+        $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
+        $listSanPham = $this->modelSanPham->getAllSanPham();
+        if ($danhMucId > 0) {
+            // Lấy danh sách sản phẩm theo danh mục
+            $listSanPham = $this->modelSanPham->getListSanPhamDanhMuc($danhMucId);
+        } else {
+            $listSanPham = []; // Nếu không có danh mục, khởi tạo danh sách sản phẩm rỗng
+        }
+
+        require_once './views/sanPham/danhMucSanPham.php';
+    }
+
 
     // 
 
@@ -232,7 +290,7 @@ class homeControllers
         if (isset($_SESSION['email'])) {
             // Lấy thông tin tài khoản từ email người dùng
             $email = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['email']);
-
+            $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
             // Kiểm tra xem người dùng đã có giỏ hàng chưa
             $gioHang = $this->modelGioHang->getGioHangFromUser($email['id']);
             if (!$gioHang) {

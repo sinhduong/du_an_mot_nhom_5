@@ -127,13 +127,16 @@
                                 <a href="<?= BASE_URL ?>" class="mainmenu__link">Trang Chủ</a>
                             </li>
                             <li class="mainmenu__item menu-item-has-children has-children">
-                                <a href="" class="mainmenu__link">Cửa hàng</a>
+                                <a href="<?= BASE_URL . '?act=shop-danh-muc-san-pham' ?>" class="mainmenu__link">Cửa hàng</a>
                                 <ul class="sub-menu">
                                     <?php foreach ($listDanhMuc as $danhmuc): ?>
                                         <li class="menu has-children">
-                                            <a href="#"><?= $danhmuc['ten_danh_muc'] ?></a>
+                                            <a href="<?= BASE_URL . '?act=load-san-pham-theo-danh-muc&id=' . $danhmuc['id'] ?>">
+                                                <?= $danhmuc['ten_danh_muc'] ?>
+                                            </a>
                                         </li>
                                     <?php endforeach; ?>
+
 
                                 </ul>
                             </li>

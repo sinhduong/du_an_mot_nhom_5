@@ -18,6 +18,9 @@ match ($act) {
    '/' => (new homeControllers())->home(),
    'chi-tiet-san-pham' => (new homeControllers())->chiTietSanPham(),
    'tim-kiem-san-pham' => (new homeControllers())->timKiemSP(),
+   'shop-danh-muc-san-pham' => (new homeControllers())->shopSanPhamSM(),
+   'san-pham' => (new homeControllers())->locSanPham(),
+   'load-san-pham-theo-danh-muc' => (new homeControllers())->loadSanPhamTheoDanhMuc(),
 
    // Bình luận
    'add-binh-luan' => (new homeControllers())->postBinhLuan(),
