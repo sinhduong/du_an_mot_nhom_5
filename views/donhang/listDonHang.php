@@ -36,30 +36,37 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php if (!empty($listDonHang)): ?>
-                                        <?php foreach ($listDonHang as $key => $donHang): ?>
-                                            <tr>
-                                                <td class="wide-column"><?= $key + 1 ?></td>
-                                                <td class="wide-column"><?= htmlspecialchars($donHang['ma_don_hang']) ?></td>
-                                                <td class="wide-column"><?= formatDate($donHang['ngay_dat']) ?></td>
-                                                <td class="wide-column"><?= formatPrice($donHang['tong_tien']+30000) . ' đ' ?></td>
-                                                <td class="wide-column"><?= htmlspecialchars($donHang['ten_trang_thai']) ?></td>
-                                                <td>
-                                                    <a class="btn btn-medium btn-style-1" href="<?= BASE_URL . '?act=chi-tiet-don-hang&id_don_hang=' . htmlspecialchars($donHang['id']) ?>">
-                                                    View
-                                                    </a>
-                                                    <!-- <a href="<?= BASE_URL_ADMIN . '?act=form-sua-don-hang&id_don_hang=' . htmlspecialchars($donHang['id']) ?>">
-                                                        <button class="btn btn-warning">Hủy</button>
-                                                    </a> -->
+                                        <?php if (!empty($listDonHang)): ?>
+                                            <?php foreach ($listDonHang as $key => $donHang): ?>
+                                                <tr class="">
+                                                    <td class="wide-column"><?= $key + 1 ?></td>
+                                                    <td class="wide-column"><?= htmlspecialchars($donHang['ma_don_hang']) ?></td>
+                                                    <td class="wide-column"><?= formatDate($donHang['ngay_dat']) ?></td>
+                                                    <td class="wide-column"><?= formatPrice($donHang['tong_tien'] + 30000) . ' đ' ?></td>
+                                                    <td class="wide-column"><?= htmlspecialchars($donHang['ten_trang_thai']) ?></td>
+                                                    <td class="d-flex gap-2">
+                                                        <?php if ($donHang['trang_thai_id'] > 1) { ?>
+                                                            <a class="btn btn-medium btn-style-1" href="<?= BASE_URL . '?act=chi-tiet-don-hang&id_don_hang=' . htmlspecialchars($donHang['id']) ?>">
+                                                                View
+                                                            </a>
 
-                                                </td>
+                                                        <?php } else { ?>
+                                                            <a class="btn btn-medium btn-style-1 " href="<?= BASE_URL . '?act=chi-tiet-don-hang&id_don_hang=' . htmlspecialchars($donHang['id']) ?>">
+                                                                View
+                                                            </a>
+                                                            <form action="<?= BASE_URL_ADMIN . '?act=huy-don-hang' ?>" method="POST" style="display: inline;">
+                                                                <input type="hidden" name="id_don_hang" value="<?= htmlspecialchars($donHang['id']) ?>">
+                                                                <button type="submit" class="btn btn-warning">Hủy</button>
+                                                            </form>
+                                                        <?php } ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <tr>
+                                                <td colspan="8" class="text-center">Không có sản phẩm nào.</td>
                                             </tr>
-                                        <?php endforeach; ?>
-                                    <?php else: ?>
-                                        <tr>
-                                            <td colspan="8" class="text-center">Không có sản phẩm nào.</td>
-                                        </tr>
-                                    <?php endif; ?>
+                                        <?php endif; ?>
                                     </tbody>
                                 </table>
                             </div>

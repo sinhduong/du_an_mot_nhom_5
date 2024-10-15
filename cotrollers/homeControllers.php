@@ -78,6 +78,7 @@ class homeControllers
     //   auth 
     public function formLogin()
     {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
         require_once './views/auth/formLogin.php';
         deleteSessionError();
     }
@@ -204,6 +205,7 @@ class homeControllers
     }
     public function gioHang()
     {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
         if (isset($_SESSION['email'])) {
             // Lấy thông tin tài khoản từ email người dùng
             $email = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['email']);
@@ -324,7 +326,12 @@ class homeControllers
                 }
                 // Xóa giỏ hàng
                 $this->modelGioHang->clearGioHang($tai_khoan_id);
-                header('location:' . BASE_URL . '?act=don-hang');
+                echo    "<script>
+                            alert('Mua hàng thành công! Bạn sẽ được chuyển đến trang đơn hàng.');
+                            setTimeout(function() {
+                            window.location.href = '" . BASE_URL . "?act=don-hang';
+                            }, 1000); // Chuyển hướng sau 1 giây
+                        </script>";
                 exit;
             } else {
                 die('Không thể tạo đơn hàng');
@@ -340,11 +347,13 @@ class homeControllers
 
     public function danhSachDonHang()
     {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
         // Lấy tài khoản từ session
         $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['email']);
         $tai_khoan_id = $user['id']; // Lấy ID tài khoản
-
+        $donHang = $this->modelDonHang->getDetailDonHang($_GET['id_don_hang']);
         // Lấy danh sách đơn hàng của tài khoản hiện tại
+        $listTrangThaiDonHang = $this->modelDonHang->getAllTrangThaiDonHang();
         $listDonHang = $this->modelDonHang->getDonHangByTaiKhoan($tai_khoan_id);
 
         // Gọi view để hiển thị
@@ -354,6 +363,7 @@ class homeControllers
 
     public function detailDonHang()
     {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
         $don_hang_id = $_GET['id_don_hang'];
         // lấy thông tin dơn hàng ở bảng 
         $donHang = $this->modelDonHang->getDetailDonHang($don_hang_id);
@@ -369,6 +379,7 @@ class homeControllers
     // tìm kiếm
     public function timKiemSP()
     {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
         $search_input = isset($_POST['search_input']) ? $_POST['search_input'] : '';
         $tiemKiemSP = $this->modelSanPham->timKiemTheoTen($search_input);
         require_once './views/sanPham/keySanPham.php';

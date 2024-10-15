@@ -89,9 +89,9 @@
                                 <div class="form-group col-6 ">
                                     <label>Giá Khuyến mãi</label>
                                     <input type="number" class="form-control" name="gia_khuyen_mai" placeholder="Nhập giá khuyến mãi">
-                                    <?php if (isset($_SESSION['error']['gia_khuyen_mai'])) { ?>
+                                    <!-- <?php if (isset($_SESSION['error']['gia_khuyen_mai'])) { ?>
                                         <p class="text-danger"><?= $_SESSION['error']['gia_khuyen_mai'] ?></p>
-                                    <?php } ?>
+                                    <?php } ?> -->
                                 </div>
                                 <div class="form-group col-6 ">
                                     <label>Hình ảnh</label>

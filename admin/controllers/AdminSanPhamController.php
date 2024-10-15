@@ -139,7 +139,7 @@ class AdminSanPhamController
 
             $ten_san_pham = $_POST['ten_san_pham'] ?? '';
             $gia_san_pham = $_POST['gia_san_pham'] ?? '';
-            $gia_khuyen_mai = $_POST['gia_khuyen_mai'] ?? '';
+            $gia_khuyen_mai = $_POST['gia_khuyen_mai'];
             $so_luong = $_POST['so_luong'] ?? '';
             $ngay_nhap = $_POST['ngay_nhap'] ?? '';
             $danh_muc_id = $_POST['danh_muc_id'] ?? '';
@@ -258,6 +258,7 @@ class AdminSanPhamController
             }
             header("location: " . BASE_URL_ADMIN . '?act=form-sua-san-pham&id_san_pham=' . $san_pham_id);
             exit();
+            deleteSessionError();
         }
     }
 
