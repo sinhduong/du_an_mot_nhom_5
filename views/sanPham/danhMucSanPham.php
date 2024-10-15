@@ -6,7 +6,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h1 class="page-title">Shop</h1>
+                        <h1 class="page-title">danh mục</h1>
                         <ul class="breadcrumb justify-content-center">
                             <li><a href="<?= BASE_URL ?>">Trang chủ</a></li>
                             <li><a href="#">Sản phẩm</a></li>
