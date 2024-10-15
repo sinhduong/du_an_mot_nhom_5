@@ -100,23 +100,38 @@
                                                     <th>Tổng tiền sản phẩm</th>
                                                     <td><span class="sub-total price-ammount"><?= formatPrice($tongGioHang) . 'đ' ?></span></td>
                                                 </tr>
-                                                <tr class="shipping">
-                                                    <th>Vận chuyển</th>
-                                                    <td>
-                                                        <span class="price-ammount">30.000đ</span>
-                                                    </td>
-                                                </tr>
-                                                <tr class="cart-total">
-                                                    <th>Thanh toán</th>
-                                                    <td><span class="total-amount price-ammount"><?= formatPrice($tongGioHang + 30000) . 'đ' ?></span></td>
-                                                </tr>
+                                                <?php if (isset($chiTietGioHang) && count($chiTietGioHang) > 0) { ?>
+                                                    <tr class="shipping">
+                                                        <th>Vận chuyển</th>
+                                                        <td>
+                                                            <span class="price-ammount">30.000đ</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="cart-total">
+                                                        <th>Thanh toán</th>
+                                                        <td><span class="total-amount price-ammount"><?= formatPrice($tongGioHang + 30000) . 'đ' ?></span></td>
+                                                    </tr>
+                                                <?php } else { ?>
+                                                    <tr class="shipping">
+                                                        <th>Vận chuyển</th>
+                                                        <td>
+                                                            <span class="price-ammount">0đ</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="cart-total">
+                                                        <th>Thanh toán</th>
+                                                        <td><span class="total-amount price-ammount">0đ</span></td>
+                                                    </tr>
+                                                <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>
                                     <?php if (isset($chiTietGioHang) && count($chiTietGioHang) > 0) { ?>
                                         <button type="submit" class="btn btn-medium btn-style-3">Đặt hàng</button>
                                     <?php } else { ?>
-                                        <a href="<?=BASE_URL?>"><p class="btn btn-medium btn-style-3">Thêm sản phẩm vào giỏ nào</p></a>
+                                        <a href="<?= BASE_URL ?>">
+                                            <p class="btn btn-medium btn-style-3">Thêm sản phẩm vào giỏ nào</p>
+                                        </a>
                                     <?php } ?>
                                 </div>
                             </form>
