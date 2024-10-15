@@ -9,9 +9,8 @@ class homeControllers
     public function home()
     {
         $listSanPham = $this->modelSanPham->getAllSanPham();
-        $listSanPhamBuy = $this->modelSanPham->getAllSanPhamBuy();
-        $listSanPhamShort = $this->modelSanPham->getAllSanPhamShort();
         $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
+
         require_once './views/home.php';
     }
 
@@ -25,33 +24,8 @@ class homeControllers
         $this->modelSanPham = new SanPham();
         $this->modelTaiKhoan = new TaiKhoan();
         $this->modelGioHang = new GioHang();
-        $this->modelDonHang = new DonHang();
+        // $this->modelDonHang = new DonHang();
     }
-
-
-    // menu con
-    public   function contact()
-    {
-        require_once './views/lienHe.php';
-    }
-    public   function gioiThieu()
-    {
-        require_once './views/gioiThieu.php';
-    }
-    public   function blog()
-    {
-        require_once './views/blog.php';
-    }
-
-
-    // public function loadAllDanhmuc()
-    // {
-
-    //     // var_dump($listDanhMuc);die;
-    //     require_once './views/layout/menu.php';
-    // }
-
-    // 
 
     public function chiTietSanPham()
     {
@@ -128,6 +102,7 @@ class homeControllers
                 $_SESSION['error'] = $user; // Lưu thông báo lỗi từ model
                 $_SESSION['flash'] = true;
                 header("location:" . BASE_URL . '?act=login');
+                // hiih
                 exit();
             }
         }
@@ -232,7 +207,11 @@ class homeControllers
         if (isset($_SESSION['email'])) {
             // Lấy thông tin tài khoản từ email người dùng
             $email = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['email']);
+<<<<<<< HEAD
             $donHang = $this->modelDonHang->getDetailDonHang($_GET['id_don_hang']);
+=======
+            $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
+>>>>>>> 38fa4500ce6b528e825e58f7a5f10bda4377d590
             // Kiểm tra xem người dùng đã có giỏ hàng chưa
             $gioHang = $this->modelGioHang->getGioHangFromUser($email['id']);
             if (!$gioHang) {
@@ -281,24 +260,21 @@ class homeControllers
 
     public function ThanhToan()
     {
-        // var_dump($_SESSION['email']);
-        // die();
-        if (isset($_SESSION['email'])) {
-            $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['email']);
+        if (isset($_SESSION['user_client'])) {
+            $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
             $gioHang = $this->modelGioHang->getGioHangFromUser($user['id']);
             if (!$gioHang) {
                 $gioHangId = $this->modelGioHang->addgioHang($user['id']);
                 $gioHang = ['id' => $gioHangId];
+                $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
             }
-            $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
+
             require_once './views/thanhToan.php';
         } else {
-            header("Location: login.php");
-            exit;
+            $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
         }
+        require_once './views/thanhToan.php';
     }
-
-    // Xử lý khi thanh toán (submit form)
     public function postThanhToan()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

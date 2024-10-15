@@ -20,30 +20,18 @@ class SanPham
             echo "Lỗi: " . $e->getMessage();
         }
     }
-    public function getAllSanPhamBuy()
-    {
+    public function getLatestSanPham() {
         try {
-            $sql = "SELECT san_phams.*, danh_mucs.ten_danh_muc FROM san_phams INNER JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id order by id desc";
+            $sql = "SELECT * FROM san_phams ORDER BY ngay_nhap ";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
-
-            return $stmt->fetchAll();
+    
+            return $stmt->fetch(); // Trả về sản phẩm mới nhất
         } catch (Exception $e) {
             echo "Lỗi: " . $e->getMessage();
         }
     }
-    public function getAllSanPhamShort()
-    {
-        try {
-            $sql = "SELECT san_phams.*, danh_mucs.ten_danh_muc FROM san_phams INNER JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id order by id asc";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
-
-            return $stmt->fetchAll();
-        } catch (Exception $e) {
-            echo "Lỗi: " . $e->getMessage();
-        }
-    }
+    
 
     public function getDetailSanPham($id)
     {

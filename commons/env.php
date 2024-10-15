@@ -3,10 +3,10 @@
 // Khai báo dưới dạng hằng số để không phải dùng $GLOBALS
 
 // Đường dẫn vào client
-define('BASE_URL', 'http://localhost/duanmot_mimora/mirora_watch/'); 
+define('BASE_URL', 'http://localhost/du-an/du_an_mot_nhom_5/'); 
 
 // Đường dẫn vào admin
-define('BASE_URL_ADMIN', 'http://localhost/duanmot_mimora/mirora_watch/admin/'); 
+define('BASE_URL_ADMIN', 'http://localhost/du-an/du_an_mot_nhom_5/admin/'); 
 
 // Database connection constants
 define('DB_HOST', 'localhost');

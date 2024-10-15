@@ -18,6 +18,9 @@ match ($act) {
    '/' => (new homeControllers())->home(),
    'chi-tiet-san-pham' => (new homeControllers())->chiTietSanPham(),
    'tim-kiem-san-pham' => (new homeControllers())->timKiemSP(),
+   'shop-danh-muc-san-pham' => (new homeControllers())->shopSanPhamSM(),
+   'san-pham' => (new homeControllers())->locSanPham(),
+   'load-san-pham-theo-danh-muc' => (new homeControllers())->loadSanPhamTheoDanhMuc(),
 
    // Bình luận
    'add-binh-luan' => (new homeControllers())->postBinhLuan(),
@@ -33,6 +36,11 @@ match ($act) {
    // giỏ hàng
    'them-gio-hang' => (new homeControllers())->addGioHang(),
    'gio-hang' => (new homeControllers())->gioHang(),
+<<<<<<< HEAD
+   
+   'update-gio-hang' => (new homeControllers())->updateGioHang(),
+=======
+>>>>>>> 4941485a8fd71383113b68c6aab168dd7dd97d7e
    'delete-san-pham-gio-hang' => (new homeControllers())->deleteOneGioHang(),
    'incQty' => (new homeControllers())->incQtyCart(),
    'decQty' => (new homeControllers())->decQtyCart(),
