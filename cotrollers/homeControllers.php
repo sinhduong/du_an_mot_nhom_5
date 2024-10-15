@@ -412,7 +412,12 @@ class homeControllers
                 }
                 // Xóa giỏ hàng
                 $this->modelGioHang->clearGioHang($tai_khoan_id);
-                header('location:' . BASE_URL . '?act=don-hang');
+                echo    "<script>
+                            alert('Mua hàng thành công! Bạn sẽ được chuyển đến trang đơn hàng.');
+                            setTimeout(function() {
+                            window.location.href = '" . BASE_URL . "?act=don-hang';
+                            }, 1000); // Chuyển hướng sau 1 giây
+                        </script>";
                 exit;
             } else {
                 die('Không thể tạo đơn hàng');
@@ -432,8 +437,9 @@ class homeControllers
         // Lấy tài khoản từ session
         $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['email']);
         $tai_khoan_id = $user['id']; // Lấy ID tài khoản
-
+        $donHang = $this->modelDonHang->getDetailDonHang($_GET['id_don_hang']);
         // Lấy danh sách đơn hàng của tài khoản hiện tại
+        $listTrangThaiDonHang = $this->modelDonHang->getAllTrangThaiDonHang();
         $listDonHang = $this->modelDonHang->getDonHangByTaiKhoan($tai_khoan_id);
 
         // Gọi view để hiển thị

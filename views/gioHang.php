@@ -89,32 +89,37 @@
                 <div class="cart-page-total-wrapper">
                     <div class="row justify-content-end">
                         <div class="col-xl-6 col-lg-8 col-md-10">
-                                <form action="<?= BASE_URL . '?act=thanh-toan' ?>" method="POST">
-                                    <div class="cart-page-total bg--dark-3">
-                                        <h2>Cart Totals</h2>
-                                        <div class="cart-calculator-table table-content table-responsive">
-                                            <table class="table">
-                                                <tbody>
-                                                    <tr class="cart-subtotal">
-                                                        <th>Tổng tiền sản phẩm</th>
-                                                        <td><span class="sub-total price-ammount"><?= formatPrice($tongGioHang) . 'đ' ?></span></td>
-                                                    </tr>
-                                                    <tr class="shipping">
-                                                        <th>Vận chuyển</th>
-                                                        <td>
-                                                            <span class="price-ammount">30.000đ</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="cart-total">
-                                                        <th>Thanh toán</th>
-                                                        <td><span class="total-amount price-ammount"><?= formatPrice($tongGioHang + 30000) . 'đ' ?></span></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <button type="submit" class="btn btn-medium btn-style-3">Đặt hàng</button>
+
+                            <form action="<?= BASE_URL . '?act=thanh-toan' ?>" method="POST">
+                                <div class="cart-page-total bg--dark-3">
+                                    <h2>Cart Totals</h2>
+                                    <div class="cart-calculator-table table-content table-responsive">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr class="cart-subtotal">
+                                                    <th>Tổng tiền sản phẩm</th>
+                                                    <td><span class="sub-total price-ammount"><?= formatPrice($tongGioHang) . 'đ' ?></span></td>
+                                                </tr>
+                                                <tr class="shipping">
+                                                    <th>Vận chuyển</th>
+                                                    <td>
+                                                        <span class="price-ammount">30.000đ</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="cart-total">
+                                                    <th>Thanh toán</th>
+                                                    <td><span class="total-amount price-ammount"><?= formatPrice($tongGioHang + 30000) . 'đ' ?></span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </form>
+                                    <?php if (isset($chiTietGioHang) && count($chiTietGioHang) > 0) { ?>
+                                        <button type="submit" class="btn btn-medium btn-style-3">Đặt hàng</button>
+                                    <?php } else { ?>
+                                        <a href="<?=BASE_URL?>"><p class="btn btn-medium btn-style-3">Thêm sản phẩm vào giỏ nào</p></a>
+                                    <?php } ?>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
