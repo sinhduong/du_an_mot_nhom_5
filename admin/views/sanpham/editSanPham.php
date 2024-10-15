@@ -55,21 +55,22 @@
                             </div>
                             <div class="form-group">
                                 <label for="gia_san_pham">Giá sản phẩm</label>
-                                <input type="number" id="gia_san_pham" name="gia_san_pham" class="form-control" value="<?= $sanPham['gia_san_pham'] ?>">
+                                <input type="text" id="gia_san_pham" name="gia_san_pham" class="form-control" value="<?= $sanPham['gia_san_pham'] ?>">
                                 <?php if (isset($_SESSION['error']['gia_san_pham'])) { ?>
                                     <p class="text-danger"><?= $_SESSION['error']['gia_san_pham'] ?></p>
                                 <?php } ?>
                             </div>
                             <div class="form-group">
-                                <label for="gia_khuyen_mai">Giá Khuyến Mãi</label>
-                                <input type="number" id="gia_khuyen_mai" name="gia_khuyen_mai" class="form-control" value="<?= $sanPham['gia_khuyen_mai'] ?>">
-                                <?php if (isset($_SESSION['error']['gia_khuyen_mai'])) { ?>
+                                <label >Giá Khuyến Mãi</label>
+                                <input type="number" name="gia_khuyen_mai" class="form-control" value="<?= $sanPham['gia_khuyen_mai'] ?>">
+                                <!-- <?php if (isset($_SESSION['error']['gia_khuyen_mai'])) { ?>
                                     <p class="text-danger"><?= $_SESSION['error']['gia_khuyen_mai'] ?></p>
-                                <?php } ?>
+                                <?php } ?> -->
                             </div>
                             <div class="form-group">
                                 <label for="hinh_anh">Hình ảnh</label>
                                 <input type="file" id="hinh_anh" name="hinh_anh" class="form-control">
+                                <img src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" style="width:100px;height:100px" alt="">
                             </div>
                             <div class="form-group">
                                 <label for="so_luong">Số lượng</label>
