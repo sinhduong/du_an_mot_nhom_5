@@ -87,25 +87,44 @@ class DonHang
             echo "Lỗi" . $e->getMessage();
         }
     }
-// Lấy đơn hàng của tài khoản
-public function getDonHangByTaiKhoan($tai_khoan_id)
-{
-    try {
-        $sql = "SELECT don_hangs.*, trang_thai_don_hangs.ten_trang_thai
+    public function updateDonHangClient($id, $trang_thai_id)
+    {
+        try {
+            $sql = 'UPDATE don_hangs
+                SET trang_thai_id = :trang_thai_id
+                WHERE id = :id';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':trang_thai_id' => $trang_thai_id,
+                ':id' => $id,
+            ]);
+            return true;
+        } catch (Exception $e) {
+            error_log('Error updating order: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+
+    // Lấy đơn hàng của tài khoản
+    public function getDonHangByTaiKhoan($tai_khoan_id)
+    {
+        try {
+            $sql = "SELECT don_hangs.*, trang_thai_don_hangs.ten_trang_thai
                 FROM don_hangs
                 INNER JOIN trang_thai_don_hangs 
                 ON don_hangs.trang_thai_id = trang_thai_don_hangs.id
                 WHERE don_hangs.tai_khoan_id = :tai_khoan_id";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([
-            ':tai_khoan_id' => $tai_khoan_id
-        ]);
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':tai_khoan_id' => $tai_khoan_id
+            ]);
 
-        return $stmt->fetchAll();
-    } catch (Exception $e) {
-        echo "Lỗi: " . $e->getMessage();
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
     }
-}
 
 
 

@@ -54,9 +54,11 @@
                                                             <a class="btn btn-medium btn-style-1 " href="<?= BASE_URL . '?act=chi-tiet-don-hang&id_don_hang=' . htmlspecialchars($donHang['id']) ?>">
                                                                 View
                                                             </a>
-                                                            <form action="<?= BASE_URL_ADMIN . '?act=huy-don-hang' ?>" method="POST" style="display: inline;">
+                                                            <form action="<?= BASE_URL . '?act=huy-don-hang' ?>" method="POST" style="display: inline;">
                                                                 <input type="hidden" name="id_don_hang" value="<?= htmlspecialchars($donHang['id']) ?>">
-                                                                <button type="submit" class="btn btn-warning">Hủy</button>
+                                                                <input type="hidden" name="trang_thai_id" value="11">
+                                                                <button type="submit" class="btn btn-warning"
+                                                                   >Hủy</button>
                                                             </form>
                                                         <?php } ?>
                                                     </td>
