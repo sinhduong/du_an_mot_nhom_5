@@ -351,7 +351,7 @@ class homeControllers
         // Lấy tài khoản từ session
         $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['email']);
         $tai_khoan_id = $user['id']; // Lấy ID tài khoản
-        $donHang = $this->modelDonHang->getDetailDonHang($_GET['id_don_hang']);
+        // $donHang = $this->modelDonHang->getDetailDonHang($_GET['id_don_hang']);
         // Lấy danh sách đơn hàng của tài khoản hiện tại
         $listTrangThaiDonHang = $this->modelDonHang->getAllTrangThaiDonHang();
         $listDonHang = $this->modelDonHang->getDonHangByTaiKhoan($tai_khoan_id);
@@ -372,6 +372,31 @@ class homeControllers
         $listTrangThaiDonHang = $this->modelDonHang->getAllTrangThaiDonHang();
         require_once './views/donhang/detailDonHang.php';
     }
+    public function updateDonHang()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $don_hang_id = $_POST['id_don_hang'] ?? '';  // Lấy id đơn hàng
+            $trang_thai_id = $_POST['trang_thai_id'] ?? '';  // Lấy trạng thái hủy (11)
+
+            // Kiểm tra và cập nhật trạng thái
+            if (!empty($don_hang_id) && !empty($trang_thai_id)) {
+                $result = $this->modelDonHang->updateDonHangClient(
+                    $don_hang_id,
+                    $trang_thai_id
+                );
+                if ($result) {
+                    header('Location: ' . BASE_URL . '?act=don-hang');  // Chuyển hướng nếu thành công
+                    exit();
+                }
+            }
+
+            // Xử lý lỗi
+            $_SESSION['error'] = "Hủy đơn hàng không thành công!";
+            header('Location: ' . BASE_URL . '?act=don-hang');
+            exit();
+        }
+    }
+
 
 
 

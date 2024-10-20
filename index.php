@@ -53,6 +53,7 @@ match ($act) {
 
    // Đơn hàng
    'don-hang' => (new homeControllers())->danhSachDonHang(),
+   'huy-don-hang' => (new homeControllers())->updateDonHang(),
    'chi-tiet-don-hang' => (new homeControllers())->detailDonHang($_GET['id_don_hang']),
 
 
