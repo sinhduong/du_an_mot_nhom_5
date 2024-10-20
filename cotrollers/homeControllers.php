@@ -209,7 +209,11 @@ class homeControllers
         if (isset($_SESSION['email'])) {
             // Lấy thông tin tài khoản từ email người dùng
             $email = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['email']);
+
+            $donHang = $this->modelDonHang->getDetailDonHang($_GET['id_don_hang']);
+
             $listDanhMuc = $this->modelSanPham->getAllDanhMucClient();
+
             // Kiểm tra xem người dùng đã có giỏ hàng chưa
             $gioHang = $this->modelGioHang->getGioHangFromUser($email['id']);
             if (!$gioHang) {

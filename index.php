@@ -36,6 +36,10 @@ match ($act) {
    // giỏ hàng
    'them-gio-hang' => (new homeControllers())->addGioHang(),
    'gio-hang' => (new homeControllers())->gioHang(),
+
+   
+   'update-gio-hang' => (new homeControllers())->updateGioHang(),
+
    'delete-san-pham-gio-hang' => (new homeControllers())->deleteOneGioHang(),
    'incQty' => (new homeControllers())->incQtyCart(),
    'decQty' => (new homeControllers())->decQtyCart(),
