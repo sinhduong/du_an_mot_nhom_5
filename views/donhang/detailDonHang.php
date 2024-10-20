@@ -74,7 +74,6 @@
                                         <h2>Trạng thái đơn hàng</h2>
                                     </div>
                                     <div class="checkout-form mb--30" style="text-align:center;">
-
                                         <p>
                                             <?php
                                             if ($donHang['trang_thai_id'] == 1) {
