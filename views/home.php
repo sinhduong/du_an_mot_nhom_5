@@ -70,7 +70,7 @@
                                                         <span>Cartier</span>
                                                         <h4><a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>"><?= $sanPham['ten_san_pham'] ?></a></h4>
                                                         <div class="product-price-wrapper">
-                                                            <?php if ($sanPham['gia_khuyen_mai']) { ?>
+                                                            <?php if ($sanPham['gia_khuyen_mai'] > 0) { ?>
                                                                 <span class="money"><?= formatPrice($sanPham['gia_khuyen_mai']) . 'đ' ?></span>
                                                                 <span class="product-price-old">
                                                                     <span class="money"><?= formatPrice($sanPham['gia_san_pham']) . 'đ' ?></span>
@@ -78,6 +78,7 @@
                                                             <?php } else { ?>
                                                                 <span class="money"><?= formatPrice($sanPham['gia_san_pham']) . 'đ' ?></span>
                                                             <?php } ?>
+
                                                         </div>
                                                     </div>
                                                     <div class="mirora_product_action text-center position-absolute">
@@ -96,7 +97,7 @@
                                                         <form action="<?= BASE_URL . '?act=them-gio-hang' ?>" method="POST">
                                                             <div class="product-action">
                                                                 <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
-                                                                <input type="hidden" name="so_luong" value="1"> 
+                                                                <input type="hidden" name="so_luong" value="1">
                                                                 <button type="submit" class="add_cart cart-item action-cart" title="wishlist">
                                                                     <span>Thêm giỏ</span>
                                                                 </button>

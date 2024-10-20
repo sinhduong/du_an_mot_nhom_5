@@ -66,7 +66,7 @@
                                             <li>Mô tả : <?= $sanPham['mo_ta'] ?></li>
                                         </ul>
                                         <div class="product-price-wrapper">
-                                            <?php if ($sanPham['gia_khuyen_mai']) { ?>
+                                            <?php if ($sanPham['gia_khuyen_mai']>0) { ?>
                                                 <span class="money"><?= formatPrice($sanPham['gia_khuyen_mai']) . 'đ' ?></span>
                                                 <span class="product-price-old">
                                                     <span class="money"><?= formatPrice($sanPham['gia_san_pham']) . 'đ' ?></span>
@@ -222,7 +222,7 @@
                                                     <span>Cartier</span>
                                                     <h4><a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>"><?= $sanPham['ten_san_pham'] ?></a></h4>
                                                     <div class="product-price-wrapper">
-                                                        <?php if ($sanPham['gia_khuyen_mai']) { ?>
+                                                        <?php if ($sanPham['gia_khuyen_mai']>0) { ?>
                                                             <span class="money"><?= formatPrice($sanPham['gia_khuyen_mai']) . 'đ' ?></span>
                                                             <span class="product-price-old">
                                                                 <span class="money"><?= formatPrice($sanPham['gia_san_pham']) . 'đ' ?></span>

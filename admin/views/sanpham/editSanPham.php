@@ -71,6 +71,8 @@
                                 <label for="hinh_anh">Hình ảnh</label>
                                 <input type="file" id="hinh_anh" name="hinh_anh" class="form-control">
                                 <img src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" style="width:100px;height:100px" alt="">
+                                <input type="hidden" name="hinh_anh" value="<?= $sanPham['hinh_anh'] ?>">
+
                             </div>
                             <div class="form-group">
                                 <label for="so_luong">Số lượng</label>

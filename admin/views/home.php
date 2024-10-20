@@ -17,8 +17,8 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>báo cáo thống kê</h1>
-                    <?php var_dump($_SESSION['user_admin']);?>
+                    <h1> admin</h1>
+                    <?php echo  'email : '. ($_SESSION['user_admin']);?>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
