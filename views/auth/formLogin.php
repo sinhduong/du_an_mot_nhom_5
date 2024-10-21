@@ -38,7 +38,7 @@
                                 <div class="form__group mb--20">
                                     <button type="submit" name="dangnhap" class="btn btn-5 btn-style-1 color-1">Đăng nhập</button>
                                 </div>
-                                <a href="" class="forgot-pass">Quên mật khẩu?</a>
+                                <!-- <a href="" class="forgot-pass">Quên mật khẩu?</a> -->
                             </form>
                         </div>
                     </div>

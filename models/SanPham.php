@@ -11,7 +11,8 @@ class SanPham
     public function getAllSanPham()
     {
         try {
-            $sql = "SELECT san_phams.*, danh_mucs.ten_danh_muc FROM san_phams INNER JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id ";
+            $sql = "SELECT san_phams.*, danh_mucs.ten_danh_muc FROM san_phams INNER JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
+            ";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
 
@@ -20,18 +21,19 @@ class SanPham
             echo "Lỗi: " . $e->getMessage();
         }
     }
-    public function getLatestSanPham() {
+    public function getLatestSanPham()
+    {
         try {
             $sql = "SELECT * FROM san_phams ORDER BY ngay_nhap ";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
-    
+
             return $stmt->fetch(); // Trả về sản phẩm mới nhất
         } catch (Exception $e) {
             echo "Lỗi: " . $e->getMessage();
         }
     }
-    
+
 
     public function getDetailSanPham($id)
     {
@@ -84,7 +86,7 @@ class SanPham
         try {
             $sql = "INSERT INTO binh_luans (san_pham_id, tai_khoan_id, noi_dung, ngay_dang, trang_thai)
                 VALUES (:san_pham_id, :tai_khoan_id, :noi_dung, :ngay_dang, :trang_thai)";
-// var_dump($this->conn);
+            // var_dump($this->conn);
 
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
@@ -150,16 +152,16 @@ class SanPham
             echo "Lỗi: " . $e->getMessage();
         }
     }
-    public function getAllDanhMucClient() {
+    public function getAllDanhMucClient()
+    {
         try {
             $sql = "SELECT * FROM danh_mucs limit 5";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
-    
+
             return $stmt->fetchAll();
         } catch (Exception $e) {
             echo "Lỗi: " . $e->getMessage();
         }
     }
-    
 }

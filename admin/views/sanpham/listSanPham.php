@@ -63,6 +63,7 @@
                                                     <img src="<?= BASE_URL . htmlspecialchars($sanPham['hinh_anh']) ?>" style="width: 100px" alt="Hình sản phẩm" onerror="this.onerror=null; this.src='default_image_url.jpg'">
                                                 </td>
                                                 <td><?= number_format($sanPham['gia_san_pham'], 0, ',', '.') ?> VNĐ</td>
+                                                
                                                 <td><?= htmlspecialchars($sanPham['so_luong']) ?></td>
                                                 <td><?= htmlspecialchars($sanPham['ten_danh_muc']) ?></td>
                                                 <td><?= $sanPham['trang_thai'] == 1 ? 'Còn bán' : 'Dừng bán' ?></td>

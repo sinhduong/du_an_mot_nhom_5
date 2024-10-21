@@ -134,9 +134,9 @@ class AdminSanPhamController
             // lấy ra dữ liệu cũ 
             $san_pham_id = $_POST['san_pham_id'] ?? '';
             //truy vấn
-            $sanPhamOld = $this->modelSanPham->getListAnhSanPham($san_pham_id);
+            $sanPhamOld = $this->modelSanPham->getDetailSanPham($san_pham_id);
             $old_file = $sanPhamOld['hinh_anh']; // lấy ảnh cũ nếu sửa ảnh
-
+            // var_dump($sanPhamOld);die;
             $ten_san_pham = $_POST['ten_san_pham'] ?? '';
             $gia_san_pham = $_POST['gia_san_pham'] ?? '';
             $gia_khuyen_mai = $_POST['gia_khuyen_mai'];
@@ -180,7 +180,7 @@ class AdminSanPhamController
                 // Kiểm tra nếu việc upload file mới thành công
                 if ($new_file) {
                     // Nếu có ảnh cũ thì xóa nó
-                    if (!empty($old_file) && file_exists($old_file)) {
+                    if (empty($old_file) && file_exists($old_file)) {
                         deleteFile($old_file);
                     }
                 } else {
@@ -303,6 +303,7 @@ class AdminSanPhamController
             $id = intval($_GET['id_san_pham']); // Sanitize input
             $sanPham = $this->modelSanPham->getDetailSanPham($id);
             $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
+            $listBinhLuan = $this->modelSanPham->getBinhLuanFromSanPham($id);
             // var_dump($listAnhSanPham);die;
 
             if ($sanPham) {

@@ -51,8 +51,14 @@
                         <hr>
 
 
-                        <h4 class="mt-3">Giá tiền: <small><?= $sanPham['gia_san_pham'] ?></small></h4>
-                        <h4 class="mt-3">Giá khuyến mãi: <small><?= $sanPham['gia_khuyen_mai'] ?></small></h4>
+                        <?php if (!empty($sanPham['gia_khuyen_mai'])) { ?>
+                            <h4 class="mt-3">Giá tiền: <small><?= $sanPham['gia_san_pham'] ?></small></h4>
+                        <?php } else { ?>
+
+                            <h4 class="mt-3">Giá khuyến mãi: <small><?= $sanPham['gia_khuyen_mai'] ?></small></h4>
+                        <?php } ?>
+
+
                         <h4 class="mt-3">Số lượng: <small><?= $sanPham['so_luong'] ?></small></h4>
                         <h4 class="mt-3">Lượt xem: <small><?= $sanPham['luot_xem'] ?></small></h4>
                         <h4 class="mt-3">Ngày nhập: <small><?= $sanPham['ngay_nhap'] ?></small></h4>
@@ -82,30 +88,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>sinh</td>
-                                <td>sản phẩm ok</td>
-                                <td>20/5/2024</td>
-                                <td>
-                                    <div class="btn-grop">
-                                        <a href="#"><button class="btn btn-warning">Ẩn</button></a>
-                                        <a href="#"><button class="btn btn-danger">Xóa</button></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>sinh</td>
-                                <td>sản phẩm ok</td>
-                                <td>20/5/2024</td>
-                                <td>
-                                    <div class="btn-grop">
-                                        <a href="#"><button class="btn btn-warning">Ẩn</button></a>
-                                        <a href="#"><button class="btn btn-danger">Xóa</button></a>
-                                    </div>
-                                </td>
-                            </tr>
+                            <?php foreach ($listBinhLuan as $key => $listBinhLuan): ?>
+                                <tr>
+                                    <td><?= $key + 1 ?></td>
+                                    <td><?= $listBinhLuan['ho_ten'] ?></td>
+                                    <td><?= $listBinhLuan['noi_dung'] ?></td>
+                                    <td><?= $listBinhLuan['ngay_dang'] ?></td>
+                                    <td>
+                                        <div class="btn-grop">
+                                            <a href="#"><button class="btn btn-warning">Ẩn</button></a>
+                                            <!-- <a href="#"><button class="btn btn-danger">Xóa</button></a> -->
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>
                         </tbody>
                     </table>
                 </div>

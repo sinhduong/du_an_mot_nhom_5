@@ -53,7 +53,7 @@
                 </div> -->
                 <div class="mini-cart__btn">
                     <a href="<?=BASE_URL . '?act=gio-hang'?>" class="btn btn-fullwidth btn-style-1">Xem giỏ hàng</a>
-                    <a href="<?=BASE_URL. '?act=thanh-toan'?>" class="btn btn-fullwidth btn-style-1">Thanh toán</a>
+                    <!-- <a href="<?=BASE_URL. '?act=thanh-toan'?>" class="btn btn-fullwidth btn-style-1">Thanh toán</a> -->
                 </div>
 
             </div>

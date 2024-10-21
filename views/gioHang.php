@@ -144,6 +144,22 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        document.querySelectorAll('.quantity-input').forEach(function(input) {
+            input.addEventListener('change', function() {
+                // Lấy giá trị hiện tại của input
+                let quantity = parseInt(this.value);
+
+                // Kiểm tra nếu số lượng nhỏ hơn 1
+                if (quantity < 1) {
+                    // Hiển thị thông báo lỗi
+                    alert('Số lượng phải lớn hơn hoặc bằng 1');
+
+                    // Đặt lại giá trị thành 1
+                    this.value = 1;
+                }
+            });
+        });
+
         $(document).ready(function() {
             // Gán sự kiện chỉ một lần cho các nút tăng giảm
             $('.qtybutton').off('click').on('click', function() {
